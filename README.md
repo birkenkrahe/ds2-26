@@ -18,7 +18,6 @@
 -   Assignments and solutions
 -   Installation information
 
-
 # How to use GitHub
 
 -   Register and get added as a collaborator to this repo
