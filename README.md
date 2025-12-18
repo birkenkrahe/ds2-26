@@ -1,4 +1,4 @@
-![img](../img/dsc205_spring26.png)
+![img](./img/dsc205_spring26.png)
 
 
 # Introduction to Advanced Data Science
