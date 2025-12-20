@@ -6,7 +6,7 @@
 * General Course Information
 
 - Meeting Times: Monday-Wednesday-Friday 14:00-14:50 hrs
-- Meeting place: Derby Science Center Room 239 (comp lab)
+- Meeting place: Derby Science Center Room 209 (comp lab)
 - Professor: Dr. Marcus Birkenkrahe
 - Office: Derby Science Building 210
 - Phone: (870) 307-7254
@@ -114,12 +114,13 @@ Notes:
 
 * Rubric
 
-| Component                | Weight | Excellent          | Good             | Satisfactory        | Needs Improvement     | Unsatisfactory        |
-|--------------------------+--------+--------------------+------------------+---------------------+-----------------------+-----------------------|
-| Participation/Attendance |     0% | Consistent, active | Regular, engaged | Present, minimal    | Infrequent, passive   | Rare, absent          |
-| Programming assignments  |    50% | Complete, accurate | Mostly correct   | Some errors/delays  | Incomplete, flawed    | Missing, incorrect    |
-| Tests                    |    25% | Thorough mastery   | Minor errors     | Basic understanding | Limited understanding | Minimal understanding |
-| Final Exam (Optional)    |    25% | Comprehensive      | Strong           | Adequate            | Weak                  | Insufficient          |
+| Component                  | Weight | Excellent                       | Good                         | Satisfactory                | Needs Improvement          | Unsatisfactory               |
+|----------------------------+--------+---------------------------------+------------------------------+-----------------------------+----------------------------+------------------------------|
+| Participation & Attendance |     0% | Consistent, active, prepared    | Regular, engaged             | Present, minimal engagement | Infrequent, passive        | Rare or absent               |
+| Programming Assignments    |    25% | Correct, clear, well-documented | Mostly correct, minor issues | Partially correct           | Frequent errors            | Incomplete or missing        |
+| Project                    |    25% | Insightful, justified, polished | Solid analysis, minor gaps   | Adequate, superficial       | Weak analysis or execution | Incoherent or minimal effort |
+| Tests                      |    25% | Conceptual mastery              | Good understanding           | Basic understanding         | Significant gaps           | Minimal understanding        |
+| Final Exam                 |    25% | Integrative, precise reasoning  | Mostly correct               | Partial integration         | Fragmented understanding   | Little or no mastery         |
 
 * Grading Table
 
@@ -142,11 +143,11 @@ For *important dates*, see the 2025-2026 Academic Calendar at:
 [[https://catalog.lyon.edu/202526-academic-calendar][catalog.lyon.edu/202526-academic-calendar]]
 
 - Time in class: approximately 40 hours
-- Time outside of class: approximately 60 hours, including readings,
+- Time outside of class: approximately 100 hours, including readings,
   take-home MPC tests, programming assignments, and a semester-long
   term project
-- Total workload over the term: approximately 100 hours
-- Average weekly workload outside of class: approximately 5 hours
+- Total workload over the term: approximately 140 hours
+- Average weekly workload outside of class: approximately 8-9 hours
 
 Workload varies across the semester and increases around sprint
 reviews.
