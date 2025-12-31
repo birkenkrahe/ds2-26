@@ -6,12 +6,13 @@
 * General Course Information
 
 - Meeting Times: Monday-Wednesday-Friday 14:00-14:50 hrs
-- Meeting place: Derby Science Center Room 209 (comp lab)
+- Meeting place: Derby Science Center Room 209 (computer lab)
 - Professor: Dr. Marcus Birkenkrahe
 - Office: Derby Science Building 210
 - Phone: (870) 307-7254
-- Office Hours: Monday-Wednesday-Friday 15:00-15:50 hrs
-- Textbook: [[https://nostarch.com/dive-data-science][Dive into Data Science, Tuckfield, NoStarch 2025]].
+- Office Hours: Mon-Wed-Fri 1500-1550 hrs, Tue-Thu 1600-1700 hrs
+- Textbook (optional): Book of R, Davies (NoStarch, 2016), Part II, R
+  Programming; fasteR, Matloff (GitHub, 2024).
 
 * Standard and course policies
 
@@ -28,79 +29,56 @@
   
 * Objectives
 
-This course builds on the conceptual foundations of data science
-introduced in DSC 105 and transitions students from introductory
-statistical analysis to decision-oriented data science. Using Bradford
-Tuckfield’s Dive into Data Science as the primary text, the course
-emphasizes exploratory reasoning, predictive modeling, statistical
-inference, experimentation, and data-driven decision making.
+This course continues the journey into data science using the
+functional, object-oriented statistical programming language R, begun
+in DSC 105, "Introduction to data science". It includes calling and
+writing functions, conditional and looping statements. We will also
+explore data science using command line UNIX tools, and several
+packages permitting performance improvement and database connections,
+like Rcpp and RSQLite. If time permits, we will look at big data
+frameworks like Apache Spark, and at running data science experiments
+in containers. We will also bring in more Python towards the end.
 
-While students enter the course with experience in R, the course
-introduces Python as a second data science language, focusing on
-conceptual transfer rather than language-specific mastery. Students
-will learn to frame real-world questions, select appropriate models,
-evaluate uncertainty, and communicate results effectively. The course
-also introduces key applied areas of modern data science, including
-classification, supervised and unsupervised learning, recommendation
-systems, web data collection, and natural language processing.
+Students will learn to critically use AI-assisted programming tools to
+explore models, generate hypotheses, and refine analyses, while
+retaining responsibility for correctness and interpretation.
 
 * Student learning outcomes
 
 Students who complete DSC 205, "Introduction to advanced data
 science", will be able to:
-- Translate real-world questions into analyzable data science problems
-- Perform exploratory data analysis to identify patterns, structure,
-  and limitations in datasets
-- Visualize data effectively to support reasoning and communication
-- Apply regression and forecasting models and assess their assumptions
-  and limitations
-- Compare groups using statistical inference and hypothesis testing
-- Design, analyze, and interpret A/B tests and controlled experiments
-- Build and evaluate binary classification models, including logistic
-  regression
-- Apply supervised learning methods and reason about accuracy,
-  interpretability, and tradeoffs
-- Use unsupervised learning techniques to discover structure in data
-- Understand and implement basic recommendation systems
-- Apply foundational natural language processing techniques using
-  vector-based representations
-- Collect and prepare data from the web using scraping techniques
-- Work with multiple data science tools and languages, including
-  Python, SQL, and R
-- Communicate data-driven insights clearly in written, visual, and
-  oral form
-- Design and present an end-to-end data science project
+- Import data into R, store them, and transform them for analysis
+- Visualize data as part of advanced explorative data analysis
+- Understand basic predictive modeling strategies and methods
+- Master statistical programming in R
+- Learn how to process data on the command-line
+- Learn data science optimization with C++
+- Learn how to write efficient functions
+- Master the infrastructure for advanced statistical computing
+- Know how to effectively present assignment results
+- Be ready for advanced data science courses like data
+  visualization (DSC 302) and machine learning (DSC 305)
+- Research and present a project 
 
 * Course requirements
 
-Students are expected to have completed DSC 105: Introduction to Data
-Science, where they learned core data science concepts using the R
-programming language. Prior experience includes basic data import,
-data manipulation, visualization, and introductory statistical
-analysis in R.
-
-No prior experience with Python is required. Python will be introduced
-as a second data science language early in the course, with emphasis
-on conceptual continuity rather than syntactic detail. Basic R
-concepts may be revisited briefly as points of comparison, but the
-course assumes students are already familiar with fundamental data
-science workflows.
-
-Students should be prepared to engage with assigned readings before
-class, participate in discussion-based sessions, and complete applied
-programming and analysis assignments throughout the term.
+Introductory knowledge of R as taught in DSC 105 or obtained
+independently by completing chapters 1-15 of the free online resource
+“fasteR: Fast Lane to Learning R!”, or Davies, The Book of R
+(NoStarch, 2016, Part I only). Basic R concepts are repeated and
+practiced at the start of the term.
 
 * Grading System
 
 You should be able to see your current grade at any time using the
 Canvas gradebook for the course.
 
-| WHEN    | DESCRIPTION            | IMPACT |
-|---------+------------------------+--------|
-| Weekly  | Assignments            |    25% |
-| Weekly  | Multiple choice tests  |    25% |
-| Monthly | Project sprint reviews |    25% |
-| TBD     | Final exam (optional)  |    25% |
+| WHEN    | DESCRIPTION             | IMPACT |
+|---------+-------------------------+--------|
+| Weekly  | Programming Assignments |    25% |
+| Weekly  | Multiple choice tests   |    25% |
+| Monthly | Project sprint reviews  |    25% |
+| TBD     | Final exam (optional)   |    25% |
 
 Notes:
 - *To pass:* 60% of all available points.
@@ -111,6 +89,18 @@ Notes:
   you want to improve your grade at the end of the course. If the
   final exam result is below your final grade average up to this
   point, it will be ignored.
+
+* Use of AI-Assisted Programming Tools
+
+Students may use AI-assisted programming tools (such as large language
+models) as part of their exploratory and iterative work in this
+course. These tools are intended to support idea generation, code
+drafting, and comparison of alternative approaches, not to replace
+conceptual understanding or independent reasoning. Students are
+responsible for the correctness, interpretation, and justification of
+all submitted work and must be able to explain and defend their
+analyses and code. Use of AI tools that obscures authorship, bypasses
+understanding, or violates the Honor Code is not permitted.
 
 * Rubric
 
@@ -139,43 +129,65 @@ Notes:
 
 * Schedule and Workload
 
-For *important dates*, see the 2025-2026 Academic Calendar at:
-[[https://catalog.lyon.edu/202526-academic-calendar][catalog.lyon.edu/202526-academic-calendar]]
+For *important dates*, see the 2024-2025 Academic Calendar at:
+[[https://catalog.lyon.edu/202425-academic-calendar][catalog.lyon.edu/202425-academic-calendar]].
 
-- Time in class: approximately 40 hours
-- Time outside of class: approximately 100 hours, including readings,
-  take-home MPC tests, programming assignments, and a semester-long
-  term project
-- Total workload over the term: approximately 140 hours
-- Average weekly workload outside of class: approximately 8-9 hours
+*Workload* (estimated):
+- Time in class: 48 hrs.
+- Time outside of class: 42 hrs.
+- Time for tests [1 hrs/test]: 14 hrs.
+- Time for home assignments [2 hrs/pgm]: 28 hrs.
+- Total number of hrs in term: 90.
+- Weekly workload (outside of class): 5.625 (2.625)
 
 Workload varies across the semester and increases around sprint
 reviews.
 
 * Course Outline
 
-The course is organized into *four parts*, each corresponding to a
-distinct phase of the data science workflow. In addition to weekly
-readings and programming assignments, students complete a *freely
-chosen term project* that spans the entire semester. The project is
-developed incrementally through *four sprint reviews*, each aligned with
-a core component of data science practice.
+This course is organized into four connected parts that develop practical,
+intermediate-to-advanced data science skills with an emphasis on *programming
+discipline*, *reproducibility*, and *performance*. The course combines hands-on
+programming, command-line data processing, function design, and performance
+optimization. Weekly assignments and in-class exercises build cumulatively
+toward an individual or team-based term project.
 
-| Week | Focus                                 | Book                      |
-|------+---------------------------------------+---------------------------|
-|    1 | EDA workflow, summary statistics      | 1 – EDA                   |
-|    2 | Visualization, correlation, pitfalls  | 1 – EDA                   |
-|    3 | Forecasting, linear regression        | 2 – Forecasting           |
-|    4 | Multivariate models, model comparison | 2 – Forecasting           |
-|    5 | Group comparisons, t-tests            | 3 – Group Comparisons     |
-|    6 | A/B testing, effect sizes             | 4 – A/B Testing           |
-|    7 | Experiment design, ethics             | 4 – A/B Testing           |
-|    8 | Applied inference                     | 4 – A/B Testing           |
-|    9 | Binary classification, LPM            | 5 – Binary Classification |
-|   10 | Logistic regression                   | 5 – Binary Classification |
-|   11 | Supervised learning, kNN              | 6 – Supervised Learning   |
-|   12 | Trees, forests, neural networks       | 6 – Supervised Learning   |
-|   13 | Unsupervised learning, clustering     | 7 – Unsupervised Learning |
-|   14 | Web scraping, recommenders, NLP       | 8–10 – Applied Topics     |
-|   15 | Synthesis, presentations, languages   | 11 – Other Languages      |
- 
+The four main parts of the course are:
+
+1. *Programming in R*: Control flow, iteration, utilities, and idiomatic base R
+   programming
+2. *Data Processing in the Shell*: Downloading, cleaning, transforming, and
+   piping data using command-line tools
+3. *Writing Functions for Data Analytics*: Designing robust, reusable, and
+   well-documented functions
+4. *Optimizing Data Science Code*: Benchmarking and accelerating R code using
+   compiled extensions
+
+* Weekly Schedule
+
+- *Week 1:* Programming in R — Control flow and conditional logic
+- *Week 2:* Programming in R — Iteration with loops
+- *Week 3:* Programming in R — Writing and using functions
+- *Week 4:* Programming in R — The =apply= family and functional patterns
+- *Week 5:* Programming in R — Utilities, scripting, and workflow practices
+- *Week 6:* Data processing in the shell — Downloading and inspecting data
+- *Week 7:* Data processing in the shell — Data cleaning and transformation
+- *Week 8:* Data processing in the shell — Working with structured data and
+  databases
+- *Week 9:* Data processing in the shell — Building reproducible data pipelines
+- *Week 10:* Writing functions for data analytics — Function structure
+  and design
+- *Week 11:* Writing functions for data analytics — Arguments, defaults, and
+  validation
+- *Week 12:* Writing functions for data analytics — Return values, scope, and
+  side effects
+- *Week 13:* Optimizing data science code — Benchmarking and performance
+  analysis
+- *Week 14:* Optimizing data science code — Control flow and functions in
+  compiled code
+- *Week 15:* Optimizing data science code — Vectorized data structures and
+  interfaces
+- *Week 16:* Project presentations and final review
+
+
+
