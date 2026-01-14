@@ -1,10 +1,11 @@
 #+TITLE:Syllabus - Introduction to Advanced Data Science
 #+AUTHOR: Marcus Birkenkrahe
-#+SUBTITLE: DSC 205 - Lyon College - Spring 2026
+#+SUBTITLE: DSC 205.01 - Lyon College - Spring 2026
 #+options: toc:nil
 #+startup: overview indent
 * General Course Information
 
+- Course prefix/number/section: DSC 205.01
 - Meeting Times: Monday-Wednesday-Friday 14:00-14:50 hrs
 - Meeting place: Derby Science Center Room 209 (computer lab)
 - Professor: Dr. Marcus Birkenkrahe
@@ -14,20 +15,7 @@
 - Textbook (optional): Book of R, Davies (NoStarch, 2016), Part II, R
   Programming; fasteR, Matloff (GitHub, 2024).
 
-* Standard and course policies
-
-- *Standard Lyon College Policies* are incorporated into this syllabus
-  and can be found at: [[http://www.lyon.edu/standard-course-policies][lyon.edu/standard-course-policies]].
-
-- The *Assignments and Honor Code* and the *Attendance Policy* are
-  incorporated into this syllabus also and can be found at:
-  [[https://tinyurl.com/LyonPolicy][tinyurl.com/LyonPolicy]].
-
-- In addition to these rules, please read and observe my guide to
-  Using AI to code (written in Fall 2024, updated in Fall 2025):
-  [[https://tinyurl.com/Using-AI-to-code][tinyurl.com/Using-AI-to-code]].
-  
-* Objectives
+* Course Description
 
 This course continues the journey into data science using the
 functional, object-oriented statistical programming language R, begun
@@ -191,3 +179,16 @@ The four main parts of the course are:
 
 
 
+* Standard and course policies
+
+- *Standard Lyon College Policies* are incorporated into this syllabus
+  and can be found at: [[http://www.lyon.edu/standard-course-policies][lyon.edu/standard-course-policies]].
+
+- The *Assignments and Honor Code* and the *Attendance Policy* are
+  incorporated into this syllabus also and can be found at:
+  [[https://tinyurl.com/LyonPolicy][tinyurl.com/LyonPolicy]].
+
+- In addition to these rules, please read and observe my guide to
+  Using AI to code (written in Fall 2024, updated in Fall 2025):
+  [[https://tinyurl.com/Using-AI-to-code][tinyurl.com/Using-AI-to-code]].
+  

@@ -1,0 +1,113 @@
+#+TITLE:Agenda and Overview
+#+AUTHOR:Marcus Birkenkrahe, Lyon College
+#+SUBTITLE:DSC 205 - Introduction to Advanced Data Science
+#+STARTUP: overview hideblocks indent
+#+OPTIONS: toc:nil num:nil ^:nil
+#+PROPERTY: header-args:R :session *R* :results output :exports both :noweb yes
+#+PROPERTY: header-args:python :session *Python* :results output :exports both :noweb yes
+#+PROPERTY: header-args:C :main yes :includes <stdio.h> :results output :exports both :noweb yes
+#+PROPERTY: header-args:C++ :main yes :includes <iostream> :results output :exports both :noweb yes
+* Overview
+#+attr_html: :width 400px :float nil:
+[[../img/cover.png]]
+
+- [ ] LLM video, slides and infographic
+- [ ] How to work with AI (demo + assignment)
+- [ ] DataCamp alignment: Intermediate R in weeks 1-5
+- [ ] Getting started with Colab (code along + exercise)
+
+* Q&A
+#+attr_html: :width 400px :float nil:
+[[../llm/ds2-26-llm-poster-1.png]]
+
+
+- Why Google Colaboratory ("Colab")?
+  #+begin_quote
+  Use Colab for zero setup, free compute, easy sharing. Runs anywhere
+  via browser, integrates naturally with Python (Jupyter
+  notebook). Helps you focus on ideas rather than infrastructure but
+  also teaches good notebook and literate programming skills.
+  #+end_quote
+
+- Why R?
+  #+begin_quote
+  R lets you focus on thinking with data rather than fighting the
+  language. It’s built for analysis, exploration, and experimentation,
+  and it makes it easy to see what your code is actually doing. In
+  this course, we mostly use base R so you learn skills that transfer
+  to other languages and tools.
+  #+end_quote
+
+- Why these topics?
+  #+begin_quote
+  These topics reflect how data science work really happens: you get
+  data, clean it, process it, write functions to reuse your work, and
+  speed things up when needed. The goal is not just to “get results,”
+  but to write code that is clear, reusable, and efficient—skills
+  you’ll use long after this course ends.
+  #+end_quote
+
+- What's missing/what to study next?
+  #+begin_quote
+  This course focuses on foundations, not every data science
+  technique. Topics like machine learning, advanced modeling, large
+  databases, and production systems come later. The goal is to prepare
+  you to learn those topics faster and more critically once you
+  encounter them.
+  #+end_quote
+
+- Why are we not using Python?
+  #+begin_quote
+  Python is widely used in data science, but learning data science is
+  not the same as learning a popular language. In this course, R
+  provides a clearer and more direct way to explore data, write
+  analytical code, and understand performance trade-offs. Once you
+  understand these ideas, picking up Python—or any other
+  language—becomes much easier.
+  #+end_quote
+
+* AI Demo + Assignment
+
+- Between 1980 and 2020, Jobs classified as "high social/low math"
+  (people with great social skills who can't do math) have a rising
+  employment share and higher average real hourly wages ("more money")
+  than jobs classified as "low social/high maths" (nerds who can do
+  math, also called "quants").
+    
+  #+attr_html: :width 400px :float nil:
+  [[../img/skills_plot.jpeg]]
+
+* Getting started with Colab
+
+Let's make a simple plot with R in Colab to revisit what you already
+know.
+
+1) Logon to your Lyon Google account.
+2) Open ~colab.research.google.com~.
+3) Create a ~New notebook~.
+4) Download the ~iris~ dataset from Kaggle.
+5) Load dataset into a ~data.frame~
+6) Include exception handling with ~tryCatch~
+7) Explore the dataset.
+8) Create a simple plot.
+9) Customize the plot.
+10) Summarize and check your understanding with a lab exercise.
+
+Lecture available [[https://github.com/birkenkrahe/ds2-26/blob/main/ipynb/0_colab.ipynb][in GitHub]] (static) and [[https://colab.research.google.com/drive/1YRme5Q016McFl_TGk3D35DT8MZYfB2Du?usp=sharing][in Colab]] (interactive). To
+open in Colab, use: [[https://tinyurl.com/colab-starter-ipynb][tinyurl.com/colab-starter-ipynb]] (make copy).
+
+* Getting started with Colab - Lab exercise
+
+Test your understanding of "Getting started with Colab" by creating a
+notebook for the Palmer Penguin dataset available for you online from:
+[[https://tinyurl.com/palmer-data-csv][tinyurl.com/palmer-data-csv]].
+
+Tasks:
+1) Create a new Colab notebook.
+2) Load the dataset into a dataframe.
+3) Check if the dataset is loaded in the current namespace.
+4) Display the first few lines of the dataset.
+5) Make a simple plot of the =bill_length_mm= vs. =bill_depth_mm=.
+6) Make a fully customized plot of the dataset grouping by =species=.
+7) Upload the URL to your notebook to Canvas.
+
