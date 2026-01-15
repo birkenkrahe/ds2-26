@@ -11,15 +11,14 @@
 #+attr_html: :width 400px :float nil:
 [[../img/cover.png]]
 
-- [ ] LLM video, slides and infographic
-- [ ] How to work with AI (demo + assignment)
-- [ ] DataCamp alignment: Intermediate R in weeks 1-5
+- [X] LLM video, slides and infographic
+- [X] How to work with AI (demo + assignment)
+- [X] DataCamp alignment: Intermediate R in weeks 1-5
 - [ ] Getting started with Colab (code along + exercise)
 
-* Q&A
+** DONE Q&A
 #+attr_html: :width 400px :float nil:
 [[../llm/ds2-26-llm-poster-1.png]]
-
 
 - Why Google Colaboratory ("Colab")?
   #+begin_quote
@@ -27,6 +26,19 @@
   via browser, integrates naturally with Python (Jupyter
   notebook). Helps you focus on ideas rather than infrastructure but
   also teaches good notebook and literate programming skills.
+  #+end_quote
+
+- What is a Jupyter notebook?
+  #+begin_quote
+  Ju[lia]Py[thon]teR - pick one of these as runtime environment = now
+  the notebook runs Julia, Python or R - all three work with SQL.
+
+  You can use pretty much any other language using "magic" commands:
+  they basically write the code as a file, and then you have to run it
+  on the shell:
+
+  ~%%writefile helloc~
+   ...
   #+end_quote
 
 - Why R?
@@ -66,7 +78,7 @@
   language—becomes much easier.
   #+end_quote
 
-* AI Demo + Assignment
+** DONE AI Demo + Assignment
 
 - Between 1980 and 2020, Jobs classified as "high social/low math"
   (people with great social skills who can't do math) have a rising
@@ -76,6 +88,91 @@
     
   #+attr_html: :width 400px :float nil:
   [[../img/skills_plot.jpeg]]
+
+
+** Review questions: Critiquing a plot
+
+Q&A by ChatGPT (extracted exclusively from the [[https://docs.google.com/document/d/1iye6yXDJHQhBOfCebotwX2XmppeWf2wF7ZkRBY_ProY/edit?usp=drive_link][chart critique]])
+
+1. What is the first thing you should evaluate when you see the title
+   of a data visualization?
+   #+begin_quote
+   Whether the title states a neutral description of the data or
+   already implies a conclusion or causal claim.
+   #+end_quote
+
+2. Why is it problematic if a plot compares only two groups when more
+   categories could reasonably exist?
+   #+begin_quote
+   It can create a false dichotomy by excluding relevant groups, which
+   biases interpretation toward a simplified narrative.
+   #+end_quote
+
+3. What questions should you ask about how categories such as “high”
+   and “low” are defined?
+   #+begin_quote
+   You should ask what thresholds are used, whether they are relative
+   or absolute, and how sensitive the results are to those choices.
+   #+end_quote
+
+4. Why does the absence of historical or contextual annotations matter
+   in a time-series plot?
+   #+begin_quote
+   Without context, trends may be misinterpreted as structural changes
+   rather than responses to external events like recessions or shocks.
+   #+end_quote
+
+5. How can axis scaling affect the viewer’s perception of differences
+   between groups?
+   #+begin_quote
+   Truncated or narrow axes can visually exaggerate small numerical
+   differences, making trends appear more dramatic than they are.
+   #+end_quote
+
+6. What is the risk of presenting aggregate data without
+   distinguishing subgroups such as industries or sectors?
+   #+begin_quote
+   Aggregation can hide opposing trends within subgroups, leading to
+   conclusions that do not hold at a more detailed level.
+   #+end_quote
+
+7. Why should visual differences always be compared to the underlying
+   numerical differences?
+   #+begin_quote
+   Because visual impressions can be misleading, while numerical
+   comparisons reveal whether differences are substantively large or
+   small.
+   #+end_quote
+
+8. How should you approach uncertainty about the reliability of data
+   sources used in a plot?
+   #+begin_quote
+   By separating concerns about data quality from concerns about how
+   the data are selected, framed, and visualized.
+   #+end_quote
+
+9. What does it mean to say that a visualization is
+   “narrative-driven”?
+   #+begin_quote
+   It means the visualization is designed to support a particular
+   story or takeaway rather than to present a complete or neutral
+   view.
+   #+end_quote
+
+10. Why is it important to consider which data are missing, not just
+    which data are shown?
+    #+begin_quote
+    Because omitted data can change the interpretation entirely and
+    may conceal the most important or informative patterns.
+    #+end_quote
+
+11. Why must observed correlations in a plot not be interpreted
+    automatically as causal relationships?
+    #+begin_quote
+    Because correlation only shows that variables move together, not
+    that one causes the other; external factors or reverse causality
+    may be responsible.
+    #+end_quote
 
 * Getting started with Colab
 
