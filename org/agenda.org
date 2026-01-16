@@ -16,7 +16,7 @@
 - [X] DataCamp alignment: Intermediate R in weeks 1-5
 - [ ] Getting started with Colab (code along + exercise)
 
-** DONE Q&A
+* DONE Q&A
 #+attr_html: :width 400px :float nil:
 [[../llm/ds2-26-llm-poster-1.png]]
 
@@ -78,7 +78,7 @@
   language—becomes much easier.
   #+end_quote
 
-** DONE AI Demo + Assignment
+* DONE AI Demo + Assignment
 
 - Between 1980 and 2020, Jobs classified as "high social/low math"
   (people with great social skills who can't do math) have a rising
@@ -89,8 +89,7 @@
   #+attr_html: :width 400px :float nil:
   [[../img/skills_plot.jpeg]]
 
-
-** Review questions: Critiquing a plot
+* NEXT Review questions: Critiquing a plot
 
 Q&A by ChatGPT (extracted exclusively from the [[https://docs.google.com/document/d/1iye6yXDJHQhBOfCebotwX2XmppeWf2wF7ZkRBY_ProY/edit?usp=drive_link][chart critique]])
 
@@ -174,6 +173,27 @@ Q&A by ChatGPT (extracted exclusively from the [[https://docs.google.com/documen
     may be responsible.
     #+end_quote
 
+
+* 10 Basic R Problems
+
+- Open https://tinyurl.com/basic-R-review (Colab)
+
+- Let's code together.
+
+- You have to upload the URL of your finished file to Canvas.
+
+* First assignments
+
+- There is no class on Monday (MLK day).
+
+- The "Intermediate R" lessons from DataCamp are available.
+
+- You need to join my new workspace (see Course Links in Canvas Pages).
+
+- We'll look at projects next Wednesday.
+
+- There will be a lab assignment based on the Colab exercise.
+
 * Getting started with Colab
 
 Let's make a simple plot with R in Colab to revisit what you already
@@ -207,4 +227,7 @@ Tasks:
 5) Make a simple plot of the =bill_length_mm= vs. =bill_depth_mm=.
 6) Make a fully customized plot of the dataset grouping by =species=.
 7) Upload the URL to your notebook to Canvas.
+
+
+
 
