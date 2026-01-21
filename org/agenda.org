@@ -7,7 +7,7 @@
 #+PROPERTY: header-args:python :session *Python* :results output :exports both :noweb yes
 #+PROPERTY: header-args:C :main yes :includes <stdio.h> :results output :exports both :noweb yes
 #+PROPERTY: header-args:C++ :main yes :includes <iostream> :results output :exports both :noweb yes
-* Overview
+* Week 1: Overview
 #+attr_html: :width 400px :float nil:
 [[../img/cover.png]]
 
@@ -16,7 +16,7 @@
 - [X] DataCamp alignment: Intermediate R in weeks 1-5
 - [ ] Getting started with Colab (code along + exercise)
 
-* DONE Q&A
+** DONE Q&A
 #+attr_html: :width 400px :float nil:
 [[../llm/ds2-26-llm-poster-1.png]]
 
@@ -38,7 +38,7 @@
   on the shell:
 
   ~%%writefile helloc~
-   ...
+  ...
   #+end_quote
 
 - Why R?
@@ -78,18 +78,30 @@
   language—becomes much easier.
   #+end_quote
 
-* DONE AI Demo + Assignment
+** DONE AI Demo + Assignment
 
 - Between 1980 and 2020, Jobs classified as "high social/low math"
   (people with great social skills who can't do math) have a rising
   employment share and higher average real hourly wages ("more money")
   than jobs classified as "low social/high maths" (nerds who can do
   math, also called "quants").
-    
+
   #+attr_html: :width 400px :float nil:
   [[../img/skills_plot.jpeg]]
 
-* NEXT Review questions: Critiquing a plot
+** DONE First assignments
+
+- There is no class on Monday (MLK day).
+
+- The "Intermediate R" lessons from DataCamp are available.
+
+- You need to join my new workspace (see Pages > Course Links in Canvas).
+
+- We'll look at projects next Wednesday.
+
+- There will be a lab assignment based on the Colab exercise.
+
+** DONE Review questions: Critiquing a plot
 
 Q&A by ChatGPT (extracted exclusively from the [[https://docs.google.com/document/d/1iye6yXDJHQhBOfCebotwX2XmppeWf2wF7ZkRBY_ProY/edit?usp=drive_link][chart critique]])
 
@@ -173,8 +185,7 @@ Q&A by ChatGPT (extracted exclusively from the [[https://docs.google.com/documen
     may be responsible.
     #+end_quote
 
-
-* 10 Basic R Problems
+** 10 Basic R Problems
 
 - Open https://tinyurl.com/basic-R-review (Colab)
 
@@ -182,17 +193,66 @@ Q&A by ChatGPT (extracted exclusively from the [[https://docs.google.com/documen
 
 - You have to upload the URL of your finished file to Canvas.
 
-* First assignments
+* Week 2: Projects, Finish 10 problems, graphing review
 
-- There is no class on Monday (MLK day).
+- [ ] Quiz 1 is live.
+- [ ] Projects: pick from the list or pick your own.
+- [ ] First DataCamp lesson is due tonight (Wed 11:59 pm).
+- [ ] Plot analysis assignment is due tonight (Wed 11:59 pm).
+- [ ] Continue 10 basic R review in Colab - [[https://tinyurl.com/basic-R-review][tinyurl.com/basic-R-review]]
+- [ ] Start basic graphing with R review in Colab.
 
-- The "Intermediate R" lessons from DataCamp are available.
+** Projects
 
-- You need to join my new workspace (see Course Links in Canvas Pages).
+- Rationale:
+  #+begin_quote
+  These projects go beyond the class material by asking you to combine
+  skills over time, not just apply them once. Instead of following
+  step-by-step instructions, you will make choices about tools,
+  structure, and trade-offs, and explain why you did so. This reflects
+  how real data science work is done and is why these projects run
+  across multiple sprints.
+  #+end_quote
 
-- We'll look at projects next Wednesday.
+- Project list:
+  1. *R Package Deep Dive*: Explore the purpose, core functions, and
+     usage patterns of a small R package.
 
-- There will be a lab assignment based on the Colab exercise.
+  2. *SQL from R* (or Python): Use SQL (via SQLite or DuckDB) to query
+     and analyze data instead of in-memory R objects.
+
+  3. *Java for Data Processing*: Implement a simple data-processing task
+     in Java and compare it conceptually to R or Python.
+
+  4. *Benchmarking R Code*: Compare loop-based, apply-based, and
+     vectorized solutions using benchmarking tools.
+
+  5. *Statistical Analysis Project:* Perform an exploratory statistical
+     analysis (summary stats, correlations, simple models) on a real
+     dataset.
+
+  6. *Apply Family vs Loops:* Solve the same problem using for-loops and
+     apply functions and compare clarity.
+
+  7. *Command-Line to R Pipeline:* Clean raw data with shell tools, then
+     analyze it in R.
+
+  8. *Reproducible Analysis Workflow:* Build a fully reproducible
+     analysis from raw data to final output.
+
+  9. *Python Package Exploration:* Study a small Python data package and
+     reproduce a simple analysis in Python.
+
+  10. *Utility Function Collection:* Design a small set of related R
+      utility functions with validation and examples.
+
+- Using AI agents:
+  #+begin_quote
+  You may use AI tools to explore ideas, draft code, and compare
+  approaches, but AI does not replace understanding. You are responsible
+  for correctness and must be able to explain your code, results, and
+  decisions clearly during sprint reviews.
+  #+end_quote
 
 * Getting started with Colab
 
@@ -227,7 +287,3 @@ Tasks:
 5) Make a simple plot of the =bill_length_mm= vs. =bill_depth_mm=.
 6) Make a fully customized plot of the dataset grouping by =species=.
 7) Upload the URL to your notebook to Canvas.
-
-
-
-
