@@ -156,7 +156,7 @@ can do this on your own and upload it until a week later, no more.
 
    Solution 1:
    #+begin_src R :results output
-     x = 5
+     x = -10
      if (x==0) {
        cat(x,"is zero.","\n")
      } else if (x < 0) {
@@ -164,61 +164,17 @@ can do this on your own and upload it until a week later, no more.
      } else {
        cat(x,"is above zero.","\n")
      }
-   #+end_src
-
-   #+RESULTS:
-   : 5 is above zero.
-
-   Solution 2: Tangle script and run on shell
-   #+begin_src R :tangle script.R :results none
-     args <- commandArgs(trailingOnly=TRUE) # CLI argument vector
-
-     x <- as.numeric(args[1]) # convert first string input to numeric
-
-     if (x==0) {
-       cat(x,"is zero.","\n")
-     } else if (x < 0) {
-       cat(x,"is below zero.","\n")
-     } else {
-       cat(x,"is above zero.","\n")
-     }
-   #+end_src
-
-   Running the tangled =script.R= on the commandline:
-   #+begin_src bash :results output :exports both
-     Rscript script.R 5
    #+end_src
 
    #+RESULTS:
    : -10 is below zero.
 
-   Solution 3: Make it safe
-   #+begin_src R :tangle script2.R :results none
-     args <- commandArgs(trailingOnly=TRUE)
+   - Solution 2: Tangle script and run on shell
+     #+begin_src R :tangle script.R :results none
+       args <- commandArgs(trailingOnly=TRUE) # CLI argument vector
 
-     ## check if an argument was passed
-     if (length(args) < 1) stop("Usage: Rscript script.R <value>")
+       x <- as.numeric(args[1]) # convert first string input to numeric
 
-     x <- as.numeric(args[1])
-     ## check if input value is a number
-     if (is.na(x)) stop("value must be numeric")
-
-     if (x==0) {
-       cat(x,"is zero.","\n")
-     } else if (x < 0) {
-       cat(x,"is below zero.","\n")
-     } else {
-       cat(x,"is above zero.","\n")
-     }
-   #+end_src
-
-   #+begin_src bash :results output :exports both
-     Rscript script2.R
-   #+end_src
-
-   More elegant: with a function:
-   #+begin_src R :session *R* :results output :exports both
-     check_val <- function(x) {
        if (x==0) {
          cat(x,"is zero.","\n")
        } else if (x < 0) {
@@ -226,16 +182,60 @@ can do this on your own and upload it until a week later, no more.
        } else {
          cat(x,"is above zero.","\n")
        }
-     }
-     check_val(5)
-     check_val(-10)
-     check_val(0)
+     #+end_src
+
+   Running the tangled =script.R= on the commandline:
+   #+begin_src bash :results output :exports both
+     Rscript script.R -10
    #+end_src
 
    #+RESULTS:
-   : 5 is above zero.
-   : -10 is below zero.
-   : 0 is zero.
+   : -10 is below zero. 
+
+   - Solution 3: Make it safe
+     #+begin_src R :tangle script2.R :results none
+       args <- commandArgs(trailingOnly=TRUE)
+
+       ## check if an argument was passed
+       if (length(args) < 1) stop("Usage: Rscript script.R <value>")
+
+       x <- as.numeric(args[1])
+       ## check if input value is a number
+       if (is.na(x)) stop("value must be numeric")
+
+       if (x==0) {
+         cat(x,"is zero.","\n")
+       } else if (x < 0) {
+         cat(x,"is below zero.","\n")
+       } else {
+         cat(x,"is above zero.","\n")
+       }
+     #+end_src
+
+   #+begin_src bash :results output :exports both
+     Rscript script2.R
+   #+end_src
+
+   - More elegant: with a function:
+     #+begin_src R :session *R* :results output :exports both
+       check_val <- function(x) {
+         if (x==0) {
+           cat(x,"is zero.","\n")
+         } else if (x < 0) {
+           cat(x,"is below zero.","\n")
+         } else {
+           cat(x,"is above zero.","\n")
+         }
+       }
+       check_val(5)
+       check_val(-10)
+       check_val(0)
+     #+end_src
+
+     #+RESULTS:
+     : 5 is above zero.
+     : -10 is below zero.
+     : 0 is zero.
 
 3. Write a conditional statement to check if a given vector of numbers
    =foo= contains any value greater than =100=. If it does, print =outlier
@@ -243,6 +243,7 @@ can do this on your own and upload it until a week later, no more.
 
    #+begin_src R
      foo <- c(10,50,101,20)
+     any(foo > 100)  # go through argument and check if any are TRUE
      if (any(foo > 100)) {
        print("Outlier detected.")
      } else {
@@ -251,4 +252,5 @@ can do this on your own and upload it until a week later, no more.
    #+end_src
 
    #+RESULTS:
+   : [1] TRUE
    : [1] "Outlier detected."
