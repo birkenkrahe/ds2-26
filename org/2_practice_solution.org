@@ -1,0 +1,254 @@
+#+TITLE:Introduction to Advanced Data Science (DSC 205)
+#+AUTHOR: Marcus Birkenkrahe (pledged)
+#+SUBTITLE:Lyon College Spring 2025
+#+STARTUP: overview hideblocks indent
+#+OPTIONS: toc:nil num:nil ^:nil
+#+PROPERTY: header-args:R :session *R* :results output :exports both :noweb yes
+#+PROPERTY: header-args:python :session *Python* :results output :exports both :noweb yes
+#+PROPERTY: header-args:C :main yes :includes <stdio.h> :results output :exports both :noweb yes
+#+PROPERTY: header-args:C++ :main yes :includes <iostream> :results output :exports both :noweb yes
+* README
+
+- Put your name at the top as =yourname.=
+- Complete as many problems as you can.
+- If you cannot complete a problem, move on.
+
+These simple exercises are based on the DataCamp chapter "Conditionals
+and Control Flow" in the "Intermediate R" course.
+
+You have 30 minutes at the end of which you will upload your solution
+to canvas so that we can review it in class. if you missed class, you
+can do this on your own and upload it until a week later, no more.
+
+* Relational operators
+
+1. Create a vector =ages= with values =18, 25, 30, 17, 40=. write code to
+   find which ages are greater than or equal to 21, and print these
+   =ages=.
+
+   Output:
+   #+begin_example
+   : [1] FALSE  TRUE  TRUE FALSE  TRUE
+   : [1] 25 30 40
+   #+end_example
+
+   Solution:
+   #+begin_src R
+     ages <- c(18,25,30,17,40)
+     ages >= 21 -> ages2
+     ages2
+     ages[ages2]
+   #+end_src
+
+   #+RESULTS:
+   : [1] FALSE  TRUE  TRUE FALSE  TRUE
+   : [1] 25 30 40
+
+2. Write a short script to check if the value of =x= (assigned 50) is
+   equal to the value of =y= (assigned 25). The answer should be a
+   Boolean value.
+
+   Solution:
+   #+begin_src R
+     x <- 50
+     y <- 25
+     x == y
+   #+end_src
+
+   #+RESULTS:
+   : [1] FALSE
+
+3. Compare two strings, ="data"= and ="science"=, and determine which
+   comes first alphabetically. Get the following output using
+   =cat=.Take a look at the help for =cat= to reproduce the output
+   exactly:
+   #+begin_example
+   "data" comes before "science": true
+   #+end_example
+
+   Solution:
+   #+begin_src R
+     s1 <- "data"
+     s2 <- "science"
+     cat('"',s1,'"'," comes before ",s2,": ",tolower(s1<s2),sep="","\n")
+   #+end_src
+
+   #+RESULTS:
+   : "data" comes before science: true
+
+* Logical operators
+
+1. Create a vector =scores <- c(55, 70, 75, 45, 80)=. Use logical
+   operators to check which scores are in the open interval
+   (50,75). Store the result in a logical index vector =idx= and use it
+   to print the values of =scores= that are in (50,75).
+
+   Solution:
+   #+begin_src R
+     scores <- c(55, 70, 75, 45, 80)
+     scores > 50 & scores < 75 -> idx
+     scores[idx]
+   #+end_src
+
+   #+RESULTS:
+   : [1] 55 70
+
+2. Write a script to check if a number =num <- 15= is divisible by both
+   3 and 5. print the result as a Boolean value.
+
+   *Tip:* For example, ~10 %% 2 == 0~ prints ~TRUE~.
+
+   Solution:
+   #+begin_src R :results output
+     num <- 15
+     num %% 3 == 0 & num %% 5 == 0
+   #+end_src
+
+   #+RESULTS:
+   : [1] TRUE
+
+3. Create two vectors, =a <- c(TRUE, FALSE, TRUE)= and =b <- c(FALSE,
+   TRUE, TRUE)=. Use logical operators to find the results of the
+   operations: =a AND b= and =a OR b=.
+
+   Solution:
+   #+begin_src R :results output
+     a <- c(TRUE,FALSE,TRUE)
+     b <- c(FALSE,TRUE,TRUE)
+     a & b
+     a | b
+   #+end_src
+
+   #+RESULTS:
+   : [1] FALSE FALSE  TRUE
+   : [1] TRUE TRUE TRUE
+
+* Conditional statements
+
+1. Create a variable =temperature= with the value =25=. Write a
+   conditional statement to print ="Cold"= if =temperature= is below =20=,
+   and ="Warm"= otherwise.
+
+   #+begin_src R
+     temperature <- 25
+     if (temperature < 20) {
+       print("Cold")
+     } else {
+       print("Warm")
+     }
+   #+end_src
+
+   #+RESULTS:
+   : [1] "Warm"
+
+   If you want to avoid the curly brackets, you need to write all code
+   after the ~if~ statement on the same line (for parsing reasons).
+   #+begin_src R
+     temperature <- 25
+     if (temperature < 20) print("Cold") else print("Warm")
+   #+end_src
+
+   #+RESULTS:
+   : [1] "Warm"
+
+2. Write a script that checks if a given number =x= is negative, zero,
+   or positive, and prints the appropriate message. Test for 5,-10, 0.
+
+   Solution 1:
+   #+begin_src R :results output
+     x = 5
+     if (x==0) {
+       cat(x,"is zero.","\n")
+     } else if (x < 0) {
+       cat(x,"is below zero.","\n")
+     } else {
+       cat(x,"is above zero.","\n")
+     }
+   #+end_src
+
+   #+RESULTS:
+   : 5 is above zero.
+
+   Solution 2: Tangle script and run on shell
+   #+begin_src R :tangle script.R :results none
+     args <- commandArgs(trailingOnly=TRUE) # CLI argument vector
+
+     x <- as.numeric(args[1]) # convert first string input to numeric
+
+     if (x==0) {
+       cat(x,"is zero.","\n")
+     } else if (x < 0) {
+       cat(x,"is below zero.","\n")
+     } else {
+       cat(x,"is above zero.","\n")
+     }
+   #+end_src
+
+   Running the tangled =script.R= on the commandline:
+   #+begin_src bash :results output :exports both
+     Rscript script.R 5
+   #+end_src
+
+   #+RESULTS:
+   : -10 is below zero.
+
+   Solution 3: Make it safe
+   #+begin_src R :tangle script2.R :results none
+     args <- commandArgs(trailingOnly=TRUE)
+
+     ## check if an argument was passed
+     if (length(args) < 1) stop("Usage: Rscript script.R <value>")
+
+     x <- as.numeric(args[1])
+     ## check if input value is a number
+     if (is.na(x)) stop("value must be numeric")
+
+     if (x==0) {
+       cat(x,"is zero.","\n")
+     } else if (x < 0) {
+       cat(x,"is below zero.","\n")
+     } else {
+       cat(x,"is above zero.","\n")
+     }
+   #+end_src
+
+   #+begin_src bash :results output :exports both
+     Rscript script2.R
+   #+end_src
+
+   More elegant: with a function:
+   #+begin_src R :session *R* :results output :exports both
+     check_val <- function(x) {
+       if (x==0) {
+         cat(x,"is zero.","\n")
+       } else if (x < 0) {
+         cat(x,"is below zero.","\n")
+       } else {
+         cat(x,"is above zero.","\n")
+       }
+     }
+     check_val(5)
+     check_val(-10)
+     check_val(0)
+   #+end_src
+
+   #+RESULTS:
+   : 5 is above zero.
+   : -10 is below zero.
+   : 0 is zero.
+
+3. Write a conditional statement to check if a given vector of numbers
+   =foo= contains any value greater than =100=. If it does, print =outlier
+   detected.=, otherwise, print =all values within range.=
+
+   #+begin_src R
+     foo <- c(10,50,101,20)
+     if (any(foo > 100)) {
+       print("Outlier detected.")
+     } else {
+       print("All values within range.")
+     }
+   #+end_src
+
+   #+RESULTS:
+   : [1] "Outlier detected."
