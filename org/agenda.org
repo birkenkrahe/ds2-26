@@ -258,9 +258,9 @@ Q&A by ChatGPT (extracted exclusively from the [[https://docs.google.com/documen
 #+attr_html: :width 400px :float nil:
 [[../img/summary_week_1.png]]
 
-- [ ] Projects? Anyone? Canvas list?
-- [ ] Getting started with Colab graphics and ~iris~
-- [ ] Colab graphics lab with ~penguins~
+- [X] Projects? Anyone? Canvas list?
+- [X] Getting started with Colab graphics and ~iris~ dataset
+- [ ] Colab graphics lab with ~penguins~ dataset
   
 ** Getting started with Colab
 
@@ -281,11 +281,21 @@ know.
 Lecture available [[https://github.com/birkenkrahe/ds2-26/blob/main/ipynb/0_colab.ipynb][in GitHub]] (static) and [[https://colab.research.google.com/drive/1YRme5Q016McFl_TGk3D35DT8MZYfB2Du?usp=sharing][in Colab]] (interactive). To
 open in Colab, use: [[https://tinyurl.com/colab-starter-ipynb][tinyurl.com/colab-starter-ipynb]] (make copy).
 
-** Getting started with Colab - Lab exercise
+* Week 4: Conditionals review / Scoping / Scoping practice
+
+- [ ] *Assignment information:* Postponed "intermediate R" lessons.
+- [ ] *Assignment*: Graphical exploration of dataset (Feb 6).
+- [ ] *Datacamp review practice*: Today in class (upload URL).
+- [ ] *Lecture* with code along: Scoping rules in R
+
+** TODO Getting started with Colab - programming assignment (60')
 
 Test your understanding of "Getting started with Colab" by creating a
 notebook for the Palmer Penguin dataset available for you online from:
 [[https://tinyurl.com/palmer-data-csv][tinyurl.com/palmer-data-csv]].
+
+You can use the ~iris~ dataset exercise that we did in class as an
+example. You can find it here: [[https://tinyurl.com/colab-starter-ipynb][tinyurl.com/colab-starter-ipynb]]
 
 Tasks:
 1) Create a new Colab notebook.
@@ -295,3 +305,20 @@ Tasks:
 5) Make a simple plot of the =bill_length_mm= vs. =bill_depth_mm=.
 6) Make a fully customized plot of the dataset grouping by =species=.
 7) Upload the URL to your notebook to Canvas.
+8) For full points, make sure that your notebook is readable: A
+   readable notebook is structured, contains explanations, code and
+   output.
+9) Feel free to add additional text and code cells if you're curious
+   about something.
+9) Be prepared to explain what you did in class.
+
+*Deadline:* Friday, 6 February 2026.
+
+** TODO DataCamp review practice (30 minutes)
+
+- Work through the exercises in this Colab notebook:
+  [[https://tinyurl.com/review-conditionals-ipynb][tinyurl.com/review-conditionals-ipynb]]
+
+- When you're done, we're going through the solutions, you can fix
+  your code and upload the result to Canvas: *conditionals practice*.
+
