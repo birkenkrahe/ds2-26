@@ -281,14 +281,15 @@ know.
 Lecture available [[https://github.com/birkenkrahe/ds2-26/blob/main/ipynb/0_colab.ipynb][in GitHub]] (static) and [[https://colab.research.google.com/drive/1YRme5Q016McFl_TGk3D35DT8MZYfB2Du?usp=sharing][in Colab]] (interactive). To
 open in Colab, use: [[https://tinyurl.com/colab-starter-ipynb][tinyurl.com/colab-starter-ipynb]] (make copy).
 
-* Week 4: Conditionals review / Scoping / Scoping practice
+* Week 4: Conditionals review / Scoping / Arguments
 
-- [ ] *Assignment information:* Postponed "intermediate R" lessons.
-- [ ] *Assignment*: Graphical exploration of dataset (Feb 6).
+- [X] *Assignment information:* Postponed "intermediate R" lessons.
+- [X] *Assignment*: Graphical exploration of dataset (Feb 6).
+- [X] *Project update*: Proposals due Monday 9 Feb 2 PM.
 - [ ] *Datacamp review practice*: Today in class (upload URL).
 - [ ] *Lecture* with code along: Scoping rules in R
 
-** TODO Getting started with Colab - programming assignment (60')
+** DONE Getting started with Colab - programming assignment (60')
 
 Test your understanding of "Getting started with Colab" by creating a
 notebook for the Palmer Penguin dataset available for you online from:
@@ -314,11 +315,19 @@ Tasks:
 
 *Deadline:* Friday, 6 February 2026.
 
-** TODO DataCamp review practice (30 minutes)
+** DONE DataCamp review practice (30 minutes)
 
 - Work through the exercises in this Colab notebook:
   [[https://tinyurl.com/review-conditionals-ipynb][tinyurl.com/review-conditionals-ipynb]]
 
 - When you're done, we're going through the solutions, you can fix
   your code and upload the result to Canvas: *conditionals practice*.
+
+** Scoping
+
+- We're taking a closer look at the programming environment, including
+  scope, global variables and packages, reserved and protected names.
+
+- Open this file in Colab and make a copy to code along with me:
+  [[https://tinyurl.com/scoping-codealong-ipynb][tinyurl.com/scoping-codealong-ipynb]]
 
