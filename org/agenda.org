@@ -286,8 +286,9 @@ open in Colab, use: [[https://tinyurl.com/colab-starter-ipynb][tinyurl.com/colab
 - [X] *Assignment information:* Postponed "intermediate R" lessons.
 - [X] *Assignment*: Graphical exploration of dataset (Feb 6).
 - [X] *Project update*: Proposals due Monday 9 Feb 2 PM.
-- [ ] *Datacamp review practice*: Today in class (upload URL).
+- [X] *Datacamp review practice*: Today in class (upload URL).
 - [ ] *Lecture* with code along: Scoping rules in R
+- [ ] *Lab*: [[https://github.com/birkenkrahe/ds2-26/blob/main/org/notebooklm.org][Project design with NotebookLM]]
 
 ** DONE Getting started with Colab - programming assignment (60')
 
@@ -323,7 +324,7 @@ Tasks:
 - When you're done, we're going through the solutions, you can fix
   your code and upload the result to Canvas: *conditionals practice*.
 
-** Scoping
+** IN PROGRESS Scoping
 
 - We're taking a closer look at the programming environment, including
   scope, global variables and packages, reserved and protected names.
@@ -331,3 +332,8 @@ Tasks:
 - Open this file in Colab and make a copy to code along with me:
   [[https://tinyurl.com/scoping-codealong-ipynb][tinyurl.com/scoping-codealong-ipynb]]
 
+** Lab: Project design with NotebookLM
+
+- Open the instructions in GitHub: [[https://tinyurl.com/ds2-26-notebooklm][tinyurl.com/ds2-26-notebooklm]]
+
+- Upload the generated artifact to Canvas for points.
