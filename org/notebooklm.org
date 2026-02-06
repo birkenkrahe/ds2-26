@@ -45,14 +45,14 @@ source) into the same reasoning space.
 - Run the following prompts *exactly* (one at a time) *inside your
 notebooklm*. 
 
-- when you are satisfied with the answers, save them as *notes* in your
+- When you are satisfied with the answers, save them as *notes* in your
   notebook (=add note=).
 
 -----
 
-1) *prompt 1 - customize response*
+1) *Prompt 1 - customize response*:
    #+begin_quote
-   for all answers in this session:
+   For all answers in this session:
    - bullet points only.
    - max 5 bullets total.
    - each bullet ≤ 10 words.
@@ -61,19 +61,19 @@ notebooklm*.
    - focus on structure, not content.
    #+end_quote
 
-2) *prompt 2 — project path*
+2) *Prompt 2 — project path*:
    #+begin_quote
-   based only on the uploaded source and the sprint 1 instructions,
+   Based only on the uploaded source and the sprint 1 instructions,
    what kind of project does this topic best support: a build-oriented
    single agent or a research deep dive?  briefly explain why.
    #+end_quote
 
-3) *prompt 3 — proposal skeleton*
+3) *Prompt 3 — proposal skeleton*:
    #+begin_quote
-   based on the sprint 1 proposal structure (problem, reason,
+   Based on the sprint 1 proposal structure (problem, reason,
    constraints, goals, metrics, references), do not write a proposal.
 
-   instead:
+   Instead:
    - list what information would be required for each section
    - state what can be inferred from the uploaded source
    - state what would still require human decisions or clarification
@@ -81,9 +81,9 @@ notebooklm*.
    present the result as a checklist or table.
    #+end_quote
 
-4) *prompt 4 — next actions*
+4) *Prompt 4 — next actions*:
    #+begin_quote
-   do not assume this project is finalized.
+   Do not assume this project is finalized.
 
    identify:
    - the key decisions that must be made before a sprint 1 proposal
@@ -95,48 +95,48 @@ notebooklm*.
    do not suggest implementation steps or timelines.
    #+end_quote
 
-rules:
+Rules:
 - do not ask for “better ideas.”
 - do not ask for examples from other students.
 - treat gaps and uncertainty as *useful signals*.
 - point out to the bot when the format/content gets too dense for you
   to understand, and ask for a simpler/shorter version.
 
-* *step 3: studio (10 minutes)*
+* *Step 3: studio (10 minutes)*
 
-ask notebooklm to generate *one visual artifact*:
+Ask notebooklm to generate *one visual artifact*:
 
-1) in the =sources=, check all your sources so that they are included.
-2) open the =infographic= menu in the =studio= panel.
-3) at the =studio= prompt, enter the following text:
+1) In the =sources=, check all your sources so that they are included.
+2) Open the =infographic= menu in the =studio= panel.
+3) At the =studio= prompt, enter the following text:
 
 #+begin_quote
-create a one-page infographic that explains:
+Create a one-page infographic that explains:
 - the project goal
 - the chosen project path (build or research)
 - the workflow or reasoning flow (inputs → process → outputs)
 - open questions, risks, or assumptions
 
-this is for explaining the project in class, not for marketing.
+This is for explaining the project in class, not for marketing.
 #+end_quote
 
-if the result (which should take 5 min to be generated) is not to your
+If the result (which should take 5 min to be generated) is not to your
 liking, alter the prompt accordingly.
 
-*optional (if time):* ask for a short slide deck (about 5 slides)
+*Optional (if time):* ask for a short slide deck (about 5 slides)
 explaining the same structure. ask in "chat" for a prompt for such
 a presentation.
 
-* *step 4: submit + reflect (5 minutes)*
+* *Step 4: submit + reflect (5 minutes)*
 
-1. export the infographic as an image.
-2. upload it to canvas for today’s participation credit.
-3. keep your notebooklm notebook — you will reuse it for sprint 2.
+1. Export the infographic as an image.
+2. Upload it to canvas for today’s participation credit.
+3. Keep your notebooklm notebook — you will reuse it for sprint 2.
 
-*be ready to discuss:*
-- where did the outline feel weak or unclear?
-- what required *your* judgment rather than the ai’s?
-- did this exercise change which project path you prefer?
+*Be ready to discuss:*
+- Where did the outline feel weak or unclear?
+- What required *your* judgment rather than the ai’s?
+- Did this exercise change which project path you prefer?
 
 * My example: Project Credo
 #+attr_html: :width 400px :float nil: 
