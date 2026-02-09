@@ -288,7 +288,10 @@ open in Colab, use: [[https://tinyurl.com/colab-starter-ipynb][tinyurl.com/colab
 - [X] *Project update*: Proposals due Monday 9 Feb 2 PM.
 - [X] *Datacamp review practice*: Today in class (upload URL).
 - [X] *Lab*: [[https://github.com/birkenkrahe/ds2-26/blob/main/org/notebooklm.org][Project design with NotebookLM]]
-- [ ] *Lecture* with code along: Scoping rules in R
+- [X] *Lecture* with code along: Scoping rules in R
+- [ ] On the power of arguments (a philosophical distraction)
+- [ ] *Review*: Scoping and environment
+- [ ] Function arguments
 
 ** DONE Getting started with Colab - programming assignment (60')
 
@@ -330,6 +333,20 @@ Tasks:
 
 - Upload the generated artifact to Canvas for points.
 
+
+** Project: First sprint report
+
+- Students explain each other which projects they're planning and then
+  introduce the other person's project to the class.
+  
+- This only works if you have an even number of students, which we are
+  lucky have had!
+
+- Olivia's project (introduced by Matheus): SQL from R - Analysis of
+  Women Basketball players
+
+- Matheus' project (introduced by Olivia): Apply family vs. loops
+
 ** IN PROGRESS Scoping
 
 - We're taking a closer look at the programming environment, including
@@ -338,6 +355,64 @@ Tasks:
 - Open this file in Colab and make a copy to code along with me:
   [[https://tinyurl.com/scoping-codealong-ipynb][tinyurl.com/scoping-codealong-ipynb]]
 
-** Arguments
+** Review: Scoping and environment
 
-Open the Colab codealong file: [[https://tinyurl.com/arguments-ipynb][tinyurl.com/arguments-ipynb]]
+1. What problem do *scoping rules* in R solve, and when do they become
+   especially important?
+   #+begin_quote
+   Scoping rules determine how R stores and retrieves objects,
+   especially when the same name exists in multiple places (e.g., a
+   function argument, a global object, or a package function).
+   #+end_quote
+
+2. What is an *environment* in R, and how does it relate to memory and
+   object lookup?
+   #+begin_quote
+   An environment is a virtual compartment that holds objects and
+   functions and points to their memory location; R searches
+   environments to resolve variable and function names.
+   #+end_quote
+
+3. What objects live in the *global environment*, and how can you
+   inspect them?
+   #+begin_quote
+   All user-created or user-overwritten objects live in the global
+   environment; they can be inspected with ~ls()~.
+   #+end_quote
+
+4. What happens when a function is called with respect to *local
+   (lexical) environments*?
+   #+begin_quote
+   Each function call creates a new local environment containing its
+   arguments and locally created objects, which is discarded after the
+   function finishes.
+   #+end_quote
+
+5. How does R’s *search path* work when resolving a function or variable
+   name?
+   #+begin_quote
+   R searches environments in order, starting with ~.GlobalEnv~ and
+   continuing through loaded packages until the object is found or the
+   empty environment is reached.
+   #+end_quote
+
+** NEXT Arguments
+
+#+attr_html: :width 600px:
+#+caption: St. Thomas Aquinas (1225-1274)
+[[../img/aquinas.jpg]]
+
+/What are humanity's most discussed questions throughout the ages?/
+#+begin_quote
+- Why are we here?
+- What is the purpose of life?
+- Is there a higher power or ultimate truth?
+- What is the nature of good and evil?
+#+end_quote
+
+- R is centered on *functions*, and functions have *arguments*.
+
+- Arguments can be specified in three different ways, and we'll take a
+  look at that. Why? Because knowledge of arguments means use power.
+  
+- Open the Colab codealong file: [[https://tinyurl.com/arguments-ipynb][tinyurl.com/arguments-ipynb]]
