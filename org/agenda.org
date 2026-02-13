@@ -1,4 +1,4 @@
-#+TITLE:Agenda and Overview
+xg#+TITLE:Agenda and Overview
 #+AUTHOR:Marcus Birkenkrahe, Lyon College
 #+SUBTITLE:DSC 205 - Introduction to Advanced Data Science
 #+STARTUP: overview hideblocks indent
@@ -281,7 +281,7 @@ know.
 Lecture available [[https://github.com/birkenkrahe/ds2-26/blob/main/ipynb/0_colab.ipynb][in GitHub]] (static) and [[https://colab.research.google.com/drive/1YRme5Q016McFl_TGk3D35DT8MZYfB2Du?usp=sharing][in Colab]] (interactive). To
 open in Colab, use: [[https://tinyurl.com/colab-starter-ipynb][tinyurl.com/colab-starter-ipynb]] (make copy).
 
-* Week 4: Conditionals review / Scoping / Arguments
+* Week 4: Conditionals review / Scoping / Arguments / Conditionals
 
 - [X] *Assignment information:* Postponed "intermediate R" lessons.
 - [X] *Assignment*: Graphical exploration of dataset (Feb 6).
@@ -334,7 +334,7 @@ Tasks:
 - Upload the generated artifact to Canvas for points.
 
 
-** Project: First sprint report
+** DONE Project: First sprint report
 
 - Students explain each other which projects they're planning and then
   introduce the other person's project to the class.
@@ -347,7 +347,7 @@ Tasks:
 
 - Matheus' project (introduced by Olivia): Apply family vs. loops
 
-** IN PROGRESS Scoping
+** DONE Scoping
 
 - We're taking a closer look at the programming environment, including
   scope, global variables and packages, reserved and protected names.
@@ -355,7 +355,7 @@ Tasks:
 - Open this file in Colab and make a copy to code along with me:
   [[https://tinyurl.com/scoping-codealong-ipynb][tinyurl.com/scoping-codealong-ipynb]]
 
-** Review: Scoping and environment
+** DONE Review: Scoping and environment
 
 1. What problem do *scoping rules* in R solve, and when do they become
    especially important?
@@ -365,8 +365,8 @@ Tasks:
    function argument, a global object, or a package function).
    #+end_quote
 
-2. What is an *environment* in R, and how does it relate to memory and
-   object lookup?
+2. What is an *environment* in R or in Python, and how does it relate to
+   memory and object lookup?
    #+begin_quote
    An environment is a virtual compartment that holds objects and
    functions and points to their memory location; R searches
@@ -381,7 +381,7 @@ Tasks:
    #+end_quote
 
 4. What happens when a function is called with respect to *local
-   (lexical) environments*?
+   (lexical) environments* (also called a *scope*)?
    #+begin_quote
    Each function call creates a new local environment containing its
    arguments and locally created objects, which is discarded after the
@@ -396,13 +396,21 @@ Tasks:
    empty environment is reached.
    #+end_quote
 
-** NEXT Arguments
+   #+begin_src R :session *R* :results output :exports both :noweb yes
+     search()  # shows the search path
+   #+end_src
+
+   #+RESULTS:
+   :  [1] ".GlobalEnv"        "ESSR"              "package:stats"     "package:graphics"  "package:grDevices"
+   :  [6] "package:utils"     "package:datasets"  "package:methods"   "Autoloads"         "package:base"
+
+** IN PROGRESS Arguments
 
 #+attr_html: :width 600px:
 #+caption: St. Thomas Aquinas (1225-1274)
 [[../img/aquinas.jpg]]
 
-/What are humanity's most discussed questions throughout the ages?/
+/What are humaanity's most discussed questions throughout the ages?/
 #+begin_quote
 - Why are we here?
 - What is the purpose of life?
@@ -416,3 +424,89 @@ Tasks:
   look at that. Why? Because knowledge of arguments means use power.
   
 - Open the Colab codealong file: [[https://tinyurl.com/arguments-ipynb][tinyurl.com/arguments-ipynb]]
+
+** NEXT Review: Function arguments
+
+1. What is meant by function argument matching in an expression like
+   =f(args)=, for example with a function like ~plot~?
+   #+begin_quote
+   It refers to the process by which actual arguments supplied in a
+   function call are matched to the formal parameters defined in the
+   function. This can occur by *exact name*, *partial name*, *position*, or
+   a *mixture* of these.
+   #+end_quote
+
+2. Define exact argument matching and state one advantage and one
+   disadvantage.
+   #+begin_quote
+   Exact argument matching means that all argument names are written
+   out in full and spelled correctly.  Advantage: It is safe and
+   independent of argument order.  Disadvantage: It can be verbose and
+   requires knowledge of the full, case-sensitive argument names.
+   #+end_quote
+
+3. Why does switching the order of arguments in a function call using
+   exact matching (e.g., matrix) still produce the same result?
+   #+begin_quote
+   Because each argument is identified by its full name, the function
+   matches them by tag rather than by position, so order does not
+   affect the result.
+   #+end_quote
+
+4. What is partial argument matching, and what condition must be
+   satisfied for it to work correctly?
+   #+begin_quote
+   Partial argument matching uses abbreviated argument names.  It
+   works only if the abbreviation uniquely identifies a single formal
+   argument.
+   #+end_quote
+
+5. What can happen if a partial argument abbreviation is not unique
+   (for example, using “d” instead of “da” for data)?
+   #+begin_quote
+   R may produce an error due to *ambiguity*, or it may match an
+   unintended argument if multiple formal arguments begin with the
+   same prefix.
+   #+end_quote
+
+6. Define positional argument matching and explain one risk associated
+   with it.
+   #+begin_quote
+   Positional argument matching assigns arguments based solely on
+   their order in the function call.  Risk: If the user does not know
+   the exact order of formal parameters, arguments may be assigned
+   incorrectly.
+   #+end_quote
+
+7. Where can you find the defined order of arguments for an R
+   function?
+   #+begin_quote
+   In the =Usage= section of the function’s help file, or by using
+   =args(function_name)= or printing the function name.
+   #+end_quote
+
+8. In a positional call to ~matrix()~, what happens if an intermediate
+   argument such as ~byrow~ is omitted without naming later arguments?
+   #+begin_quote
+   Subsequent arguments shift position and may be matched to the wrong
+   formal parameters, potentially producing unintended results or
+   errors.
+   #+end_quote
+
+9. What is mixed argument matching? Provide a brief description.
+   #+begin_quote
+   Mixed argument matching combines different styles (exact, partial,
+   and positional) within the same function call. This is common.
+   #+end_quote
+
+10. What is the role of ellipses (...) in a function definition?
+    #+begin_quote
+    Ellipses allow a function to accept any number and type of
+    additional arguments, which can be passed on to other functions or
+    handled internally.
+    #+end_quote
+
+* Conditionals    
+
+- Open a Colab notebook and code along with me.
+- You can find the complete file (Org-mode) in GitHub.
