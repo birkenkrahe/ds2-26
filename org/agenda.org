@@ -1,4 +1,4 @@
-xg#+TITLE:Agenda and Overview
+#+TITLE:Agenda and Overview
 #+AUTHOR:Marcus Birkenkrahe, Lyon College
 #+SUBTITLE:DSC 205 - Introduction to Advanced Data Science
 #+STARTUP: overview hideblocks indent
@@ -293,7 +293,7 @@ open in Colab, use: [[https://tinyurl.com/colab-starter-ipynb][tinyurl.com/colab
 - [ ] *Review*: Scoping and environment
 - [ ] Function arguments
 
-** DONE Getting started with Colab - programming assignment (60')
+** Getting started with Colab - programming assignment (60')
 
 Test your understanding of "Getting started with Colab" by creating a
 notebook for the Palmer Penguin dataset available for you online from:
@@ -319,7 +319,7 @@ Tasks:
 
 *Deadline:* Friday, 6 February 2026.
 
-** DONE DataCamp review practice (30 minutes)
+** DataCamp review practice (30 minutes)
 
 - Work through the exercises in this Colab notebook:
   [[https://tinyurl.com/review-conditionals-ipynb][tinyurl.com/review-conditionals-ipynb]]
@@ -327,14 +327,13 @@ Tasks:
 - When you're done, we're going through the solutions, you can fix
   your code and upload the result to Canvas: *conditionals practice*.
 
-** DONE Lab: Project design with NotebookLM
+** Lab: Project design with NotebookLM
 
 - Open the instructions in GitHub: [[https://tinyurl.com/ds2-26-notebooklm][tinyurl.com/ds2-26-notebooklm]]
 
 - Upload the generated artifact to Canvas for points.
 
-
-** DONE Project: First sprint report
+** Project: First sprint report
 
 - Students explain each other which projects they're planning and then
   introduce the other person's project to the class.
@@ -347,7 +346,7 @@ Tasks:
 
 - Matheus' project (introduced by Olivia): Apply family vs. loops
 
-** DONE Scoping
+** Scoping
 
 - We're taking a closer look at the programming environment, including
   scope, global variables and packages, reserved and protected names.
@@ -355,7 +354,7 @@ Tasks:
 - Open this file in Colab and make a copy to code along with me:
   [[https://tinyurl.com/scoping-codealong-ipynb][tinyurl.com/scoping-codealong-ipynb]]
 
-** DONE Review: Scoping and environment
+** Review: Scoping and environment
 
 1. What problem do *scoping rules* in R solve, and when do they become
    especially important?
@@ -404,7 +403,7 @@ Tasks:
    :  [1] ".GlobalEnv"        "ESSR"              "package:stats"     "package:graphics"  "package:grDevices"
    :  [6] "package:utils"     "package:datasets"  "package:methods"   "Autoloads"         "package:base"
 
-** IN PROGRESS Arguments
+** Arguments
 
 #+attr_html: :width 600px:
 #+caption: St. Thomas Aquinas (1225-1274)
@@ -425,7 +424,7 @@ Tasks:
   
 - Open the Colab codealong file: [[https://tinyurl.com/arguments-ipynb][tinyurl.com/arguments-ipynb]]
 
-** NEXT Review: Function arguments
+** Review: Function arguments
 
 1. What is meant by function argument matching in an expression like
    =f(args)=, for example with a function like ~plot~?
@@ -446,7 +445,7 @@ Tasks:
    #+end_quote
 
 3. Why does switching the order of arguments in a function call using
-   exact matching (e.g., matrix) still produce the same result?
+   exact matching (e.g., ~matrix~) still produce the same result?
    #+begin_quote
    Because each argument is identified by its full name, the function
    matches them by tag rather than by position, so order does not
@@ -485,6 +484,14 @@ Tasks:
    =args(function_name)= or printing the function name.
    #+end_quote
 
+   #+begin_src R :session *R* :results output :exports both :noweb yes
+     args(matrix)
+   #+end_src
+
+   #+RESULTS:
+   : function (data = NA, nrow = 1, ncol = 1, byrow = FALSE, dimnames = NULL) 
+   : NULL
+   
 8. In a positional call to ~matrix()~, what happens if an intermediate
    argument such as ~byrow~ is omitted without naming later arguments?
    #+begin_quote
@@ -506,7 +513,39 @@ Tasks:
     handled internally.
     #+end_quote
 
-* Conditionals    
+    #+begin_src R :session *R* :results output :exports both :noweb yes
+      args(plot) # additional graphics parameters
+      args(mean) # additional stats parameters
+      args(options) # needs environment parametersx
+    #+end_src
 
-- Open a Colab notebook and code along with me.
-- You can find the complete file (Org-mode) in GitHub.
+    #+RESULTS:
+    : function (x, y, ...) 
+    : NULL
+    : function (x, ...) 
+    : NULL
+    : function (...) 
+    : NULL
+
+    #+begin_src R :session *R* :results output :exports both :noweb yes
+      plot(1,1,main="point plot")
+      mean(c(1,2,3,NA), na.rm=TRUE)
+      (x <- 3.145)
+      options(digits=3)
+      (x <- 3.1459)
+    #+end_src
+
+    #+RESULTS:
+    : [1] 2
+    : [1] 3.15
+    : [1] 3.15
+    
+* Week 5: Conditionals
+
+- [ ] There is no class on Friday!
+- [ ] You will get two assignments from me this week
+- [ ] You will get a quiz (arguments & conditionals)
+
+** Conditionals
+
+- [ ] Open a Colab notebook and code along with me.

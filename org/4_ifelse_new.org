@@ -1,0 +1,221 @@
+#+TITLE: CONDITIONAL STATEMENTS - IF ELSE IFELSE
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: DSC 205 - Advanced introduction to data science
+#+STARTUP: overview hideblocks indent inlineimages
+#+OPTIONS: toc:nil num:nil ^:nil
+#+PROPERTY: header-args:R :session *R* :results output :exports both :noweb yes
+#+attr_html: :width 300px
+* README
+#+attr_html: :width 300px
+#+caption: Photo by Robert Anasch on Unsplash
+[[../img/3_doors.jpg]]
+
+You will learn:
+
+- How to control the flow and execution order in R code
+- How to use ~if~, ~else~ and ~ifelse~ statements in R
+- What role vectorization plays
+- How to do this with vectorization in Python
+
+* Conditional Logic in R
+
+Control flow allows us to make decisions in code.
+
+We focus on:
+- if
+- if ... else
+- else if
+- ifelse() (vectorized)
+
+* Basic if
+
+Structure:
+
+#+begin_src R :results output :export both
+if (condition) {
+  code
+}
+#+end_src
+
+Example:
+
+#+begin_src R :results output :export both
+x <- 5
+
+if (x > 0) {
+  print("x is positive")
+}
+#+end_src
+
+Change x to -2 and run again.
+
+* if ... else
+
+Structure:
+
+#+begin_src R :results output :export both
+if (condition) {
+  code_if_true
+} else {
+  code_if_false
+}
+#+end_src
+
+Example:
+
+#+begin_src R :results output :export both
+x <- -3
+
+if (x > 0) {
+  print("positive")
+} else {
+  print("zero or negative")
+}
+#+end_src
+
+* else if (multiple cases)
+
+Structure:
+
+#+begin_src R :results output :export both
+if (condition1) {
+  ...
+} else if (condition2) {
+  ...
+} else {
+  ...
+}
+#+end_src
+
+Example:
+
+#+begin_src R :results output :export both
+x <- 0
+
+if (x > 0) {
+  print("positive")
+} else if (x < 0) {
+  print("negative")
+} else {
+  print("zero")
+}
+#+end_src
+
+Conditions are checked from top to bottom.
+The first TRUE branch executes.
+
+* Using if inside a function
+
+#+begin_src R :results output :export both
+sign_label <- function(x) {
+  if (x > 0) {
+    return("positive")
+  } else if (x < 0) {
+    return("negative")
+  } else {
+    return("zero")
+  }
+}
+
+sign_label(10)
+sign_label(-4)
+sign_label(0)
+#+end_src
+
+* Limitation of if
+
+if expects a single logical value.
+
+This works:
+
+#+begin_src R :results output :export both
+x <- 5
+if (x > 0) print("ok")
+#+end_src
+
+This fails:
+
+#+begin_src R :results output :export both
+x <- c(-1, 2, 3)
+x > 0
+#+end_src
+
+Because x > 0 returns a vector.
+
+* Vectorized alternative: ifelse()
+
+Structure:
+
+#+begin_src R :results output :export both
+ifelse(test, value_if_true, value_if_false)
+#+end_src
+
+Example:
+
+#+begin_src R :results output :export both
+x <- c(-2, -1, 0, 1, 2)
+
+result <- ifelse(x > 0, "positive", "not positive")
+result
+#+end_src
+
+* Numeric example: avoid division by zero
+
+#+begin_src R :results output :export both
+x <- 10
+y <- c(-2, -1, 0, 1, 2)
+
+result <- ifelse(y == 0, NA, x / y)
+result
+#+end_src
+
+ifelse() operates element-wise and returns a vector of the same length as the test.
+
+* Practice Exercise
+
+** Part 1
+
+Create a variable score.
+If score >= 60, print "Pass".
+
+** Part 2
+
+Modify the code:
+
+- If score >= 60 → "Pass"
+- Otherwise → "Fail"
+
+** Part 3
+
+Extend it to assign grades:
+
+- score >= 90 → "A"
+- score >= 80 → "B"
+- score >= 70 → "C"
+- score >= 60 → "D"
+- otherwise → "F"
+
+Be careful with order.
+
+** Part 4
+
+#+begin_src R :results output :export both
+x <- -5:5
+#+end_src
+
+Use ~ifelse()~ to:
+
+- Replace negative values with 0
+- Keep all other values unchanged
+
+Store the result in a new variable.
+
+* Glossary
+
+| TERM    | MEANING                                   |
+|---------+-------------------------------------------|
+| ~if~      | conditional (continue if condition ~TRUE~)  |
+| ~else~    | alternative (continue if condition ~FALSE~) |
+| ~ifelse~  | test logical condition on vectors         |
+| ~else if~ | stacked ~if~                                |
+
