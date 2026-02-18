@@ -1,0 +1,302 @@
+#+TITLE: Stacked, Nested if Statements and switch()
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: DSC 205 — Advanced Introduction to Data Science
+#+OPTIONS: toc:nil num:nil
+#+PROPERTY: header-args:R :results output :exports both :session *R*
+#+startup: overview hideblocks indent entitiespretty: 
+* Overview
+
+In this lecture you will learn:
+
+- What stacked if statements are
+- What nested if statements are
+- When to use switch()
+- How these structures differ
+- How to choose the simplest structure
+
+We build on:
+- if
+- if ... else
+- else if
+- ifelse()
+
+* 1. Stacked if Statements
+
+Stacked if statements are independent.
+
+Each condition is checked separately.
+
+Example:
+
+#+begin_src R :results output :exports both :session *R*
+x <- 5
+
+if (x > 0) {
+  print("positive")
+}
+
+if (x %% 2 == 1) {
+  print("odd")
+}
+#+end_src
+
+Both conditions may run.
+
+Stacked if statements do NOT exclude each other.
+
+* 2. else if Chains (Mutually Exclusive)
+
+#+begin_src R :results output :exports both :session *R*
+x <- 5
+
+if (x > 0) {
+  print("positive")
+} else if (x == 0) {
+  print("zero")
+} else {
+  print("negative")
+}
+#+end_src
+
+Only one branch runs.
+
+Order matters.
+
+* 3. Nested if Statements
+
+Nested means: an if inside another if.
+
+#+begin_src R :results output :exports both :session *R*
+x <- 8
+
+if (x > 0) {
+  if (x %% 2 == 0) {
+    print("positive and even")
+  } else {
+    print("positive and odd")
+  }
+}
+#+end_src
+
+The inner test only runs if the outer condition is TRUE.
+
+* 4. When to Nest vs. When to Stack
+
+Stacked:
+
+#+begin_src R :results output :exports both :session *R*
+if (x > 0) print("positive")
+if (x %% 2 == 0) print("even")
+#+end_src
+
+Nested:
+
+#+begin_src R :results output :exports both :session *R*
+if (x > 0) {
+  if (x %% 2 == 0) print("positive and even")
+}
+#+end_src
+
+The meaning differs.
+
+* 5. Introducing switch()
+
+switch() compares one value against fixed cases.
+
+Numeric selector:
+
+#+begin_src R :results output :exports both :session *R*
+day <- 2
+
+switch(day,
+       "Monday",
+       "Tuesday",
+       "Wednesday",
+       "Thursday",
+       "Friday")
+#+end_src
+
+Character selector:
+
+#+begin_src R :results output :exports both :session *R*
+op <- "add"
+
+switch(op,
+       add = 2 + 3,
+       subtract = 5 - 2,
+       multiply = 3 * 4,
+       "Unknown operation")
+#+end_src
+
+If no match is found, the last value is returned.
+
+* 6. switch vs else if
+
+Better suited for switch:
+
+#+begin_src R :results output :exports both :session *R*
+grade <- "B"
+
+switch(grade,
+       A = "Excellent",
+       B = "Good",
+       C = "Average",
+       D = "Below Average",
+       F = "Fail",
+       "Invalid grade")
+#+end_src
+
+Use else if for ranges or logical comparisons.
+
+* Practice Exercises
+
+Use paste() so that the value and message print together.
+
+Example format:
+
+#+begin_src R :results output :exports both :session *R*
+x <- 10
+print(paste("x =", x, "| status:", "positive"))
+#+end_src
+
+** Part 1 — Stacked if
+
+Create:
+
+#+begin_src R :results output :exports both :session *R*
+x <- 12
+#+end_src
+
+Write stacked if statements that:
+
+- Print "x = value | positive" if x > 0
+- Print "x = value | multiple of 3" if x %% 3 == 0
+
+Use paste() to combine value and message.
+
+Test with different values.
+
+** Part 2 — Nested if
+
+Create:
+
+#+begin_src R :results output :exports both :session *R*
+x <- -4
+#+end_src
+
+Write nested if statements that:
+
+- If x > 0:
+  - If x is even → print "x = value | positive even"
+  - Else → print "x = value | positive odd"
+- Otherwise → print "x = value | not positive"
+
+Use paste().
+
+Test with at least three values.
+
+#+begin_src R :session *R* :results output :exports both :noweb yes
+  x <- -5
+  if (x>0) {
+    if (x %% 2 == 0) {
+      paste(x,"is positive and even")
+    } else {
+      paste(x,"is positive and odd")
+    }
+    } else {
+      paste(x,"is negative")
+  }
+#+end_src
+
+#+RESULTS:
+: [1] "-5 is negative"
+
+** Part 3 — Convert Nested to else if
+
+Rewrite Part 2 using an else if chain instead of nesting.
+
+Use paste() for output.
+
+** Part 4 — switch with Numbers
+
+Create:
+
+#+begin_src R :results output :exports both :session *R*
+choice <- 3
+#+end_src
+
+Use switch() to return:
+
+1 → "Red"
+2 → "Green"
+3 → "Blue"
+4 → "Yellow"
+
+Print using paste():
+
+"choice = value | color = result"
+
+Test at least two values.
+
+#+begin_src R :session *R* :results output :exports both :noweb yes
+choice <- 3
+
+switch(choice,
+       "Red",
+       "Green",
+       "Yellow",
+       "Blue")
+#+end_src
+
+** Part 5 — switch with Character Input
+
+Create:
+
+#+begin_src R :results output :exports both :session *R*
+command <- "square"
+x <- 4
+#+end_src
+
+Use switch() to compute:
+
+- "square" → x^2
+- "cube" → x^3
+- "double" → 2*x
+- Otherwise → "Unknown command"
+
+Print:
+
+"command = value | result = ..."
+
+Use paste().
+
+Test with at least three commands.
+
+#+begin_src R :session *R* :results output :exports both :noweb yes
+  command = "half"
+  x <- 4
+
+  switch(command,
+         square = x*x,  # prints the result
+         double = paste("command: ",command,"| result = ",2*x),
+         cube = paste("command: ", command, "| result = ", x*x*x),
+         "Unknown command"
+         )
+#+end_src
+
+#+RESULTS:
+: [1] "Unknown command"
+
+* Summary
+
+Stacked if:
+- Independent tests
+
+Nested if:
+- Dependent structure
+
+else if:
+- Mutually exclusive chain
+
+switch():
+- Best for matching one value against fixed cases

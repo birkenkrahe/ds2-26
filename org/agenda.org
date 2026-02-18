@@ -281,7 +281,7 @@ know.
 Lecture available [[https://github.com/birkenkrahe/ds2-26/blob/main/ipynb/0_colab.ipynb][in GitHub]] (static) and [[https://colab.research.google.com/drive/1YRme5Q016McFl_TGk3D35DT8MZYfB2Du?usp=sharing][in Colab]] (interactive). To
 open in Colab, use: [[https://tinyurl.com/colab-starter-ipynb][tinyurl.com/colab-starter-ipynb]] (make copy).
 
-* Week 4: Conditionals review / Scoping / Arguments / Conditionals
+* Week 4: Conditionals review / Scoping / Arguments
 
 - [X] *Assignment information:* Postponed "intermediate R" lessons.
 - [X] *Assignment*: Graphical exploration of dataset (Feb 6).
@@ -542,10 +542,17 @@ Tasks:
     
 * Week 5: Conditionals
 
-- [ ] There is no class on Friday!
-- [ ] You will get two assignments from me this week
-- [ ] You will get a quiz (arguments & conditionals)
+- [X] There is no class on Friday!
+- [X] You will get two assignments from me this week
+- [X] You will get a quiz (arguments & conditionals)
+- [X] *The equivalent of R's ~ifelse~ in Python*
+- [X] Nested and stacked ~if~ and the ~switch~ function
+  
+** DONE Conditionals
 
-** Conditionals
+- [ ] Open [[https://tinyurl.com/if-else-ipynb][tinyurl.com/if-else-ipynb]] in and code along with me.
 
-- [ ] Open a Colab notebook and code along with me.
+** Stacked, Nested if Statements and switch function
+
+- [ ] Open [[https://tinyurl.com/switch-ipynb][tinyurl.com/switch-ipynb]] in and code along with me.
+
