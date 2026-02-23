@@ -561,3 +561,5 @@ Tasks:
 - Extended deadline for next DataCamp lesson to Wednesday night
 - Code along file: [[https://tinyurl.com/r-loops-ipynb][tinyurl.com/r-loops-ipynb]]
 - Upload the final file to Canvas
+
+* Week 7: Functions  
