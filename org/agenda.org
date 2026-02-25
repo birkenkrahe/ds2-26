@@ -565,12 +565,14 @@ Tasks:
 - [X] Code along file: [[https://tinyurl.com/r-loops-ipynb][tinyurl.com/r-loops-ipynb]]. (Copy to edit.)
   Upload the final file to Canvas (when we're done with it).
 
-- [ ] 2nd sprint: *extensive* Literature review (due March 13)
+- [X] 2nd sprint: *extensive* Literature review (due March 13)
 
 - [ ] Open and copy the notebook to code along:
   [[https://tinyurl.com/while-ipynb][tinyurl.com/while-ipynb]]
   
 ** 2nd sprint: Literature review
 
+- Make sure you look at the assignment and follow it to the letter!
+- Don't be too stingy with your time, 4-6 hours is expected minimum.xsa
 
 * Week 7: Functions
