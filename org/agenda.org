@@ -570,7 +570,7 @@ Tasks:
 - [ ] Open and copy the notebook to code along:
   [[https://tinyurl.com/while-ipynb][tinyurl.com/while-ipynb]]
   
-** 2nd sprint: Literature review
+** TODO 2nd sprint: Literature review
 
 - Make sure you look at the assignment and follow it to the letter!
 - Don't be too stingy with your time, 4-6 hours is expected minimum.xsa
