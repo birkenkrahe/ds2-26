@@ -556,7 +556,7 @@ Tasks:
 
 - [ ] Open [[https://tinyurl.com/switch-ipynb][tinyurl.com/switch-ipynb]] in and code along with me.
 
-* Week 6: Loops (~for~, ~while~, ~apply~) / Literature review
+* DONE Week 6: Loops (~for~, ~while~, ~apply~) / Literature review
 #+attr_html: :width 400px :float nil:
 [[../img/literature_review.png]]
 
@@ -570,9 +570,54 @@ Tasks:
 - [ ] Open and copy the notebook to code along:
   [[https://tinyurl.com/while-ipynb][tinyurl.com/while-ipynb]]
   
-** TODO 2nd sprint: Literature review
+** 2nd sprint: Literature review
 
 - Make sure you look at the assignment and follow it to the letter!
 - Don't be too stingy with your time, 4-6 hours is expected minimum.xsa
 
-* Week 7: Functions
+
+* Week 7: ~next~, ~break~, ~repeat~ and Monte Carlo Simulations
+
+- [ ] Review: ~apply~ functions so far
+- [ ] Lecture (codealong + exercise): ~tapply~, ~lapply~, ~sapply~.
+- [ ] Home programming assignment "Titanic Survival" with ~tapply~.
+- [ ] Quiz on ~apply~ functions.
+- [ ] ~next~, ~break~, ~repeat~ and Monte Carlo Simulations
+
+** Review: ~apply~ functions so far
+
+1. What is the main purpose of the *apply family* of functions in R?
+   #+begin_quote
+   They implement implicit looping by applying a function to elements
+   or subsets of vectors, matrices, arrays, or lists, avoiding
+   explicit ~for~ loops.
+   #+end_quote
+
+2. In the function ~apply(X, MARGIN, FUN)~, what does the argument
+   ~MARGIN~ represent?
+   #+begin_quote
+   It specifies the dimension of the data structure to operate over: ~1~
+   for rows, ~2~ for columns, ~3~ for layers in a 3-D array, and higher
+   values for higher dimensions.
+   #+end_quote
+
+3. What is the difference between ~lapply~ and ~sapply~?
+   #+begin_quote
+   ~lapply~ always returns a list, while ~sapply~ attempts to simplify the
+   result into a vector or matrix when possible.
+   #+end_quote
+
+4. What does the command ~apply(foo, 1, sum)~ compute if ~foo~ is a matrix?
+   #+begin_quote
+   It computes the sum of each row of the matrix ~foo~, because ~MARGIN =
+   1~ indicates rows.
+   #+end_quote
+
+5. What problem does ~tapply~ solve and how are subsets defined?
+   #+begin_quote
+   ~tapply~ applies a function to subsets of a vector defined by
+   categorical groups, typically using a ~factor~ variable to split the
+   data.
+   #+end_quote
+
+  
