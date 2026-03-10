@@ -586,7 +586,7 @@ Tasks:
 - [ ] Quiz on ~apply~ functions.
 - [ ] ~next~, ~break~, ~repeat~ and Monte Carlo Simulations
 
-** Review: ~apply~ functions so far (popquiz)
+** DONE Review: ~apply~ functions so far (popquiz)
 
 1. What is the main purpose of the *apply family* of functions in R?
    #+begin_quote
@@ -622,4 +622,6 @@ Tasks:
    data.
    #+end_quote
 
-  
+** ~next~, ~break~, ~repeat~ and Monte Carlo Simulations
+
+Open the Colab notebook: https://tinyurl.com/monte-carlo-r
