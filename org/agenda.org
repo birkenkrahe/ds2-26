@@ -575,15 +575,14 @@ Tasks:
 - Make sure you look at the assignment and follow it to the letter!
 - Don't be too stingy with your time, 4-6 hours is expected minimum.xsa
 
+* DONE Week 7: ~next~, ~break~, ~repeat~ and Monte Carlo Simulations
 
-* Week 7: ~next~, ~break~, ~repeat~ and Monte Carlo Simulations
-
-- [ ] DataCamp: ~apply~ functions lesson was due March 4th
-- [ ] DataCamp: new lesson "Writing functions in R"
-- [ ] Review: ~apply~ functions so far
-- [ ] Lecture (codealong + exercise): ~tapply~, ~lapply~, ~sapply~.
-- [ ] Home programming assignment "Titanic Survival" with ~tapply~.
-- [ ] Quiz on ~apply~ functions.
+- [X] DataCamp: ~apply~ functions lesson was due March 4th
+- [X] DataCamp: new lesson "Writing functions in R"
+- [X] Review: ~apply~ functions so far
+- [X] Lecture (codealong + exercise): ~tapply~, ~lapply~, ~sapply~.
+- [X] Home programming assignment "Titanic Survival" with ~tapply~.
+- [X] Quiz on ~apply~ functions.
 - [ ] ~next~, ~break~, ~repeat~ and Monte Carlo Simulations
 
 ** DONE Review: ~apply~ functions so far (popquiz)
@@ -625,3 +624,71 @@ Tasks:
 ** ~next~, ~break~, ~repeat~ and Monte Carlo Simulations
 
 Open the Colab notebook: https://tinyurl.com/monte-carlo-r
+
+* Week 8: Real world problems / Functions
+
+- [ ] New home assignment: Monte Carlo simulation (March 20)
+- [ ] Review: ~break~, ~next~, ~repeat~
+- [ ] Real world problems: codealong - open
+  [[https://tinyurl.com/real-world-ipynb][tinyurl.com/real-world-ipynb]]
+
+** Review: ~break~, ~next~, ~repeat~
+
+1. What are the purposes of the loop control statements *break*, *next*,
+   and *repeat* in R?
+   #+begin_quote
+   - *break* immediately terminates the current loop and exits it.
+   - *next* skips the remainder of the current iteration and proceeds to
+     the next iteration of the loop.
+   - *repeat* creates an indefinite loop that runs until it is
+     explicitly terminated, usually with *break*.
+   #+end_quote
+
+2. How do *for* loops and *while* loops normally terminate in R?
+   #+begin_quote
+   - A *for* loop terminates when the loop index has iterated through
+     all elements of the loop vector.
+   - A *while* loop terminates when its logical condition evaluates to
+     *FALSE*.
+   #+end_quote
+
+3. What effect does the *break* statement have when encountered inside a
+   loop?
+   #+begin_quote
+   The *break* statement immediately stops the execution of the loop and
+   transfers control to the first statement after the loop.
+   #+end_quote
+
+4. What effect does the *next* statement have inside a loop?
+   #+begin_quote
+   The *next* statement skips the remaining statements in the current
+   loop iteration and continues with the next iteration.
+   #+end_quote
+   
+5. Why does the mixed vector =readings <- c(12.5, "error", -8.0, NA,
+   15.2, "fault", -9.1)= cause problems when checking with  ~is.numeric()~?
+   #+begin_quote
+   Because the vector contains character elements, R coerces all
+   elements to the character type. As a result, each element appears
+   as a character string rather than a numeric value.
+   #+end_quote
+
+6. In the Monte Carlo method for estimating π, why is the expression
+   =x^2 + y^2 ≤ 1= used?
+   #+begin_quote
+   This inequality determines whether a randomly generated point lies
+   inside the unit circle centered at the origin. Points satisfying
+   the condition fall within the circle and are counted toward
+   estimating π.
+   #+end_quote
+
+7. What will the following R code print?
+   #+begin_src R
+     x <- c(5, "error", 7, "fault", 10)
+
+     for (v in x) {
+       num <- as.numeric(v)
+       if (is.na(num)) next
+       print(num)
+     }
+   #+end_src
