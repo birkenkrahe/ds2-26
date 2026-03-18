@@ -583,9 +583,9 @@ Tasks:
 - [X] Lecture (codealong + exercise): ~tapply~, ~lapply~, ~sapply~.
 - [X] Home programming assignment "Titanic Survival" with ~tapply~.
 - [X] Quiz on ~apply~ functions.
-- [ ] ~next~, ~break~, ~repeat~ and Monte Carlo Simulations
+- [X] ~next~, ~break~, ~repeat~ and Monte Carlo Simulations
 
-** DONE Review: ~apply~ functions so far (popquiz)
+** Review: ~apply~ functions so far (popquiz)
 
 1. What is the main purpose of the *apply family* of functions in R?
    #+begin_quote
@@ -625,70 +625,22 @@ Tasks:
 
 Open the Colab notebook: https://tinyurl.com/monte-carlo-r
 
-* Week 8: Real world problems / Functions
+* Week 8: Autonomous AI agent / Business Analytics dashboard
 
-- [ ] New home assignment: Monte Carlo simulation (March 20)
-- [ ] Review: ~break~, ~next~, ~repeat~
-- [ ] Real world problems: codealong - open
-  [[https://tinyurl.com/real-world-ipynb][tinyurl.com/real-world-ipynb]]
+- [ ] Practice: Build an autonomous weather agent
+- [ ] Practice: Separate spreadsheet data from program logic
+- [ ] Building with AI: Business Analytics Dashboard
+- [ ] Plan for after Spring break: Python and Machine Learning (ML)
 
-** Review: ~break~, ~next~, ~repeat~
+** Plan for after Spring break
 
-1. What are the purposes of the loop control statements *break*, *next*,
-   and *repeat* in R?
-   #+begin_quote
-   - *break* immediately terminates the current loop and exits it.
-   - *next* skips the remainder of the current iteration and proceeds to
-     the next iteration of the loop.
-   - *repeat* creates an indefinite loop that runs until it is
-     explicitly terminated, usually with *break*.
-   #+end_quote
+- [ ] We will switch from R to Python
+  + Data frame library ~pandas~
+  + Numerical functions library ~NumPy~
+  + Machine learning libraries ~Scikit-Learn~ and ~PyTorch~
 
-2. How do *for* loops and *while* loops normally terminate in R?
-   #+begin_quote
-   - A *for* loop terminates when the loop index has iterated through
-     all elements of the loop vector.
-   - A *while* loop terminates when its logical condition evaluates to
-     *FALSE*.
-   #+end_quote
+- [ ] We will study machine learning:
+  + What is machine learning (DataCamp course)
+  + Classification algorithms
+  + Linear and logistic regression
 
-3. What effect does the *break* statement have when encountered inside a
-   loop?
-   #+begin_quote
-   The *break* statement immediately stops the execution of the loop and
-   transfers control to the first statement after the loop.
-   #+end_quote
-
-4. What effect does the *next* statement have inside a loop?
-   #+begin_quote
-   The *next* statement skips the remaining statements in the current
-   loop iteration and continues with the next iteration.
-   #+end_quote
-   
-5. Why does the mixed vector =readings <- c(12.5, "error", -8.0, NA,
-   15.2, "fault", -9.1)= cause problems when checking with  ~is.numeric()~?
-   #+begin_quote
-   Because the vector contains character elements, R coerces all
-   elements to the character type. As a result, each element appears
-   as a character string rather than a numeric value.
-   #+end_quote
-
-6. In the Monte Carlo method for estimating π, why is the expression
-   =x^2 + y^2 ≤ 1= used?
-   #+begin_quote
-   This inequality determines whether a randomly generated point lies
-   inside the unit circle centered at the origin. Points satisfying
-   the condition fall within the circle and are counted toward
-   estimating π.
-   #+end_quote
-
-7. What will the following R code print?
-   #+begin_src R
-     x <- c(5, "error", 7, "fault", 10)
-
-     for (v in x) {
-       num <- as.numeric(v)
-       if (is.na(num)) next
-       print(num)
-     }
-   #+end_src
