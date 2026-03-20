@@ -1,0 +1,150 @@
+#+TITLE:Getting Started with R: Palmer Penguins (Exercise Solution)
+#+AUTHOR:Marcus Birkenkrahe (pledged)
+#+SUBTITLE:DSC 205 – Introduction to Advanced Data Science
+#+STARTUP: overview hideblocks indent
+#+OPTIONS: toc:nil num:nil ^:nil
+#+PROPERTY: header-args:R :session *R* :results output :exports both
+* Task
+
+Test your understanding of "Getting started with Colab" by creating a
+notebook for the Palmer Penguin dataset available for you online from:
+[[https://tinyurl.com/palmer-data-csv][tinyurl.com/palmer-data-csv]].
+
+Tasks:
+1) Create a new Colab notebook.
+2) Load the dataset into a dataframe.
+3) Check if the dataset is loaded in the current namespace.
+4) Display the first few lines of the dataset.
+5) Make a simple plot of the =bill_length_mm= vs. =bill_depth_mm=.
+6) Make a fully customized plot of the dataset grouping by =species=.
+7) Upload the URL to your notebook to Canvas.
+
+* Load the dataset safely
+
+#+begin_src R :session *R* :results output :exports both
+  data_url <- "https://tinyurl.com/palmer-data-csv"
+
+  df <- tryCatch(
+  {
+    tmp <- read.csv(data_url)
+    cat("Dataset downloaded and loaded successfully!\n")
+    tmp
+  },
+  error = function(e) {
+    cat("Error loading dataset:\n")
+    cat(conditionMessage(e), "\n")
+    cat("Please check your internet connection or the URL.\n")
+    NULL
+  }
+  )
+#+end_src
+
+#+RESULTS:
+: Dataset downloaded and loaded successfully!
+
+* Check if the dataset exists
+
+#+begin_src R
+  if (exists("df") && !is.null(df)) {
+    head(df)
+  } else {
+    cat("Data frame 'df' not found. Did loading fail?\n")
+  }
+#+end_src
+
+#+RESULTS:
+:   species    island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g    sex
+: 1  Adelie Torgersen           39.1          18.7               181        3750   MALE
+: 2  Adelie Torgersen           39.5          17.4               186        3800 FEMALE
+: 3  Adelie Torgersen           40.3          18.0               195        3250 FEMALE
+: 4  Adelie Torgersen             NA            NA                NA          NA
+: 5  Adelie Torgersen           36.7          19.3               193        3450 FEMALE
+: 6  Adelie Torgersen           39.3          20.6               190        3650   MALE
+
+* Inspect the data
+
+#+begin_src R
+  if (!is.null(df)) {
+    str(df)
+  }
+#+end_src
+
+#+RESULTS:
+: 'data.frame': 344 obs. of  7 variables:
+:  $ species          : chr  "Adelie" "Adelie" "Adelie" "Adelie" ...
+:  $ island           : chr  "Torgersen" "Torgersen" "Torgersen" "Torgersen" ...
+:  $ bill_length_mm   : num  39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
+:  $ bill_depth_mm    : num  18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
+:  $ flipper_length_mm: int  181 186 195 NA 193 190 181 195 193 190 ...
+:  $ body_mass_g      : int  3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
+:  $ sex              : chr  "MALE" "FEMALE" "FEMALE" "" ...
+
+* Simple scatter plot
+
+#+begin_src R :file ../../img/palmer1.png :session *R* :results graphics output file :exports both
+  if (!is.null(df)) {
+    plot(df$bill_length_mm,
+         df$bill_depth_mm,
+         xlab = "Bill length (mm)",
+         ylab = "Bill depth (mm)",
+         main = "Palmer Penguins: Bill Dimensions")
+  }
+#+end_src
+
+#+RESULTS:
+[[file:../../img/palmer1.png]]
+
+* Grouped plot by species
+
+- The simple version (nothing you don't know yet):
+  #+begin_src R :file ../../img/palmer2.png :session *R* :results graphics output file :exports both
+    if (!is.null(df)) {
+
+      cols <- as.integer(factor(df$species))
+
+      plot(df$bill_length_mm,
+           df$bill_depth_mm,
+           col = cols,
+           pch = 19,
+           xlab = "Bill length (mm)",
+           ylab = "Bill depth (mm)",
+           main = "Palmer Penguins by Species")
+
+      legend("bottomright",
+             legend = levels(factor(df$species)),
+             col = seq_along(levels(factor(df$species))),
+             pch = 19)
+    }
+  #+end_src
+
+  #+RESULTS:
+  [[file:../../img/palmer2.png]]
+
+- A version with control flow and loops (new stuff):
+  #+begin_src R :file ../../img/palmer3.png :session *R* :results graphics output file :exports both
+    if (!is.null(df)) {
+
+      species <- unique(df$species)
+      cols <- c("blue", "red", "darkgreen")
+
+      plot(df$bill_length_mm,
+           df$bill_depth_mm,
+           type = "n",
+           xlab = "Bill length (mm)",
+           ylab = "Bill depth (mm)",
+           main = "Palmer Penguins by Species")
+
+      for (i in seq_along(species)) {
+        sub <- df[df$species == species[i], ]
+        points(sub$bill_length_mm,
+               sub$bill_depth_mm,
+               col = cols[i],
+               pch = 19)
+      }
+
+      legend("bottomright",
+             legend = species,
+             col = cols,
+             pch = 19)
+    }
+  #+end_src
