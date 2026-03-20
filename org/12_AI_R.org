@@ -1,0 +1,121 @@
+#+TITLE:Exploring Datasets with (generative) AI
+#+AUTHOR:Marcus Birkenkrahe
+#+SUBTITLE:DSC 205 and DSC 482, Lyon College, Spring 2026
+#+STARTUP: overview hideblocks indent
+#+OPTIONS: toc:nil num:nil ^:nil
+#+PROPERTY: header-args:python :session *Python* :results output :exports both :noweb yes
+* Objectives
+
+1. [ ] Setting up Gemini in Google Colab
+2. [ ] Testing the setup
+3. [ ] Letting AI write document structure
+4. [ ] Letting AI get and insert the date
+5. [ ] Loading the Palmer penguins dataset
+6. [ ] Inspecting the data
+7. [ ] Plotting the data
+8. [ ] Printing a summary and a glossary
+9. [ ] Summarizing your experience
+10. [ ] Home assignment
+
+* Setting up Gemini in Colab
+
+- Our goal is to use AI to write our whole notebook.
+
+- Start a new notebook in colab.research.google.com.
+
+- In the first code cell, click on ~generate~.
+
+- Change the model type to =Gemini 3 Flash=.
+
+- At the Gemini prompt in the sidebar, enter these system
+  instructions: [[https://tinyurl.com/gemini-instructions][tinyurl.com/gemini-instructions]].
+
+- The instructions cover:
+  1. Text-only output (text cells)
+  2. Analytical/coding output (code cells)
+  3. Notebook assumption (append to end)
+  4. Interaction rules (keep it short)
+  5. Analysis workflow (for datasets)
+  6. Libraries (R, Python)
+
+* Testing the setup
+
+- To test, at the prompt, enter:
+  #+begin_quote
+  Create a # headline `Exploring the Palmer Penguins Dataset`
+  #+end_quote
+  If you're happy with the output, =Accept= it.
+
+- To test, at the prompt, enter:
+  #+begin_quote
+  In the first section, add bullet points for me as Author (Marcus
+  Birkenkrahe), Date (today), and Class (DSC 205).
+  #+end_quote 
+
+- In my first test, the date was wrong. =Cancel= it and correct:
+  #+begin_quote
+  Repeat the last command but use today's date in Batesville, AR.
+  #+end_quote
+
+- If the date is still wrong, =Cancel= and ask:
+  #+begin_quote
+  Can you get me today's date using R?
+  #+end_quote
+
+- In my case, the instructions failed, and I had to amend them. Notice
+  that any change to the instructions will not be persistent to Colab.
+  #+begin_quote
+  Change system instructions. This is an R runtime. No magic %%
+  commands. Use base R. By default, write user prompt in the text cell
+  immediately preceding the code output.
+  #+end_quote
+
+ - To get the final system instructions that you're happy with, ask
+   Gemini for it at the end of the session:
+   #+begin_quote
+   Write the system instructions that you're using right now to a file
+   `system.txt` so that I can export it.
+   #+end_quote
+
+ - Now I asked to update the Date section using today's date as
+   computed:
+   #+begin_quote
+   Can you update the `Date:` in the first section to today's date
+   (output of `Sys.Date()`)?
+   #+end_quote
+
+   This worked: When you see this, check the new (+ green) line
+   against the old (- red) line, then =Accept= or =Cancel= and redo.
+   #+attr_html: :width 400px :float nil:
+   [[../img/gemini2.png]]
+
+* Loading the dataset
+
+- Create a new headline =Load the Palmer penguins dataset=.
+
+- In my Gemini console, a prompt is suggested:
+  #+begin_quote
+  Load the Palmer penguins dataset into a dataframe.
+  #+end_quote
+  Choose it, check it, and if OK, =Accept= it.
+
+- Minor hiccup: If the new text cell (headline) is not selected, the
+  prompt and code may be inserted in the wrong place, not at the
+  end. You can ask the AI to move it, or just move it manually.
+
+- Ask Gemini to explain the code to you.
+  #+begin_quote
+  Now explain the code response at the end (loading palmer dataset) to
+  me.
+  #+end_quote
+
+* Inspecting the data
+
+* Plotting the data
+
+* Summary
+
+* Glossary
+
+* Home assignment
+

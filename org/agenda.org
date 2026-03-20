@@ -625,11 +625,12 @@ Tasks:
 
 Open the Colab notebook: https://tinyurl.com/monte-carlo-r
 
-* Week 8: Autonomous AI agent / Business Analytics dashboard
+* Week 8: Autonomous AI agent / Business Analytics dashboard / AI and R
 
-- [ ] Practice: Build an autonomous weather agent
-- [ ] Practice: Separate spreadsheet data from program logic
-- [ ] Building with AI: Business Analytics Dashboard
+- [X] Practice: Build an autonomous weather agent
+- [X] Practice: Separate spreadsheet data from program logic
+- [X] Building with AI: Business Analytics Dashboard
+- [ ] Exploring datasets with AI and R using Google Colab
 - [ ] Plan for after Spring break: Python and Machine Learning (ML)
 
 ** Plan for after Spring break
@@ -640,7 +641,7 @@ Open the Colab notebook: https://tinyurl.com/monte-carlo-r
   + Machine learning libraries ~Scikit-Learn~ and ~PyTorch~
 
 - [ ] We will study machine learning:
-  + What is machine learning (DataCamp course)
-  + Classification algorithms
-  + Linear and logistic regression
+  + Understanding machine learning (DataCamp course)
+  + Classification algorithms in Python
+  + Linear and logistic regression in Python
 
