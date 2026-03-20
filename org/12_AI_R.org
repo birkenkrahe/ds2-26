@@ -6,16 +6,18 @@
 #+PROPERTY: header-args:python :session *Python* :results output :exports both :noweb yes
 * Objectives
 
-1. [ ] Setting up Gemini in Google Colab
-2. [ ] Testing the setup
-3. [ ] Letting AI write document structure
-4. [ ] Letting AI get and insert the date
-5. [ ] Loading the Palmer penguins dataset
-6. [ ] Inspecting the data
-7. [ ] Plotting the data
-8. [ ] Printing a summary and a glossary
-9. [ ] Summarizing your experience
-10. [ ] Home assignment
+1. Setting up Gemini in Google Colab
+2. Testing the setup
+3. Letting AI write document structure
+4. Letting AI get and insert the date
+5. Loading the Palmer penguins dataset
+6. Inspecting the data (TODO)
+7. Plotting the data (TODO)
+8. Printing a summary and a glossary (TODO)
+9. Summarizing your experience (TODO
+
+The blueprint for this exploration is the home assignment that you
+completed for February 6 using the Palmer penguins dataset ([[https://github.com/birkenkrahe/ds2-26/blob/main/org/colab_palmer.org][solution]]).
 
 * Setting up Gemini in Colab
 
@@ -111,11 +113,16 @@
 
 * Inspecting the data
 
+Your prompts here.
+
 * Plotting the data
+
+Your prompts here.
 
 * Summary
 
 * Glossary
 
-* Home assignment
+* Summary of your experience
 
+* References
