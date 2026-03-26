@@ -625,23 +625,58 @@ Tasks:
 
 Open the Colab notebook: https://tinyurl.com/monte-carlo-r
 
-* Week 8: Autonomous AI agent / Business Analytics dashboard / AI and R
+* DONE Week 8: Autonomous AI agent / Business Analytics dashboard / AI and R
 
 - [X] Practice: Build an autonomous weather agent
 - [X] Practice: Separate spreadsheet data from program logic
 - [X] Building with AI: Business Analytics Dashboard
 - [X] Exploring datasets with AI and R using Google Colab
-- [ ] Plan for after Spring break: Python and Machine Learning (ML)
+- [X] Plan for after Spring break: Python and Machine Learning (ML)
 
 ** Plan for after Spring break
 
-- [ ] We will switch from R to Python
+- We will switch from R to Python
   + Data frame library ~pandas~
   + Numerical functions library ~NumPy~
   + Machine learning libraries ~Scikit-Learn~ and ~PyTorch~
 
-- [ ] We will study machine learning:
+- We will study machine learning:
   + Understanding machine learning (DataCamp course)
   + Classification algorithms in Python
   + Linear and logistic regression in Python
 
+* Week 9 - Review: Sprint 2 / AI Python / Introduction to Machine Learning
+
+- [ ] New DataCamp courses assigned
+- [ ] AI Python lesson and home assignment
+- [ ] Introduction to Machine Learning
+
+** New DataCamp courses 
+
+"Understanding Machine Learning":
+- No-code introduction to what "training a model" means
+- Understanding of basic types of models
+- Requires basic intuition about data
+- *Three modules - 2 hrs - Deadline April 10th*
+
+"Understanding Data Visualization":
+- No prerequisites course on visualizing statistics data
+- Understanding of distributions and plot types
+- Requires basic knowledge of statistics
+- *Four modules - 2 hrs - Deadline April 24th*
+
+"Understanding Data Engineering"
+- No prerequisites course on handling data
+- Understanding of storing, moving, processing data
+- Requires basic understanding of shell infrastructure
+- *Three modules - 2 hrs - Deadline May 8th*
+
+** AI Python lesson (and home assignment)
+
+- Even if AI can write code, you still need to learn how to program.
+- You can write and run a Python notebook with Gemini.
+- We will start a notebook and you will finish it at home.
+
+
+
+    
