@@ -115,14 +115,32 @@ completed for February 6 using the Palmer penguins dataset ([[https://github.com
 
 Your prompts here.
 
+Your results here.
+
 * Plotting the data
 
 Your prompts here.
 
+Your results here.
+
 * Summary
+
+Your prompts here.
+
+Your results here.
 
 * Glossary
 
+Your prompts here.
+
+Your results here.
+
 * Summary of your experience
 
+Your results here.
+
 * References
+
+Your prompts here.
+
+Your results here.
