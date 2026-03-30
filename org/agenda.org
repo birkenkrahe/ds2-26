@@ -648,8 +648,9 @@ Open the Colab notebook: https://tinyurl.com/monte-carlo-r
 * Week 9 - Review: Sprint 2 / AI Python / Introduction to Machine Learning
 
 - [ ] New DataCamp courses assigned
-- [ ] AI Python lesson and home assignment
 - [ ] Introduction to Machine Learning
+- [ ] Diagnosis decision tree exercise 
+- [ ] AI Python lesson and home assignment
 
 ** New DataCamp courses 
 
@@ -670,6 +671,18 @@ Open the Colab notebook: https://tinyurl.com/monte-carlo-r
 - Understanding of storing, moving, processing data
 - Requires basic understanding of shell infrastructure
 - *Three modules - 2 hrs - Deadline May 8th*
+
+** Introduction to machine learning
+
+- What is machine learning?
+- Simple example: Spam filter
+- Extended example: Does money make people happy?
+- Extended example: Diagnosing illness
+- Fitting a linear model to data and making predictions
+
+** Diagnosis decision tree exercise
+
+A manual machine learning example and exercise.
 
 ** AI Python lesson (and home assignment)
 
