@@ -647,10 +647,11 @@ Open the Colab notebook: https://tinyurl.com/monte-carlo-r
 
 * Week 9 - Review: Sprint 2 / AI Python / Introduction to Machine Learning
 
-- [ ] New DataCamp courses assigned
-- [ ] Introduction to Machine Learning
-- [ ] Diagnosis decision tree exercise 
-- [ ] AI Python lesson and home assignment
+- [X] New DataCamp courses assigned
+- [X] Introduction to Machine Learning
+- [X] Diagnosis decision tree exercise
+- [X] QuizRunner: Intro to ML ([[https://tinyurl.com/quiz-runner-ml][tinyurl.com/quiz-runner-ml]])
+- [X] AI Python lesson and home assignment
 
 ** New DataCamp courses 
 
