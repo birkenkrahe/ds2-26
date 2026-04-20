@@ -193,7 +193,7 @@ Q&A by ChatGPT (extracted exclusively from the [[https://docs.google.com/documen
 
 - You have to upload the URL of your finished file to Canvas.
 
-* DONE Week 2 ["MLK week"]: Projects, Finish 10 problems, graphing review
+* DONE Week 2: ["MLK week"]: Projects, Finish 10 problems, graphing review
 
 - [X] Quiz 1 is live.
 - [X] Projects: pick from the list or pick your own.
@@ -254,7 +254,7 @@ Q&A by ChatGPT (extracted exclusively from the [[https://docs.google.com/documen
   decisions clearly during sprint reviews.
   #+end_quote
 
-* DONE Week 3 ["Winter week"]: Graphics demo and lab with Colab
+* DONE Week 3: ["Winter week"]: Graphics demo and lab with Colab
 #+attr_html: :width 400px :float nil:
 [[../img/summary_week_1.png]]
 
@@ -540,7 +540,7 @@ Tasks:
     : [1] 3.15
     : [1] 3.15
 
-* DONE Week 5: Conditionals
+* DONE Week 5: Conditionals - nested and stacked and switch
 
 - [X] There is no class on Friday!
 - [X] You will get two assignments from me this week
@@ -569,13 +569,13 @@ Tasks:
 
 - [ ] Open and copy the notebook to code along:
   [[https://tinyurl.com/while-ipynb][tinyurl.com/while-ipynb]]
-  
+
 ** 2nd sprint: Literature review
 
 - Make sure you look at the assignment and follow it to the letter!
 - Don't be too stingy with your time, 4-6 hours is expected minimum.xsa
 
-* DONE Week 7: ~next~, ~break~, ~repeat~ and Monte Carlo Simulations
+* DONE Week 7: Loops II
 
 - [X] DataCamp: ~apply~ functions lesson was due March 4th
 - [X] DataCamp: new lesson "Writing functions in R"
@@ -625,7 +625,7 @@ Tasks:
 
 Open the Colab notebook: https://tinyurl.com/monte-carlo-r
 
-* DONE Week 8: Autonomous AI agent / Business Analytics dashboard / AI and R
+* DONE Week 8: ~next~, ~break~, ~repeat~ and Monte Carlo Simulations
 
 - [X] Practice: Build an autonomous weather agent
 - [X] Practice: Separate spreadsheet data from program logic
@@ -645,7 +645,7 @@ Open the Colab notebook: https://tinyurl.com/monte-carlo-r
   + Classification algorithms in Python
   + Linear and logistic regression in Python
 
-* Week 9 - Review: Sprint 2 / AI Python / Introduction to Machine Learning
+* DONE Week 9: Autonomous AI agents
 
 - [X] New DataCamp courses assigned
 - [X] Introduction to Machine Learning
@@ -653,7 +653,7 @@ Open the Colab notebook: https://tinyurl.com/monte-carlo-r
 - [X] QuizRunner: Intro to ML ([[https://tinyurl.com/quiz-runner-ml][tinyurl.com/quiz-runner-ml]])
 - [X] AI Python lesson and home assignment
 
-** New DataCamp courses 
+** New DataCamp courses
 
 "Understanding Machine Learning":
 - No-code introduction to what "training a model" means
@@ -691,6 +691,226 @@ A manual machine learning example and exercise.
 - You can write and run a Python notebook with Gemini.
 - We will start a notebook and you will finish it at home.
 
+* DONE Week 10: Business Analytics dashboard / AI and R
+* DONE Week 11: Review: Sprint 2 / Introduction to Machine Learning
+* DONE Week 12: Machine Learning II / Review: Sprint 2
+* DONE Week 13: Fitting linear models (supervised ML)
+
+- [X] Fitting linear models
+- [X] Open assignment posted: AI-assisted Python (deadline Apr 17)
+- [ ] Visualize the model
+- [ ] Use the fitted model for prediction
+
+** Review Questions - Python Basics
+
+- Start a new Colab file: open ~colab.research.google.com~.
+- Write text answers in text blocks.
+- Write code answers in code blocks and run them.
+- Submit the URL to your file in Canvas ("Python review I").
+-----
+
+1. What are the main steps of a typical machine learning workflow?
+   #+begin_quote
+   Define the problem, collect data, prepare data, choose a model,
+   train the model, evaluate the model, and use the model for
+   prediction. The process is iterative.
+   #+end_quote
+
+2. Write Python code to create two lists: one for hours studied and
+   one for scores. Then print both lists.
+   #+begin_src python
+     hours = [1, 2, 3, 4, 5]
+     scores = [50, 55, 65, 70, 80]
+
+     print(hours)
+     print(scores)
+   #+end_src
+
+   #+RESULTS:
+   [1, 2, 3, 4, 5]
+   [50, 55, 65, 70, 80]
+
+3. Write Python code to compute the average (mean) of the scores list
+   *without using external libraries*. Tip: to sum a list, use ~sum()~, to
+   get the length of a list, use ~length()~.
+   #+begin_src python
+     scores = [50, 55, 65, 70, 80]
+
+     avg = sum(scores) / len(scores)
+     print(avg)
+   #+end_src
+
+   #+RESULTS:
+   : 64.0
+
+4. Ask Gemini (in a text cell): "What relationships might be
+   interesting in a dataset with variables 'hours studied' and 'exam
+   score'?"
+
+   Then write Python code to create a simple scatter plot of the data
+   and run it. Add a ~title()~ to the plot.
+   #+begin_src python
+     import matplotlib.pyplot as plt
+
+     hours = [1, 2, 3, 4, 5]
+     scores = [50, 55, 65, 70, 80]
+
+     plt.scatter(hours, scores)
+     plt.xlabel("Hours studied")
+     plt.ylabel("Score")
+     plt.show()
+   #+end_src
+
+5. Modify the previous code to compute and print the predicted score
+   using a simple linear rule: prediction = 40 + 8 * hours.
+
+   Print =prediction= as a function of =hours= using a ~for~
+   loop. Pseudocode:
+   #+begin_example 
+   // FOR h in hours:
+      // COMPUTE prediction
+      // PRINT hour and prediction score
+   #+end_example
+
+   Ask Gemini for the exact syntax of a ~for~ loop in Python.
+
+   #+begin_src python
+     hours = [1, 2, 3, 4, 5]
+
+     for h in hours:
+         prediction = 40 + 8 * h
+         print("Hours:", h, "Predicted score:", prediction)
+   #+end_src
+
+   #+RESULTS:
+   : Hours: 1 Predicted score: 48
+   : Hours: 2 Predicted score: 56
+   : Hours: 3 Predicted score: 64
+   : Hours: 4 Predicted score: 72
+   : Hours: 5 Predicted score: 80
+
+6. Ask Gemini:
+   "What is overfitting and underfitting in simple terms?"
+
+   Then answer in one sentence in your own words (no code).
+
+   #+begin_quote
+   Overfitting means the model learns noise instead of patterns, while
+   underfitting means the model is too simple to capture the pattern.
+   #+end_quote
 
 
-    
+* Week 14: Classification (supervised ML)
+
+- [ ] Complete your presentation schedule in Canvas
+- [ ] Review questions (Python)
+- [ ] Classification - supervised ML with categorical variables
+
+** TODO Review Questions - Find What Is Wrong (Popquiz)
+
+1. What is wrong with this code?
+  #+begin_src python
+  Print("Hello, world!")
+  #+end_src
+  #+begin_quote
+  ~Print~ should be ~print~ in lowercase.
+  #+end_quote
+
+2. What is wrong with this code?
+  #+begin_src python
+  name = input("What is your name?")
+  print("Hello, " + Name)
+  #+end_src
+  #+begin_quote
+  ~Name~ should be ~name~ because Python is case-sensitive.
+  #+end_quote
+
+3. What is wrong with this code?
+  #+begin_src python
+  age = input("Enter your age: ")
+  next_age = age + 1
+  print(next_age)
+  #+end_src
+  #+begin_quote
+  ~age~ is a string, so it should be converted with ~int(age)~.
+  #+end_quote
+
+4. What is wrong with this code?
+  #+begin_src python
+  import matplot.pyplot as plt
+  #+end_src
+  #+begin_quote
+  The library name is wrong; it should be ~matplotlib.pyplot~.
+  #+end_quote
+
+5. What is wrong with this code?
+  #+begin_src python
+  x = [1, 2, 3, 4]
+  y = [2, 4, 6]
+  plt.scatter(x, y)
+  #+end_src
+  #+begin_quote
+  ~x~ and ~y~ should have the same number of values.
+  #+end_quote
+
+6. What is wrong with this code?
+  #+begin_src python
+  import matplotlib.pyplot as plt
+  x = [1, 2, 3]
+  y = [2, 4, 6]
+  pltscatter(x, y)
+  #+end_src
+  #+begin_quote
+  ~pltscatter(x, y)~ should be ~plt.scatter(x, y)~.
+  #+end_quote
+
+7. What is wrong with this code?
+  #+begin_src python
+  from sklearn.linear_model import LinearRegression
+  model = LinearRegression
+  #+end_src
+  #+begin_quote
+  The model should be created with parentheses: ~LinearRegression()~.
+  #+end_quote
+
+8. What is wrong with this code?
+  #+begin_src python
+  from sklearn.linear_model import LinearRegression
+  model = LinearRegression()
+  model.fit(x, y)
+  #+end_src
+  #+begin_quote
+  ~x~ and ~y~ have not been defined in the code shown.
+  #+end_quote
+
+9. What is wrong with this code?
+  #+begin_src python
+  if guess = number:
+      print("Correct!")
+  #+end_src
+  #+begin_quote
+  The condition should use ~==~ instead of ~=~.
+  #+end_quote
+
+10. What is wrong with this code?
+   #+begin_src python
+   while guess != number
+       print("Try again")
+   #+end_src
+   #+begin_quote
+   The while line is missing a colon.
+   #+end_quote
+
+11. What is wrong with this code?
+   #+begin_src python
+   import random
+   number = random.randint(1, 10)
+   guess = input("Guess: ")
+   if guess < number:
+       print("Too low")
+   #+end_src
+   #+begin_quote
+   ~guess~ should be converted to an integer before comparison.
+   #+end_quote
+
+   

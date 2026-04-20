@@ -1,0 +1,568 @@
+#+TITLE: Lecture 2 - Classification: Predicting Categories
+#+AUTHOR: Marcus Birkenkrahe
+#+STARTUP: overview hideblocks indent entitiespretty:
+* Learning Objectives
+
+- Understand the difference between regression and classification
+- Interpret classification as decision-making
+- Explain how k-nearest neighbors (kNN) works
+- Understand the effect of the parameter =k=
+- Interpret predictions in plain language
+
+* From Regression to Classification
+
+- Regression: predict a *number*
+
+- Classification: predict a *category*
+
+Example:
+
+- Regression: predict exam score (predictor: hours studied)
+- Classification: predict pass/fail
+
+#+begin_quote
+Key shift: output is no longer continuous, but discrete.
+#+end_quote
+
+* Example Dataset: Pass / Fail
+
+- Let's look at an example:
+
+  #+begin_src python :results none :exports both :session *Python* :python python3
+    import numpy as np
+
+    # Feature: hours studied
+    x = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)
+    # Target: 0 = fail, 1 = pass
+    y = np.array([0, 0, 0, 1, 1])
+  #+end_src
+
+- What's different from before?
+  #+begin_src python :results output :exports both :session *Python* :python python3
+    print(x.reshape(5))
+    print(y)
+  #+end_src
+
+  #+RESULTS:
+  : [1 2 3 4 5]
+  : [0 0 0 1 1]
+
+- Interpretation:
+  - Study less (< 4) → more likely to fail (~0~)
+  - Study more (> 3) → more likely to pass (~1~)
+
+* Visualizing the Data
+
+#+begin_src python :file classPlot.png :results file graphics output :exports both :session *Python* :python python3
+  import matplotlib.pyplot as plt
+
+  plt.scatter(x, y) # scatter plot f(x) = y
+  plt.xlabel("Hours studied")  # x-axis label
+  plt.ylabel("Pass (1) / Fail (0)") # y-axis label
+  plt.yticks([0,1]) # change y-axis ticks to binary (categorical) values
+  plt.savefig("classPlot.png") # save plot to file
+#+end_src
+
+#+RESULTS:
+[[file:classPlot.png]]
+
+Question:
+
+#+begin_quote
+Where would you place a boundary between pass and fail?
+#+end_quote
+
+* Decision Boundary (Intuition)
+
+We want a rule like:
+
+#+begin_quote
+“If hours studied > threshold → pass, else fail”
+#+end_quote
+
+This threshold is called a *decision boundary*.
+
+Let's visualize it, and also add a title:
+#+begin_src python :file classPlot2.png :results file graphics output :exports both :session *Python* :python python3
+  import matplotlib.pyplot as plt
+
+  plt.clf()
+  plt.scatter(x, y)
+  plt.xlabel("Hours studied")
+  plt.ylabel("Pass (1) / Fail (0)")
+  plt.yticks([0,1])
+
+  # Decision boundary
+  plt.axvline(x=3.5,
+              color="red",
+              linestyle='--',
+              linewidth=2)
+  # Write 'decision boundary' next to the boundary
+  plt.text(3.5, 0.5, "decision boundary",
+           rotation=90,
+           color='red',
+           verticalalignment='center',
+           horizontalalignment='right')
+
+  plt.title("Pass/fail as function of hours studied")
+  plt.savefig("classPlot2.png")
+#+end_src
+
+#+RESULTS:
+[[file:classPlot2.png]]
+
+* Manual Classification
+
+Suppose:
+
+#+begin_quote
+x_new = 3.5 hours
+#+end_quote
+
+Question:
+
+#+begin_quote
+Would you classify this as pass or fail?
+#+end_quote
+
+Answer:
+#+begin_quote
+A value on the decision boundary is ambiguous. It's a tie without a
+unique answer unless you specify a tie-breaking rule. Our algorithm
+has to break the tie.
+#+end_quote
+
+* k-Nearest Neighbors (kNN)
+
+Algorithmic idea:
+
+- Look at the closest data points
+- Let them “vote”
+
+Steps:
+
+1. Choose a value for =k=
+2. Find the k nearest neighbors
+3. Take majority vote
+
+* Example: k = 1
+
+For =x_new = 3.5=:
+
+- Closest point: x = 3 (fail)
+
+Prediction:
+
+#+begin_quote
+fail (0)
+#+end_quote
+
+* Example: k = 3
+
+Neighbors:
+
+- x = 3 → 0
+- x = 4 → 1
+- x = 2 → 0
+
+Vote:
+
+- 2 fail vs 1 pass
+
+Prediction:
+
+#+begin_quote
+fail (0)
+#+end_quote
+
+* Example: k = 5
+
+Neighbors:
+
+- all points
+
+Vote:
+
+- 3 fail vs 2 pass
+
+Prediction:
+
+#+begin_quote
+fail (0)
+#+end_quote
+
+* Example: k = 2
+
+- Using k = 2 makes ties more likely
+
+- Odd k reduce the chance of ties (there's always a majority)
+
+- Even k increase the chance of ties
+
+- This is only true for (unweighted) binary classification
+
+* Key Observation
+
+Changing =k= changes the model.
+
+- small k → sensitive to noise
+- large k → smoother, more stable
+
+* SOMEDAY Overfitting vs Smoothing
+
+- k = 1 → fits data very closely (may overfit)
+- larger k → averages behavior
+
+#+begin_quote
+The model trades sensitivity for stability.
+#+end_quote
+
+Visualizing the smoothing effect as k gets larger, on a larger
+dataset, for a family of decision curves:
+#+begin_src python :file kPlot.png :results file graphics output :exports both :session *Python* :python python3
+  import numpy as np
+  import matplotlib.pyplot as plt
+  from sklearn.neighbors import KNeighborsClassifier
+
+  # Larger 1D classification dataset
+  x = np.array([
+      1.0, 1.5, 2.0, 2.2, 2.8, 3.0, 3.3, 3.8,
+      4.2, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5
+  ]).reshape(-1, 1)
+
+  y = np.array([
+      0, 0, 0, 0, 0, 0, 1, 0,
+      1, 1, 1, 1, 1, 1, 1, 1
+  ])
+
+  # Dense grid for visualizing predictions
+  xx = np.linspace(0.5, 8.0, 600).reshape(-1, 1)
+
+  # Many odd k values
+  k_values = range(1, 16, 2)
+
+  plt.figure(figsize=(10, 5))
+
+  # Plot training data
+  plt.scatter(x, y, s=50, label="data")
+
+  # Plot one decision curve for each k
+  for k in k_values:
+      model = KNeighborsClassifier(n_neighbors=k)
+      model.fit(x, y)
+      yy = model.predict(xx)
+      plt.plot(xx, yy, alpha=0.35, linewidth=1)
+
+  plt.xlabel("Hours studied")
+  plt.ylabel("Predicted class")
+  plt.yticks([0, 1], ["fail", "pass"])
+  plt.title("kNN decision curves for increasing k")
+  plt.grid(True, alpha=0.3)
+  plt.savefig("kPlot.png")
+#+end_src
+
+#+RESULTS:
+[[file:kPlot.png]]
+
+And here is the prediction vs. k for one fixed point:
+#+begin_src python :file kPlot2.png :results file graphics output :exports both :session *Python* :python python3
+  import numpy as np
+  import matplotlib.pyplot as plt
+  from sklearn.neighbors import KNeighborsClassifier
+
+  x = np.array([
+      1.0, 1.5, 2.0, 2.2, 2.8, 3.0, 3.3, 3.8,
+      4.2, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5
+  ]).reshape(-1, 1)
+
+  y = np.array([
+      0, 0, 0, 0, 0, 0, 1, 0,
+      1, 1, 1, 1, 1, 1, 1, 1
+  ])
+
+  x_new = np.array([[3.5]])
+  k_values = list(range(1, 16, 2))
+  preds = []
+
+  for k in k_values:
+      model = KNeighborsClassifier(n_neighbors=k)
+      model.fit(x, y)
+      preds.append(model.predict(x_new)[0])
+
+  plt.figure(figsize=(8, 4))
+  plt.plot(k_values, preds, marker='o')
+  plt.xlabel("k")
+  plt.ylabel("Prediction at x_new = 3.5")
+  plt.yticks([0, 1], ["fail", "pass"])
+  plt.title("Prediction stability as k increases")
+  plt.grid(True, alpha=0.3)
+  plt.savefig("kPlot2.png")
+#+end_src
+
+#+RESULTS:
+[[file:kPlot2.png]]
+
+What happens at k = 15?
+#+begin_quote
+The prediction uses almost the entire dataset - only one point is left
+out, and the classifier is now dominated by the global class balance,
+not the local neighborhood structure. The model has become too global:
+When you listen to everybody, you stop getting a local answer.
+#+end_quote
+
+* Using scikit-learn (kNN)
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  # Import the k-nearest neighbors classifier from scikit-learn
+  # This provides an implementation of the kNN algorithm
+  from sklearn.neighbors import KNeighborsClassifier
+
+  # Create a kNN model object
+  # n_neighbors=3 means: look at the 3 closest training points
+  # and let them vote to determine the class (k=3)
+  model = KNeighborsClassifier(n_neighbors=3)
+
+  # Train (fit) the model using the training data
+  # x: input features (hours studied), shape = (n_samples, n_features)
+  # y: target labels (0 = fail, 1 = pass)
+  # The model stores the data internally (kNN is a "lazy learner")
+  model.fit(x, y)
+
+  # Make a prediction for a new data point
+  # [[3.5]] means:
+  # - one sample (outer list)
+  # - one feature (inner value: hours studied)
+  # Shape = (1, 1), which is required by scikit-learn
+  # The model will:
+  #   1. compute distances from 3.5 to all training points
+  #   2. select the 3 nearest neighbors
+  #   3. take a majority vote among their labels
+  #   4. return the predicted class (0 or 1)
+  prediction = model.predict([[3.5]])
+
+  # Print the prediction
+  # Output is an array, e.g. [0] meaning "fail"
+  print(prediction)
+
+#+end_src
+
+#+RESULTS:
+: [0]
+
+* Why 3.5
+
+- Input must be 2D: (n_samples, n_features)
+- 3.5 → one sample, one feature
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  x_new = np.array([[3.5]])
+  print(x_new.shape) # (1,1): 1 row (1 sample), 1 column (1 feature)
+#+end_src
+
+#+RESULTS:
+: (1, 1)
+
+* Visualizing Decision Regions
+
+#+begin_src python :file classPlot3.png :results file graphics output :exports both :session *Python* :python python3
+  # Import NumPy for numerical operations
+  import numpy as np
+
+  # Create a sequence of 100 evenly spaced values between 0 and 6
+  # These represent "test inputs" across the full range of hours studied
+  # reshape(-1,1) converts the array into a 2D shape required by sklearn:
+  # (n_samples, n_features) → here: (100, 1)
+  xx = np.linspace(0, 6, 100).reshape(-1,1)
+
+  # Use the trained model to predict the class (0 or 1)
+  # for each of the 100 input values in xx
+  # Result: an array of 100 predictions
+  yy = model.predict(xx)
+
+  # Plot the original training data (points)
+  # x: input values (hours studied)
+  # y: labels (0 = fail, 1 = pass)
+  plt.scatter(x, y)
+
+  # Plot the model's predictions across the range
+  # xx: input values
+  # yy: predicted class at each input
+  # This creates a step-like curve showing where the model switches class
+  plt.plot(xx, yy, color="red")
+
+  # Display the plot on screen
+  plt.savefig("classPlot3.png")
+#+end_src
+
+#+RESULTS:
+[[file:classPlot3.png]]
+
+Interpretation:
+
+- The red line shows predicted class across inputs
+
+* PRACTICE Predicting loan approval
+
+A bank wants to decide whether to approve a loan based on a customer's
+annual income (in $10,000s).
+
+You are given past data:
+#+begin_example
+Input (income): [2,3,4,5,6]
+Output (approval): [0,0,1,1,1]
+#+end_example
+
+Here, 0 = denied, 1 = approved.
+
+Tasks:
+1. Import required libraries
+2. Define the dataset
+3. Check work environment
+4. Fit and predict =model1= for =k=1=
+4. Fit and predict =model3= for =k=3=
+
+-----
+
+1. Import required libraries (from ~numpy~ and ~sklearn~)
+
+   #+begin_src python :results none :session *Python* :python python3 :noweb yes
+     <<clear_user_defined_objects_except_imports>> # remove all user-defined objects (see below)
+     from sklearn.neighbors import KNeighborsClassifier
+     import numpy as np
+   #+end_src
+
+2. Define the dataset (=income= and =approved=)
+
+   #+begin_src python :results none :session *Python* :python python3
+     # Annual income (in $10,000s)
+     income = np.array([2, 3, 4, 5, 6]).reshape(-1,1)
+
+     # Outcome: 0 = denied, 1 = approved
+     approved = np.array([0, 0, 1, 1, 1])
+   #+end_src
+
+3. Check work environment (excluding system objects)
+
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     for name in dir():
+         if not name.startswith('_'):
+             print(name)
+   #+end_src
+
+   #+RESULTS:
+   #+begin_example
+   KNeighborsClassifier
+   approval
+   approved
+   ast
+   clear
+   f
+   income
+   model1
+   model3
+   name
+   np
+   #+end_example
+
+   #+begin_quote
+   ~ast~ and ~f~ do not start with =_= and escape the filter. Need to improve
+   it!
+   #+end_quote
+
+4. Fit and predict =model1= (k = 1)
+
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     model1 = KNeighborsClassifier(n_neighbors=1)
+     model1.fit(income, approved)
+
+     print(model1.predict([[4.5]]))
+   #+end_src
+
+   #+RESULTS:
+   : [1]
+
+5. Fit and predict =model3= (k = 3)
+
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     model3 = KNeighborsClassifier(n_neighbors=3)
+     model3.fit(income, approved)
+
+     print(model3.predict([[4.5]]))
+   #+end_src
+
+6. Compare predictions for different k nearest neighbors
+
+   #+begin_quote
+   Do the predictions differ? Why or why not?
+   #+end_quote
+
+   Answer:
+   #+begin_quote
+   The predictions do not differ. For both k=1 and k=3, the model
+   predicts 1 (approved).
+
+   Why? The value 4.5 lies between 4 and 5, and both of these nearest
+   neighbors belong to class 1. When k = 3, two of the three nearest
+   neighbors 4 (1), 5 (1) are class 1. There is a tie for the third,
+   either 3 (0) or 6 (1) because they are equally distant.
+
+   There is no tie-breaking rule here so whatever appears first in =income=
+   is chosen - in this case 3, but that does not affect the outcome.
+   #+end_quote
+
+* Question
+
+#+begin_quote
+In one sentence: how does changing k affect the decision?
+#+end_quote
+
+Answer:
+#+begin_quote
+Changing k makes the model consider more nearby examples, which
+usually makes the prediction more stable and less sensitive to any one
+single data point.
+#+end_quote
+
+* Key Points
+
+- Classification predicts categories instead of numbers
+- A decision boundary separates classes
+- kNN classifies based on similarity to known examples
+- The parameter k controls model complexity
+- Predictions depend on local data structure
+
+* Python Tips
+
+- To see the user-defined objects in your current work session, use
+  the following "list comprehension" (this is the same as ~ls()~ in R):
+  #+begin_src python :results output :exports both :session *Python* :python python3
+    print([name for name in dir() if not name.startswith('_')])
+  #+end_src
+
+  #+RESULTS:
+  : ['KNeighborsClassifier', 'approval', 'ast', 'clear', 'f', 'income', 'model1', 'model3', 'name', 'np']
+
+- This removes all system objects (whose name begin with a ~_~).
+
+- Or one per line:
+  #+begin_src python :results output :exports both :session *Python* :python python3
+    for name in dir():
+        if not name.startswith('_'):
+            print(name)
+  #+end_src
+
+- Remove all user-defined variables
+
+  In Colab, you can use the magic command =%reset -f= and then check
+  with =%whos= what's still standing.
+
+  In Python, you can delete from ~globals()~ (here wrapped in a
+  function =clear()=):
+
+  #+name: clear_user_defined_objects_except_imports
+  #+begin_src python :results none :session *Python* :python python3
+    def clear():
+        for name in list(globals()):
+            if name not in ['np','plt'] and not name.startswith('_'):
+                del globals()[name]
+  #+end_src
