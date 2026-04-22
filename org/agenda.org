@@ -802,11 +802,12 @@ A manual machine learning example and exercise.
 
 * Week 14: Classification (supervised ML)
 
-- [ ] Complete your presentation schedule in Canvas
-- [ ] Review questions (Python)
+- [X] Complete your presentation schedule in Canvas
+- [X] Review questions (Python)
 - [ ] Classification - supervised ML with categorical variables
+- [ ] Colab notebook: [[https://tinyurl.com/classification-ipynb][tinyurl.com/classification-ipynb]]
 
-** TODO Review Questions - Find What Is Wrong (Popquiz)
+** DONE Review Questions - Find What Is Wrong (Popquiz)
 
 1. What is wrong with this code?
   #+begin_src python
@@ -914,3 +915,4 @@ A manual machine learning example and exercise.
    #+end_quote
 
    
+** NEXT What do you remember from last session (incl. the recording)?

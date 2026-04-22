@@ -3,9 +3,9 @@
 #+STARTUP: overview hideblocks indent entitiespretty:
 * Learning Objectives
 
-- Understand the difference between regression and classification
-- Interpret classification as decision-making
-- Explain how k-nearest neighbors (kNN) works
+- [ ] Understand the difference between regression and classification
+- [ ] Interpret classification as decision-making
+- [ ] Explain how k-nearest neighbors (kNN) works
 - Understand the effect of the parameter =k=
 - Interpret predictions in plain language
 
@@ -23,6 +23,8 @@ Example:
 #+begin_quote
 Key shift: output is no longer continuous, but discrete.
 #+end_quote
+
+Open a Colab notebook:
 
 * Example Dataset: Pass / Fail
 
@@ -110,6 +112,7 @@ Let's visualize it, and also add a title:
 
 #+RESULTS:
 [[file:classPlot2.png]]
+
 
 * Manual Classification
 
