@@ -916,3 +916,36 @@ A manual machine learning example and exercise.
 
    
 ** NEXT What do you remember from last session (incl. the recording)?
+
+** Review: From Regression to Classification
+
+1. What is the key difference between regression and classification?
+   #+begin_quote
+   Regression predicts a numerical (continuous) value, while
+   classification predicts a categorical (discrete) outcome.
+   #+end_quote
+
+2. In the example dataset, what do ~x~ (=hours=) and ~y~ (=success=)
+   represent?
+   #+begin_quote
+   ~x~ represents hours studied (*input feature*), and ~y~ represents
+   pass/fail *outcomes (0 = fail, 1 = pass)*.
+   #+end_quote
+
+3. How can you interpret the relationship between study time and
+   outcome?
+   #+begin_quote
+   Lower study time (< 4 hours) is associated with failing, while
+   higher study time (> 3 hours) is associated with passing.
+   #+end_quote
+
+4. What is a decision boundary?
+   #+begin_quote
+   A threshold value used to separate categories (e.g., pass vs. fail)
+   based on the input feature.
+   #+end_quote
+
+5. What rule defines the decision boundary in this example?
+   #+begin_quote
+   If hours studied > threshold → pass, otherwise → fail.
+   #+end_quote

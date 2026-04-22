@@ -3,11 +3,11 @@
 #+STARTUP: overview hideblocks indent entitiespretty:
 * Learning Objectives
 
-- [ ] Understand the difference between regression and classification
-- [ ] Interpret classification as decision-making
+- [X] Understand the difference between regression and classification
+- [X] Interpret classification as decision-making
 - [ ] Explain how k-nearest neighbors (kNN) works
-- Understand the effect of the parameter =k=
-- Interpret predictions in plain language
+- [ ] Understand the effect of the parameter =k=
+- [ ] Interpret predictions in plain language
 
 * From Regression to Classification
 
