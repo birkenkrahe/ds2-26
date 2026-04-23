@@ -804,10 +804,12 @@ A manual machine learning example and exercise.
 
 - [X] Complete your presentation schedule in Canvas
 - [X] Review questions (Python)
-- [ ] Classification - supervised ML with categorical variables
-- [ ] Colab notebook: [[https://tinyurl.com/classification-ipynb][tinyurl.com/classification-ipynb]]
+- [X] Classification - supervised ML with categorical variables
+- [X] Colab notebook: [[https://tinyurl.com/classification-ipynb][tinyurl.com/classification-ipynb]]
+- [ ] Overfitting and underfitting visualized (Colab notebook)
+- [ ] Last home assignment: kNN classification (loan approval)
 
-** DONE Review Questions - Find What Is Wrong (Popquiz)
+** Review Questions - Find What Is Wrong (Popquiz)
 
 1. What is wrong with this code?
   #+begin_src python
@@ -914,9 +916,6 @@ A manual machine learning example and exercise.
    ~guess~ should be converted to an integer before comparison.
    #+end_quote
 
-   
-** NEXT What do you remember from last session (incl. the recording)?
-
 ** Review: From Regression to Classification
 
 1. What is the key difference between regression and classification?
@@ -929,7 +928,7 @@ A manual machine learning example and exercise.
    represent?
    #+begin_quote
    ~x~ represents hours studied (*input feature*), and ~y~ represents
-   pass/fail *outcomes (0 = fail, 1 = pass)*.
+   pass/fail *outcomes (0 = fail, 1 = pass)* or *target label*.
    #+end_quote
 
 3. How can you interpret the relationship between study time and
@@ -949,3 +948,72 @@ A manual machine learning example and exercise.
    #+begin_quote
    If hours studied > threshold → pass, otherwise → fail.
    #+end_quote
+
+** NEXT Review: k-Nearest Neighbors (kNN)
+
+1. A new data point lies exactly between two classes with equal
+   support. How should it be classified?
+   #+begin_quote
+   The classification is ambiguous and requires a tie-breaking rule.
+   #+end_quote
+
+2. A classification method assigns labels based on nearby data
+   points. What is the core idea of this approach?
+   #+begin_quote
+   Use the closest data points and let them vote on the class.
+   #+end_quote
+
+3. A classification algorithm requires selecting a parameter k. What
+   does this parameter control?
+   #+begin_quote
+   The number of nearest neighbors used to make a prediction.
+   #+end_quote
+
+4. A model uses k = 1 to classify a new observation. How is the class
+   determined?
+   #+begin_quote
+   It is determined by the label of the single closest data point.
+   #+end_quote
+
+5. A model considers three nearest neighbors with labels [0, 1,
+   0]. What class will be predicted?
+   #+begin_quote
+   Class 0, because it has the majority vote.
+   #+end_quote
+
+6. Why can choosing an even value of k (e.g., k = 2) be problematic in
+   binary classification?
+   #+begin_quote
+   It can lead to ties, making the prediction unclear.
+   #+end_quote
+
+7. In a nearest-neighbor classification method, what determines how
+   many data points influence the decision?
+   #+begin_quote
+   The chosen value of k.
+   #+end_quote
+
+8. What is the general effect of increasing k in a nearest-neighbor
+   model?
+   #+begin_quote
+   Predictions become smoother and more stable.
+   #+end_quote
+
+9. What is the general effect of decreasing k in a nearest-neighbor
+   model?
+   #+begin_quote
+   Predictions become more sensitive to individual data points.
+   #+end_quote
+
+10. A machine learning model requires input in the shape (number of
+    samples, number of features). How should a single data point with
+    one feature be formatted?
+    #+begin_quote
+    As a 2D structure, e.g., [[value]].
+    #+end_quote
+
+11. A plot shows predicted class values across a range of inputs. What
+    does such a plot represent?
+    #+begin_quote
+    How the model assigns classes across different input values.
+    #+end_quote

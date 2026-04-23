@@ -113,7 +113,6 @@ Let's visualize it, and also add a title:
 #+RESULTS:
 [[file:classPlot2.png]]
 
-
 * Manual Classification
 
 Suppose:
@@ -210,6 +209,529 @@ Changing =k= changes the model.
 
 - small k → sensitive to noise
 - large k → smoother, more stable
+
+* Using scikit-learn (kNN)
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  # Import the k-nearest neighbors classifier from scikit-learn
+  # This provides an implementation of the kNN algorithm
+  from sklearn.neighbors import KNeighborsClassifier
+
+  # Create a kNN model object
+  # n_neighbors=3 means: look at the 3 closest training points
+  # and let them vote to determine the class (k=3)
+  model = KNeighborsClassifier(n_neighbors=3)
+
+  # Train (fit) the model using the training data
+  # x: input features (hours studied), shape = (n_samples, n_features)
+  # y: target labels (0 = fail, 1 = pass)
+  # The model stores the data internally (kNN is a "lazy learner")
+  model.fit(x, y)
+
+  # Make a prediction for a new data point
+  # [[3.5]] means:
+  # - one sample (outer list)
+  # - one feature (inner value: hours studied)
+  # Shape = (1, 1), which is required by scikit-learn
+  # The model will:
+  #   1. compute distances from 3.5 to all training points
+  #   2. select the 3 nearest neighbors
+  #   3. take a majority vote among their labels
+  #   4. return the predicted class (0 or 1)
+  prediction = model.predict([[3.5]])
+
+  # Print the prediction
+  # Output is an array, e.g. [0] meaning "fail"
+  print(prediction)
+
+#+end_src
+
+#+RESULTS:
+: [0]
+
+* Why 3.5
+
+- Input must be 2D: (n_samples, n_features)
+- 3.5 → one sample, one feature
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  x_new = np.array([[3.5]])
+  print(x_new.shape) # (1,1): 1 row (1 sample), 1 column (1 feature)
+#+end_src
+
+#+RESULTS:
+: (1, 1)
+
+* Visualizing Decision Regions
+
+#+begin_src python :file classPlot3.png :results file graphics output :exports both :session *Python* :python python3
+  # Import NumPy for numerical operations
+  import numpy as np
+
+  # Create a sequence of 100 evenly spaced values between 0 and 6
+  # These represent "test inputs" across the full range of hours studied
+  # reshape(-1,1) converts the array into a 2D shape required by sklearn:
+  # (n_samples, n_features) → here: (100, 1)
+  xx = np.linspace(0, 6, 100).reshape(-1,1)
+
+  # Use the trained model to predict the class (0 or 1)
+  # for each of the 100 input values in xx
+  # Result: an array of 100 predictions
+  yy = model.predict(xx)
+
+  # Plot the original training data (points)
+  # x: input values (hours studied)
+  # y: labels (0 = fail, 1 = pass)
+  plt.scatter(x, y)
+
+  # Plot the model's predictions across the range
+  # xx: input values
+  # yy: predicted class at each input
+  # This creates a step-like curve showing where the model switches class
+  plt.plot(xx, yy, color="red")
+
+  # Display the plot on screen
+  plt.savefig("classPlot3.png")
+#+end_src
+
+#+RESULTS:
+[[file:classPlot3.png]]
+
+Interpretation:
+
+- The red line shows predicted class across inputs
+
+* Visualize over and underfitting
+
+- Over- and underfitting as a function of =k= is easier visualized in a
+  two-dimensional example:
+  + for =k=1= (overfit) the boundary is jagged and closely wraps
+    individual points.
+  + moderate =k= (good fit) separates the point clusters cleanly.
+  + very large =k= (underfit) creates an almost flat boundary and
+    ignores the structure.
+
+- Code example:
+  #+begin_src python :results file output :exports both :session *Python* :python python3 
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from sklearn.neighbors import NearestNeighbors
+
+    # dataset
+    X = np.array([
+        [1,1],[2,1],[1,2],
+        [4,4],[5,4],[4,5]
+    ])
+    y = np.array([0,0,0,1,1,1])
+
+    # query point
+    x_new = np.array([[3,3]])
+
+    def show_neighbors(k):
+        nn = NearestNeighbors(n_neighbors=k)
+        nn.fit(X)
+
+        distances, indices = nn.kneighbors(x_new)
+
+        plt.scatter(X[:,0], X[:,1], c=y, s=80)
+        plt.scatter(x_new[:,0], x_new[:,1], c='red', s=120, marker='x')
+
+        # highlight neighbors
+        neighbors = X[indices[0]]
+        plt.scatter(neighbors[:,0], neighbors[:,1],
+                    facecolors='none', edgecolors='black', s=200)
+
+        # draw circle to furthest neighbor
+        r = distances[0][-1]
+        circle = plt.Circle((x_new[0,0], x_new[0,1]), r,
+                            fill=False, linestyle='--')
+        plt.gca().add_patch(circle)
+
+        plt.title(f"k = {k}")
+        plt.xlim(0,6); plt.ylim(0,6)
+        plt.gca().set_aspect('equal')
+        plt.savefig(f"neighbors_k_{k}.png")
+        plt.close()
+
+    for k in [1,3,5]:
+        show_neighbors(k)
+  #+end_src
+
+  #+RESULTS:
+  [[file:]]
+
+* PRACTICE Predicting loan approval (1D)
+
+A bank wants to decide whether to approve a loan based on a customer's
+annual income (in $10,000s).
+
+You are given past data:
+#+begin_example
+Input (income): [2,3,4,5,6]
+Output (approval): [0,0,1,1,1]
+#+end_example
+
+Here, 0 = denied, 1 = approved.
+
+Tasks:
+1. Import required libraries
+2. Define the dataset
+3. Check work environment
+4. Fit and predict =model1= for =k=1=
+4. Fit and predict =model3= for =k=3=
+
+-----
+
+1. Import required libraries (from ~numpy~ and ~sklearn~)
+
+   #+begin_src python :results none :session *Python* :python python3 :noweb yes
+     <<clear_user_defined_objects_except_imports>> # remove all user-defined objects (see below)
+     from sklearn.neighbors import KNeighborsClassifier
+     import numpy as np
+   #+end_src
+
+2. Define the dataset (=income= and =approved=)
+
+   #+begin_src python :results none :session *Python* :python python3
+     # Annual income (in $10,000s)
+     income = np.array([2, 3, 4, 5, 6]).reshape(-1,1)
+
+     # Outcome: 0 = denied, 1 = approved
+     approved = np.array([0, 0, 1, 1, 1])
+   #+end_src
+
+3. Check work environment (excluding system objects)
+
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     for name in dir():
+         if not name.startswith('_'):
+             print(name)
+   #+end_src
+
+   #+RESULTS:
+   : KNeighborsClassifier
+   : ast
+   : clear
+   : f
+   : np
+   : readline
+   : tty
+
+   #+begin_quote
+   ~ast~ and ~f~ do not start with =_= and escape the filter. Need to improve
+   it!
+   #+end_quote
+
+4. Fit and predict =model1= (k = 1)
+
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     model1 = KNeighborsClassifier(n_neighbors=1)
+     model1.fit(income, approved)
+
+     print(model1.predict([[4.5]]))
+   #+end_src
+
+   #+RESULTS:
+
+5. Fit and predict =model3= (k = 3)
+
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     model3 = KNeighborsClassifier(n_neighbors=3)
+     model3.fit(income, approved)
+
+     print(model3.predict([[4.5]]))
+   #+end_src
+
+   #+RESULTS:
+
+6. Compare predictions for different k nearest neighbors
+
+   #+begin_quote
+   Do the predictions differ? Why or why not?
+   #+end_quote
+
+   Answer:
+   #+begin_quote
+   The predictions do not differ. For both k=1 and k=3, the model
+   predicts 1 (approved).
+
+   Why? The value 4.5 lies between 4 and 5, and both of these nearest
+   neighbors belong to class 1. When k = 3, two of the three nearest
+   neighbors 4 (1), 5 (1) are class 1. There is a tie for the third,
+   either 3 (0) or 6 (1) because they are equally distant.
+
+   There is no tie-breaking rule here so whatever appears first in =income=
+   is chosen - in this case 3, but that does not affect the outcome.
+   #+end_quote
+
+* PRACTICE Predicting Loan Approval in 2D
+
+A bank wants to decide whether to approve a loan based on *two input
+features*:
+
+- annual income (in $10,000s)
+- credit score (scaled)
+
+You are given past data:
+
+#+begin_example
+income   credit_score   approval
+2        3              0
+2        5              0
+3        4              0
+4        4              1
+5        6              1
+6        5              1
+#+end_example
+
+Here:
+- ~0 = denied~
+- ~1 = approved~
+
+This is more interesting than the 1D example because each customer is
+now a *point in the plane*, and the classifier must decide based on
+*location* in 2D.
+
+** Question
+
+A new customer has:
+- income = 4
+- credit score = 5
+
+Will the loan be approved?
+
+-----
+
+** Tasks
+
+1. Import required libraries
+2. Define the 2D dataset
+3. Inspect the shapes of input and output
+4. Plot the training data
+5. Fit and predict ~model1~ for ~k=1~
+6. Fit and predict ~model3~ for ~k=3~
+7. Compare the predictions
+8. Visualize decision regions
+
+-----
+
+1. Import required libraries
+
+   #+begin_src python :results none :session *Python* :python python3
+     from sklearn.neighbors import KNeighborsClassifier
+     import numpy as np
+     import matplotlib.pyplot as plt
+   #+end_src
+
+2. Define the dataset
+
+   #+begin_src python :results none :session *Python* :python python3
+     # Input features: [income, credit_score]
+     X = np.array([
+         [2, 3],
+         [2, 5],
+         [3, 4],
+         [4, 4],
+         [5, 6],
+         [6, 5]
+     ])
+
+     # Output labels: 0 = denied, 1 = approved
+     y = np.array([0, 0, 0, 1, 1, 1])
+
+     # New customer
+     x_new = np.array([[4, 5]])
+   #+end_src
+
+3. Inspect the shapes of input and output
+
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     print("X shape:", X.shape)
+     print("y shape:", y.shape)
+     print("x_new shape:", x_new.shape)
+   #+end_src
+
+   #+RESULTS:
+   : X shape: (6, 2)
+   : y shape: (6,)
+   : x_new shape: (1, 2)
+
+4. Plot the training data
+
+   #+begin_src python :file loan2d_points.png :results file graphics output :exports both :session *Python* :python python3
+     plt.clf()
+
+     # denied
+     plt.scatter(X[y==0, 0], X[y==0, 1], label="denied (0)")
+     # approved
+     plt.scatter(X[y==1, 0], X[y==1, 1], label="approved (1)")
+
+     # new point
+     plt.scatter(x_new[:,0], x_new[:,1], marker='x', s=100, label="new customer")
+
+     plt.xlabel("Income ($10,000s)")
+     plt.ylabel("Credit score (scaled)")
+     plt.title("Loan approval training data")
+     plt.legend()
+     plt.savefig("loan2d_points.png")
+   #+end_src
+
+   #+RESULTS:
+   [[file:loan2d_points.png]]
+
+5. Fit and predict ~model1~ (k = 1)
+
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     model1 = KNeighborsClassifier(n_neighbors=1)
+     model1.fit(X, y)
+
+     pred1 = model1.predict(x_new)
+     print(pred1)
+   #+end_src
+
+   #+RESULTS:
+   : [1]
+
+6. Fit and predict ~model3~ (k = 3)
+
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     model3 = KNeighborsClassifier(n_neighbors=3)
+     model3.fit(X, y)
+
+     pred3 = model3.predict(x_new)
+     print(pred3)
+   #+end_src
+
+   #+RESULTS:
+   : [1]
+
+7. Compare the predictions
+
+   #+begin_quote
+   Do the predictions differ? Why or why not?
+   #+end_quote
+
+   #+begin_quote
+   In this example, both ~k=1~ and ~k=3~ predict approval. The new
+   customer is located near points labeled 1, so both the closest single
+   neighbor and the majority of the three nearest neighbors vote for
+   approval.
+   #+end_quote
+
+8. Visualize decision regions
+
+   #+begin_src python :file loan2d_regions.png :results file graphics output :exports both :session *Python* :python python3
+     plt.clf()
+
+     # Choose which model to visualize
+     model = model3
+
+     # Create a grid of points in the plane
+     xx, yy = np.meshgrid(
+         np.linspace(1, 7, 200),
+         np.linspace(2, 7, 200)
+     )
+
+     grid = np.c_[xx.ravel(), yy.ravel()]
+     Z = model.predict(grid).reshape(xx.shape)
+
+     # Draw decision regions
+     plt.contourf(xx, yy, Z, alpha=0.3)
+
+     # Plot training points
+     plt.scatter(X[y==0, 0], X[y==0, 1], label="denied (0)")
+     plt.scatter(X[y==1, 0], X[y==1, 1], label="approved (1)")
+
+     # Plot new customer
+     plt.scatter(x_new[:,0], x_new[:,1], marker='x', s=100, label="new customer")
+
+     plt.xlabel("Income ($10,000s)")
+     plt.ylabel("Credit score (scaled)")
+     plt.title("Decision regions for kNN")
+     plt.legend()
+     plt.savefig("loan2d_regions.png")
+   #+end_src
+
+   #+RESULTS:
+   [[file:loan2d_regions.png]]
+
+** Follow-up Questions
+
+1. Why is this example more informative than the 1D loan example?
+   #+begin_quote
+   Because each customer now has two features, so classification depends
+   on position in a 2D space rather than only one number.
+   #+end_quote
+
+2. What does the ~X~ marker represent in the scatter plot?
+   #+begin_quote
+   It represents the new customer whose class we want to predict.
+   #+end_quote
+
+3. What do the decision regions show?
+   #+begin_quote
+   They show which class the model would predict at different locations
+   in the 2D feature space.
+   #+end_quote
+
+4. How might changing ~k~ affect the decision boundary?
+   #+begin_quote
+   Smaller ~k~ gives a more local, sensitive boundary, while larger ~k~
+   gives a smoother, more stable boundary.
+   #+end_quote
+
+** Possible extension
+
+Use the same dataset and do the following:
+
+1. Predict the class of these new customers:
+   - ~[3,5]~
+   - ~[5,4]~
+   - ~[6,6]~
+
+2. Compare predictions for:
+   - ~k=1~
+   - ~k=3~
+   - ~k=5~
+
+3. Create one plot of the training points and the new customers.
+
+4. Create one plot of the decision regions for one chosen value of ~k~.
+
+5. In a short paragraph, explain how changing ~k~ affects the model.
+
+** Simple variation 
+
+To make ~k=1~ and ~k=3~ differ, move one point or add a slightly noisy
+point, for example:
+
+#+begin_example
+[4,5] -> 0
+#+end_example
+
+That gives you a more interesting comparison because one close neighbor
+may disagree with the majority of three neighbors.
+
+* Question
+
+#+begin_quote
+In one sentence: how does changing k affect the decision?
+#+end_quote
+
+Answer:
+#+begin_quote
+Changing k makes the model consider more nearby examples, which
+usually makes the prediction more stable and less sensitive to any one
+single data point.
+#+end_quote
+
+* Key Points
+
+- Classification predicts categories instead of numbers
+- A decision boundary separates classes
+- kNN classifies based on similarity to known examples
+- The parameter k controls model complexity
+- Predictions depend on local data structure
 
 * SOMEDAY Overfitting vs Smoothing
 
@@ -312,227 +834,6 @@ out, and the classifier is now dominated by the global class balance,
 not the local neighborhood structure. The model has become too global:
 When you listen to everybody, you stop getting a local answer.
 #+end_quote
-
-* Using scikit-learn (kNN)
-
-#+begin_src python :results output :exports both :session *Python* :python python3
-  # Import the k-nearest neighbors classifier from scikit-learn
-  # This provides an implementation of the kNN algorithm
-  from sklearn.neighbors import KNeighborsClassifier
-
-  # Create a kNN model object
-  # n_neighbors=3 means: look at the 3 closest training points
-  # and let them vote to determine the class (k=3)
-  model = KNeighborsClassifier(n_neighbors=3)
-
-  # Train (fit) the model using the training data
-  # x: input features (hours studied), shape = (n_samples, n_features)
-  # y: target labels (0 = fail, 1 = pass)
-  # The model stores the data internally (kNN is a "lazy learner")
-  model.fit(x, y)
-
-  # Make a prediction for a new data point
-  # [[3.5]] means:
-  # - one sample (outer list)
-  # - one feature (inner value: hours studied)
-  # Shape = (1, 1), which is required by scikit-learn
-  # The model will:
-  #   1. compute distances from 3.5 to all training points
-  #   2. select the 3 nearest neighbors
-  #   3. take a majority vote among their labels
-  #   4. return the predicted class (0 or 1)
-  prediction = model.predict([[3.5]])
-
-  # Print the prediction
-  # Output is an array, e.g. [0] meaning "fail"
-  print(prediction)
-
-#+end_src
-
-#+RESULTS:
-: [0]
-
-* Why 3.5
-
-- Input must be 2D: (n_samples, n_features)
-- 3.5 → one sample, one feature
-
-#+begin_src python :results output :exports both :session *Python* :python python3
-  x_new = np.array([[3.5]])
-  print(x_new.shape) # (1,1): 1 row (1 sample), 1 column (1 feature)
-#+end_src
-
-#+RESULTS:
-: (1, 1)
-
-* Visualizing Decision Regions
-
-#+begin_src python :file classPlot3.png :results file graphics output :exports both :session *Python* :python python3
-  # Import NumPy for numerical operations
-  import numpy as np
-
-  # Create a sequence of 100 evenly spaced values between 0 and 6
-  # These represent "test inputs" across the full range of hours studied
-  # reshape(-1,1) converts the array into a 2D shape required by sklearn:
-  # (n_samples, n_features) → here: (100, 1)
-  xx = np.linspace(0, 6, 100).reshape(-1,1)
-
-  # Use the trained model to predict the class (0 or 1)
-  # for each of the 100 input values in xx
-  # Result: an array of 100 predictions
-  yy = model.predict(xx)
-
-  # Plot the original training data (points)
-  # x: input values (hours studied)
-  # y: labels (0 = fail, 1 = pass)
-  plt.scatter(x, y)
-
-  # Plot the model's predictions across the range
-  # xx: input values
-  # yy: predicted class at each input
-  # This creates a step-like curve showing where the model switches class
-  plt.plot(xx, yy, color="red")
-
-  # Display the plot on screen
-  plt.savefig("classPlot3.png")
-#+end_src
-
-#+RESULTS:
-[[file:classPlot3.png]]
-
-Interpretation:
-
-- The red line shows predicted class across inputs
-
-* PRACTICE Predicting loan approval
-
-A bank wants to decide whether to approve a loan based on a customer's
-annual income (in $10,000s).
-
-You are given past data:
-#+begin_example
-Input (income): [2,3,4,5,6]
-Output (approval): [0,0,1,1,1]
-#+end_example
-
-Here, 0 = denied, 1 = approved.
-
-Tasks:
-1. Import required libraries
-2. Define the dataset
-3. Check work environment
-4. Fit and predict =model1= for =k=1=
-4. Fit and predict =model3= for =k=3=
-
------
-
-1. Import required libraries (from ~numpy~ and ~sklearn~)
-
-   #+begin_src python :results none :session *Python* :python python3 :noweb yes
-     <<clear_user_defined_objects_except_imports>> # remove all user-defined objects (see below)
-     from sklearn.neighbors import KNeighborsClassifier
-     import numpy as np
-   #+end_src
-
-2. Define the dataset (=income= and =approved=)
-
-   #+begin_src python :results none :session *Python* :python python3
-     # Annual income (in $10,000s)
-     income = np.array([2, 3, 4, 5, 6]).reshape(-1,1)
-
-     # Outcome: 0 = denied, 1 = approved
-     approved = np.array([0, 0, 1, 1, 1])
-   #+end_src
-
-3. Check work environment (excluding system objects)
-
-   #+begin_src python :results output :exports both :session *Python* :python python3
-     for name in dir():
-         if not name.startswith('_'):
-             print(name)
-   #+end_src
-
-   #+RESULTS:
-   #+begin_example
-   KNeighborsClassifier
-   approval
-   approved
-   ast
-   clear
-   f
-   income
-   model1
-   model3
-   name
-   np
-   #+end_example
-
-   #+begin_quote
-   ~ast~ and ~f~ do not start with =_= and escape the filter. Need to improve
-   it!
-   #+end_quote
-
-4. Fit and predict =model1= (k = 1)
-
-   #+begin_src python :results output :exports both :session *Python* :python python3
-     model1 = KNeighborsClassifier(n_neighbors=1)
-     model1.fit(income, approved)
-
-     print(model1.predict([[4.5]]))
-   #+end_src
-
-   #+RESULTS:
-   : [1]
-
-5. Fit and predict =model3= (k = 3)
-
-   #+begin_src python :results output :exports both :session *Python* :python python3
-     model3 = KNeighborsClassifier(n_neighbors=3)
-     model3.fit(income, approved)
-
-     print(model3.predict([[4.5]]))
-   #+end_src
-
-6. Compare predictions for different k nearest neighbors
-
-   #+begin_quote
-   Do the predictions differ? Why or why not?
-   #+end_quote
-
-   Answer:
-   #+begin_quote
-   The predictions do not differ. For both k=1 and k=3, the model
-   predicts 1 (approved).
-
-   Why? The value 4.5 lies between 4 and 5, and both of these nearest
-   neighbors belong to class 1. When k = 3, two of the three nearest
-   neighbors 4 (1), 5 (1) are class 1. There is a tie for the third,
-   either 3 (0) or 6 (1) because they are equally distant.
-
-   There is no tie-breaking rule here so whatever appears first in =income=
-   is chosen - in this case 3, but that does not affect the outcome.
-   #+end_quote
-
-* Question
-
-#+begin_quote
-In one sentence: how does changing k affect the decision?
-#+end_quote
-
-Answer:
-#+begin_quote
-Changing k makes the model consider more nearby examples, which
-usually makes the prediction more stable and less sensitive to any one
-single data point.
-#+end_quote
-
-* Key Points
-
-- Classification predicts categories instead of numbers
-- A decision boundary separates classes
-- kNN classifies based on similarity to known examples
-- The parameter k controls model complexity
-- Predictions depend on local data structure
 
 * Python Tips
 
