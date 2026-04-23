@@ -808,6 +808,7 @@ A manual machine learning example and exercise.
 - [X] Colab notebook: [[https://tinyurl.com/classification-ipynb][tinyurl.com/classification-ipynb]]
 - [ ] Overfitting and underfitting visualized (Colab notebook)
 - [ ] Last home assignment: kNN classification (loan approval)
+- [ ] Last quiz: Classification (May 1)
 
 ** Review Questions - Find What Is Wrong (Popquiz)
 
@@ -949,6 +950,7 @@ A manual machine learning example and exercise.
    If hours studied > threshold → pass, otherwise → fail.
    #+end_quote
 
+
 ** NEXT Review: k-Nearest Neighbors (kNN)
 
 1. A new data point lies exactly between two classes with equal
@@ -1017,3 +1019,8 @@ A manual machine learning example and exercise.
     #+begin_quote
     How the model assigns classes across different input values.
     #+end_quote
+
+
+** TODO Visualizing overfitting and underfitting
+
+** TODO Classification example in 2D: Loan approval
