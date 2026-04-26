@@ -799,8 +799,7 @@ A manual machine learning example and exercise.
    underfitting means the model is too simple to capture the pattern.
    #+end_quote
 
-
-* Week 14: Classification (supervised ML)
+* DONE Week 14: Classification (supervised ML)
 
 - [X] Complete your presentation schedule in Canvas
 - [X] Review questions (Python)
@@ -950,8 +949,7 @@ A manual machine learning example and exercise.
    If hours studied > threshold → pass, otherwise → fail.
    #+end_quote
 
-
-** NEXT Review: k-Nearest Neighbors (kNN)
+** Review: k-Nearest Neighbors (kNN)
 
 1. A new data point lies exactly between two classes with equal
    support. How should it be classified?
@@ -1010,9 +1008,9 @@ A manual machine learning example and exercise.
 10. A machine learning model requires input in the shape (number of
     samples, number of features). How should a single data point with
     one feature be formatted?
-    #+begin_quote
-    As a 2D structure, e.g., [[value]].
-    #+end_quote
+    #+begin_example
+    As a 2D structure, e.g., [[value]]. Must reshape the vector.
+    #+end_example
 
 11. A plot shows predicted class values across a range of inputs. What
     does such a plot represent?
@@ -1021,6 +1019,15 @@ A manual machine learning example and exercise.
     #+end_quote
 
 
-** TODO Visualizing overfitting and underfitting
+* Week 15: Classification in 2D / Advanced examples
 
-** TODO Classification example in 2D: Loan approval
+** Classification example in 2D: Loan approval (continued)
+
+** Data visualization: Choosing the right plot in Python
+
+- Open the notebook to code along: [[https://tinyurl.com/dviz-colab-ipynb][tinyurl.com/dviz-colab-ipynb]]
+
+** Recognizing handwritten digits: kNN vs. NN
+
+
+
