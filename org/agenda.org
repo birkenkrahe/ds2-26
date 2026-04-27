@@ -1031,8 +1031,19 @@ A manual machine learning example and exercise.
 ** Data visualization: Choosing the right plot in Python
 
 - Open the notebook to code along: [[https://tinyurl.com/dviz-colab-ipynb][tinyurl.com/dviz-colab-ipynb]]
+
 - We are going to look at: different types of plots using two
   different data sets.
+
+- Scatter plot (2 continuous variables)
+
+- Histogram (1 continuous variable)
+
+- Boxplot (continous + categorical)
+
+- Bar plot (categorical)
+
+- Line plot (order/time data)
 
 ** +Recognizing handwritten digits: kNN vs. NN+
 

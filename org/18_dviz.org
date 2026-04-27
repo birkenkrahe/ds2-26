@@ -3,6 +3,10 @@
 #+AUTHOR: DSC 205
 #+STARTUP: overview hideblocks indent
 #+OPTIONS: toc:nil num:nil ^:nil
+* Code along
+
+Minimal Colab starter code: [[https://tinyurl.com/dataviz-lab][tinyurl.com/dataviz-lab]]
+
 * Lab goal
 
 In this lab, we will practice choosing the right plot for a data
@@ -18,6 +22,9 @@ The DataCamp lectures introduced these ideas:
 - Continuous variables are usually numeric
 - Categorical variables are usually labels
 - Different plot types answer different questions
+
+There are excellent online tutorials on data visualization with
+Python: for example on realpython.com for [[https://realpython.com/python-matplotlib-guide/][matplotlib]] and [[https://realpython.com/python-seaborn/][seaborn]].
 
 * Setup
 
@@ -213,7 +220,7 @@ As total bill increases, the tip usually seems to increase also.
 
 Missing values are automatically dropped for the plotting, by the way.
 
-* Add axis labels and a title
+* Customize the scatter plot
 
 The plot works, but it needs a title and axis labels.
 
@@ -248,7 +255,7 @@ harder to interpret: =size= only takes a few discrete values - points
 stack vertically. A scatterplot is not the right choice for this data!
 #+end_quote
 
-* NEXT Add a category using color
+* Add a category using color
 
 The variable ~time~ is categorical. It tells us whether the bill was for
 lunch or dinner.
@@ -263,10 +270,10 @@ plt.ylabel("Tip in dollars")
 plt.show()
 #+end_src
 
-Write one observation.
-
+What do you observe?
 #+begin_quote
-One thing I notice about lunch and dinner is:
+Dinner bills tend to be larger and more spread out, while lunch bills
+are smaller and more clustered.
 #+end_quote
 
 Now try the categorical variable ~smoker~.
@@ -279,10 +286,10 @@ plt.ylabel("Tip in dollars")
 plt.show()
 #+end_src
 
-Write one observation.
-
+What do you observe?
 #+begin_quote
-One thing I notice about smoker status is:
+There is no clear difference between smokers and non-smokers; the
+points overlap heavily.
 #+end_quote
 
 * A bad scatter plot
@@ -299,10 +306,15 @@ plt.ylabel("Tip in dollars")
 plt.show()
 #+end_src
 
-Write why this is not the best plot.
+Looks like the earlier plot tip vs. party size. How is this worse?
 
+*Answer*
 #+begin_quote
-This is not the best scatter plot because:
+In tip vs. day, the x-axis is purely categorical, and the spacing of
+the piles of points is not meaningful.
+
+In tip vs. party size, the size was an ordered numerical variable so
+the x-axis has some structure.
 #+end_quote
 
 * Add a trend line
@@ -317,10 +329,10 @@ plt.ylabel("Tip in dollars")
 plt.show()
 #+end_src
 
-Write what the trend line shows.
-
+Observation:
 #+begin_quote
-The trend line shows that:
+The trend line shows the overall direction of the relationship: as the
+total bill increases, the tip tends to increase as well.
 #+end_quote
 
 * Scatter plot recap
@@ -328,7 +340,7 @@ The trend line shows that:
 A scatter plot is useful when:
 
 #+begin_quote
-We have ______ continuous variables and want to study their relationship.
+We have two continuous variables and want to study their relationship.
 #+end_quote
 
 
