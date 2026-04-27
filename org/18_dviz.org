@@ -1,0 +1,952 @@
+#+TITLE: Data Visualization Code-Along Lab
+#+SUBTITLE: Choosing the Right Plot with Python
+#+AUTHOR: DSC 205
+#+STARTUP: overview hideblocks indent
+#+OPTIONS: toc:nil num:nil ^:nil
+* Lab goal
+
+In this lab, we will practice choosing the right plot for a data
+question.
+
+We will use Python, but the main goal is not Python syntax. The main
+goal is to understand which plot matches which kind of data.
+
+The DataCamp lectures introduced these ideas:
+
+- Summary statistics are useful, but they can hide patterns
+- Plots help us see patterns
+- Continuous variables are usually numeric
+- Categorical variables are usually labels
+- Different plot types answer different questions
+
+* Setup
+
+- Google Colab (Jupyter notebook in the cloud)
+- Python 3.10.12
+- Two data sets:
+  1. =tips=: Restaurant transactions
+  2. =flights=: Monthly airline passenger counts
+- Python libraries:
+  1. ~seaborn~: makes statistical plots
+  2. ~matplotlib.pyplot~: displays the plots
+     
+#+begin_src bash :results output :exports both
+  python3 --version
+#+end_src
+
+#+RESULTS:
+: Python 3.10.12
+
+#+begin_src python :results none :exports both :session *Python* :python python3 
+  import seaborn as sns
+#+end_src
+
+#+begin_src python :results none :exports both :session *Python* :python python3 
+import matplotlib.pyplot as plt
+#+end_src
+
+Installing libraries does not give you any output but you can list the
+objects in the current session with ~dir()~:
+#+begin_src python :results output :exports both :session *Python* :python python3 
+  print(dir())
+#+end_src
+
+#+RESULTS:
+: ['KNeighborsClassifier', 'X', 'Z', '__PYTHON_EL_eval', '__PYTHON_EL_eval_file', '__PYTHON_EL_native_completion_setup', '__annotations__', '__builtins__', '__doc__', '__loader__', '__name__', '__org_babel_python_ast', '__org_babel_python_final', '__org_babel_python_format_value', '__org_babel_python_tmpfile', '__package__', '__spec__', 'ast', 'f', 'grid', 'matplotlib', 'model', 'model1', 'model3', 'np', 'os', 'plt', 'pred1', 'pred3', 'readline', 'sns', 'tty', 'x_new', 'xx', 'y', 'yy']
+
+Or if you only want to list user-defined (rather than system-defined) objects:
+#+begin_src python :results output :exports both :session *Python* :python python3 
+  print([name for name in dir() if not name.startswith('_')])
+#+end_src
+
+#+RESULTS:
+: ['KNeighborsClassifier', 'X', 'Z', 'ast', 'f', 'grid', 'matplotlib', 'model', 'model1', 'model3', 'np', 'os', 'plt', 'pred1', 'pred3', 'readline', 'sns', 'tty', 'x_new', 'xx', 'y', 'yy']
+
+* Load the first dataset
+
+We will begin with a small restaurant dataset called ~tips~.
+
+Each row is one restaurant bill.
+
+#+begin_src python :results none :exports both :session *Python* :python python3 
+  tips = sns.load_dataset("tips")
+#+end_src
+
+* Inspect the data
+
+Before plotting, always inspect the data.
+
+Now display the first few rows.
+#+begin_src python :results output :exports both :session *Python* :python python3 
+  print(tips.head())
+#+end_src
+
+#+RESULTS:
+:    total_bill   tip     sex smoker  day    time  size
+: 0       16.99  1.01  Female     No  Sun  Dinner     2
+: 1       10.34  1.66    Male     No  Sun  Dinner     3
+: 2       21.01  3.50    Male     No  Sun  Dinner     3
+: 3       23.68  3.31    Male     No  Sun  Dinner     2
+: 4       24.59  3.61  Female     No  Sun  Dinner     4
+
+To get structural information on the whole dataset (analog to R's
+~str~):
+#+begin_src python :results output :exports both :session *Python* :python python3 
+  print(tips.info())
+#+end_src
+
+#+RESULTS:
+#+begin_example
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 244 entries, 0 to 243
+Data columns (total 7 columns):
+ #   Column      Non-Null Count  Dtype   
+---  ------      --------------  -----   
+ 0   total_bill  244 non-null    float64 
+ 1   tip         244 non-null    float64 
+ 2   sex         244 non-null    category
+ 3   smoker      244 non-null    category
+ 4   day         244 non-null    category
+ 5   time        244 non-null    category
+ 6   size        244 non-null    int64   
+dtypes: category(4), float64(2), int64(1)
+memory usage: 7.4 KB
+None
+#+end_example
+
+How many rows and columns does the dataset have and what can you say
+about it?
+#+begin_quote
+- 244 rows/records (restaurant bills)
+- 7 columns/features describing a bill
+- three numeric features
+- four categorical features including two date-time features (stored
+  as labels rather than time variables)
+- this is a ~DataFrame~ in the ~pandas~ library (dependency of ~seaborn~)
+- there are no missing values (~non-null count~)
+#+end_quote
+
+How would missing values be reported? Remove an entry to see:
+#+begin_src python :results output :exports both :session *Python* :python python3 
+  import numpy as np
+
+  tips2 = tips # copy dataset
+
+  print(tips2.head())
+
+  tips2.loc[0,"feature"] = np.nan # add new column with missing values
+
+  print(tips2.info())
+#+end_src
+
+#+RESULTS:
+#+begin_example
+   total_bill   tip     sex smoker  day    time  size  feature
+0       16.99  1.01  Female     No  Sun  Dinner     2      NaN
+1       10.34  1.66    Male     No  Sun  Dinner     3      NaN
+2       21.01  3.50    Male     No  Sun  Dinner     3      NaN
+3       23.68  3.31    Male     No  Sun  Dinner     2      NaN
+4       24.59  3.61  Female     No  Sun  Dinner     4      NaN
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 244 entries, 0 to 243
+Data columns (total 8 columns):
+ #   Column      Non-Null Count  Dtype   
+---  ------      --------------  -----   
+ 0   total_bill  244 non-null    float64 
+ 1   tip         244 non-null    float64 
+ 2   sex         244 non-null    category
+ 3   smoker      244 non-null    category
+ 4   day         244 non-null    category
+ 5   time        244 non-null    category
+ 6   size        244 non-null    int64   
+ 7   feature     0 non-null      float64 
+dtypes: category(4), float64(3), int64(1)
+memory usage: 9.3 KB
+None
+#+end_example
+
+Now look at summary statistics for the numeric columns.
+
+#+begin_src python :results output :exports both :session *Python* :python python3 
+  print(tips.describe())
+#+end_src
+
+#+RESULTS:
+:        total_bill         tip        size
+: count  244.000000  244.000000  244.000000
+: mean    19.785943    2.998279    2.569672
+: std      8.902412    1.383638    0.951100
+: min      3.070000    1.000000    1.000000
+: 25%     13.347500    2.000000    2.000000
+: 50%     17.795000    2.900000    2.000000
+: 75%     24.127500    3.562500    3.000000
+: max     50.810000   10.000000    6.000000
+
+* First plot: scatter plot
+
+Use a scatter plot when you have two continuous variables and want to
+study their relationship.
+
+But since there are several numerical features, you first must
+identify an interesting question:
+
+Question:
+#+begin_quote
+Do larger restaurant bills usually have larger tips?
+#+end_quote
+
+Make a scatter plot.
+
+#+begin_src python :file tipPlot.png :results file graphics output :exports both :session *Python* :python python3 
+  # explore the relationship between total_bill and tip
+  sns.scatterplot(data=tips, x="total_bill", y="tip")
+  plt.savefig("tipPlot.png")
+#+end_src
+
+#+RESULTS:
+[[file:tipPlot.png]]
+
+Observation:
+#+begin_quote
+As total bill increases, the tip usually seems to increase also.
+#+end_quote
+
+Missing values are automatically dropped for the plotting, by the way.
+
+* Add axis labels and a title
+
+The plot works, but it needs a title and axis labels.
+
+#+begin_src python :file tipPlot2.png :results file graphics output :exports both :session *Python* :python python3 
+  sns.scatterplot(data=tips, x="total_bill", y="tip")
+  plt.title("Tip vs. Total Bill")
+  plt.xlabel("Total bill in dollars")
+  plt.ylabel("Tip in dollars")
+  plt.savefig("tipPlot2.png")
+#+end_src
+
+#+RESULTS:
+[[file:tipPlot2.png]]
+
+* Change one variable
+
+Now keep ~tip~ on the y-axis, but change the x-axis to ~size~.
+
+#+begin_src python
+sns.scatterplot(data=tips, x="size", y="tip")
+plt.title("Tip vs. Party Size")
+plt.xlabel("Party size")
+plt.ylabel("Tip in dollars")
+plt.show()
+#+end_src
+
+Write what changed.
+
+#+begin_quote
+Compared with total_bill, size gives a relationship that is weaker and
+harder to interpret: =size= only takes a few discrete values - points
+stack vertically. A scatterplot is not the right choice for this data!
+#+end_quote
+
+* NEXT Add a category using color
+
+The variable ~time~ is categorical. It tells us whether the bill was for
+lunch or dinner.
+
+We can use color to show categories.
+
+#+begin_src python
+sns.scatterplot(data=tips, x="total_bill", y="tip", hue="time")
+plt.title("Tip vs. Total Bill by Time")
+plt.xlabel("Total bill in dollars")
+plt.ylabel("Tip in dollars")
+plt.show()
+#+end_src
+
+Write one observation.
+
+#+begin_quote
+One thing I notice about lunch and dinner is:
+#+end_quote
+
+Now try the categorical variable ~smoker~.
+
+#+begin_src python
+sns.scatterplot(data=tips, x="total_bill", y="tip", hue="smoker")
+plt.title("Tip vs. Total Bill by Smoker Status")
+plt.xlabel("Total bill in dollars")
+plt.ylabel("Tip in dollars")
+plt.show()
+#+end_src
+
+Write one observation.
+
+#+begin_quote
+One thing I notice about smoker status is:
+#+end_quote
+
+* A bad scatter plot
+
+Now we deliberately make a less useful scatter plot.
+
+Here, ~day~ is categorical, not continuous.
+
+#+begin_src python
+sns.scatterplot(data=tips, x="day", y="tip")
+plt.title("Tip by Day")
+plt.xlabel("Day")
+plt.ylabel("Tip in dollars")
+plt.show()
+#+end_src
+
+Write why this is not the best plot.
+
+#+begin_quote
+This is not the best scatter plot because:
+#+end_quote
+
+* Add a trend line
+
+A trend line helps us see the general direction of a relationship.
+
+#+begin_src python
+sns.regplot(data=tips, x="total_bill", y="tip")
+plt.title("Tip vs. Total Bill with Trend Line")
+plt.xlabel("Total bill in dollars")
+plt.ylabel("Tip in dollars")
+plt.show()
+#+end_src
+
+Write what the trend line shows.
+
+#+begin_quote
+The trend line shows that:
+#+end_quote
+
+* Scatter plot recap
+
+A scatter plot is useful when:
+
+#+begin_quote
+We have ______ continuous variables and want to study their relationship.
+#+end_quote
+
+
+* Histogram
+
+Use a histogram when you have one continuous variable and want to see
+its distribution.
+
+Question:
+
+#+begin_quote
+What do restaurant bills usually look like?
+#+end_quote
+
+Make a histogram of ~total_bill~.
+
+#+begin_src python
+sns.histplot(data=tips, x="total_bill")
+plt.title("Distribution of Total Bill")
+plt.xlabel("Total bill in dollars")
+plt.ylabel("Count")
+plt.show()
+#+end_src
+
+Write what you see.
+
+#+begin_quote
+Most total bills are between about ______ and ______ dollars.
+#+end_quote
+
+* Histogram of another variable
+
+Now make a histogram of ~tip~.
+
+#+begin_src python
+sns.histplot(data=tips, x="tip")
+plt.title("Distribution of Tips")
+plt.xlabel("Tip in dollars")
+plt.ylabel("Count")
+plt.show()
+#+end_src
+
+Write what you see.
+
+#+begin_quote
+Most tips are between about ______ and ______ dollars.
+#+end_quote
+
+* Histogram bins
+
+The number of bins changes the appearance of a histogram.
+
+First use only 5 bins.
+
+#+begin_src python
+sns.histplot(data=tips, x="total_bill", bins=5)
+plt.title("Total Bill with 5 Bins")
+plt.xlabel("Total bill in dollars")
+plt.ylabel("Count")
+plt.show()
+#+end_src
+
+Write what you see.
+
+#+begin_quote
+With 5 bins, the histogram looks:
+#+end_quote
+
+Now use 10 bins.
+
+#+begin_src python
+sns.histplot(data=tips, x="total_bill", bins=10)
+plt.title("Total Bill with 10 Bins")
+plt.xlabel("Total bill in dollars")
+plt.ylabel("Count")
+plt.show()
+#+end_src
+
+Write what you see.
+
+#+begin_quote
+With 10 bins, the histogram looks:
+#+end_quote
+
+Now use 20 bins.
+
+#+begin_src python
+sns.histplot(data=tips, x="total_bill", bins=20)
+plt.title("Total Bill with 20 Bins")
+plt.xlabel("Total bill in dollars")
+plt.ylabel("Count")
+plt.show()
+#+end_src
+
+Write what you see.
+
+#+begin_quote
+With 20 bins, the histogram looks:
+#+end_quote
+
+Now use 50 bins.
+
+#+begin_src python
+sns.histplot(data=tips, x="total_bill", bins=50)
+plt.title("Total Bill with 50 Bins")
+plt.xlabel("Total bill in dollars")
+plt.ylabel("Count")
+plt.show()
+#+end_src
+
+Write what you see.
+
+#+begin_quote
+With 50 bins, the histogram looks:
+#+end_quote
+
+* Choosing bins
+
+Compare the four histograms.
+
+Write your answer.
+
+#+begin_quote
+The best number of bins here is probably ______ because:
+#+end_quote
+
+* Add a smooth curve
+
+A smooth curve can make the overall shape easier to see.
+
+#+begin_src python
+sns.histplot(data=tips, x="total_bill", bins=20, kde=True)
+plt.title("Distribution of Total Bill with Smooth Curve")
+plt.xlabel("Total bill in dollars")
+plt.ylabel("Count")
+plt.show()
+#+end_src
+
+Write whether the distribution is symmetric or skewed.
+
+#+begin_quote
+The distribution is:
+#+end_quote
+
+* Histogram recap
+
+A histogram is useful when:
+
+#+begin_quote
+We have ______ continuous variable and want to study its ______.
+#+end_quote
+
+
+* Box plot
+
+Use a box plot when you have:
+
+- one continuous variable
+- one categorical variable
+
+Question:
+
+#+begin_quote
+Do total bills differ by day of the week?
+#+end_quote
+
+Make a box plot.
+
+#+begin_src python
+sns.boxplot(data=tips, x="day", y="total_bill")
+plt.title("Total Bill by Day")
+plt.xlabel("Day")
+plt.ylabel("Total bill in dollars")
+plt.show()
+#+end_src
+
+Write what you see.
+
+#+begin_quote
+The day with the largest typical total bill seems to be:
+#+end_quote
+
+* Box plot: tips by day
+
+Now compare tips by day.
+
+#+begin_src python
+sns.boxplot(data=tips, x="day", y="tip")
+plt.title("Tip by Day")
+plt.xlabel("Day")
+plt.ylabel("Tip in dollars")
+plt.show()
+#+end_src
+
+Write what you see.
+
+#+begin_quote
+The day with the largest typical tip seems to be:
+#+end_quote
+
+* Box plot: total bill by time
+
+Now compare lunch and dinner.
+
+#+begin_src python
+sns.boxplot(data=tips, x="time", y="total_bill")
+plt.title("Total Bill by Time")
+plt.xlabel("Time")
+plt.ylabel("Total bill in dollars")
+plt.show()
+#+end_src
+
+Write what you see.
+
+#+begin_quote
+Dinner bills seem to be:
+#+end_quote
+
+* Box plot: tip by time
+
+Now compare tips at lunch and dinner.
+
+#+begin_src python
+sns.boxplot(data=tips, x="time", y="tip")
+plt.title("Tip by Time")
+plt.xlabel("Time")
+plt.ylabel("Tip in dollars")
+plt.show()
+#+end_src
+
+Write what you see.
+
+#+begin_quote
+Dinner tips seem to be:
+#+end_quote
+
+* A messy histogram comparison
+
+Now compare total bills by day using a histogram with color.
+
+#+begin_src python
+sns.histplot(data=tips, x="total_bill", hue="day")
+plt.title("Total Bill by Day")
+plt.xlabel("Total bill in dollars")
+plt.ylabel("Count")
+plt.show()
+#+end_src
+
+Write why this is harder to read.
+
+#+begin_quote
+This plot is harder to read because:
+#+end_quote
+
+Now return to the box plot.
+
+#+begin_src python
+sns.boxplot(data=tips, x="day", y="total_bill")
+plt.title("Total Bill by Day")
+plt.xlabel("Day")
+plt.ylabel("Total bill in dollars")
+plt.show()
+#+end_src
+
+Write why the box plot is better here.
+
+#+begin_quote
+The box plot is better here because:
+#+end_quote
+
+* Box plot recap
+
+A box plot is useful when:
+
+#+begin_quote
+We have one ______ variable split by one ______ variable.
+#+end_quote
+
+
+* Bar plot: counts
+
+Use a bar plot when you want to count categories.
+
+Question:
+
+#+begin_quote
+How many restaurant bills are there for each day?
+#+end_quote
+
+Use a count plot.
+
+#+begin_src python
+sns.countplot(data=tips, x="day")
+plt.title("Number of Bills by Day")
+plt.xlabel("Day")
+plt.ylabel("Count")
+plt.show()
+#+end_src
+
+Write what you see.
+
+#+begin_quote
+The day with the most bills is:
+#+end_quote
+
+* Bar plot: another category
+
+Now count lunch vs dinner.
+
+#+begin_src python
+sns.countplot(data=tips, x="time")
+plt.title("Number of Bills by Time")
+plt.xlabel("Time")
+plt.ylabel("Count")
+plt.show()
+#+end_src
+
+Write what you see.
+
+#+begin_quote
+There are more bills for:
+#+end_quote
+
+* Bar plot: smoker status
+
+Now count smoker vs non-smoker.
+
+#+begin_src python
+sns.countplot(data=tips, x="smoker")
+plt.title("Number of Bills by Smoker Status")
+plt.xlabel("Smoker")
+plt.ylabel("Count")
+plt.show()
+#+end_src
+
+Write what you see.
+
+#+begin_quote
+There are more bills from:
+#+end_quote
+
+* Bar plot with color
+
+Now count days, but split by time.
+
+#+begin_src python
+sns.countplot(data=tips, x="day", hue="time")
+plt.title("Number of Bills by Day and Time")
+plt.xlabel("Day")
+plt.ylabel("Count")
+plt.show()
+#+end_src
+
+Write what you see.
+
+#+begin_quote
+One thing I notice about lunch and dinner by day is:
+#+end_quote
+
+* Bar plot recap
+
+A bar plot is useful when:
+
+#+begin_quote
+We have a ______ variable and want to count the number of observations.
+#+end_quote
+
+* Load the flights dataset
+
+Now we move to a second dataset.
+
+The ~flights~ dataset contains monthly airline passenger counts.
+
+#+begin_src python
+flights = sns.load_dataset("flights")
+#+end_src
+
+Look at the first few rows.
+
+#+begin_src python
+flights.head()
+#+end_src
+
+Inspect the data.
+
+#+begin_src python
+flights.info()
+#+end_src
+
+Write a short note.
+
+#+begin_quote
+The columns in this dataset are:
+#+end_quote
+
+* Line plot
+
+Use a line plot when observations are connected in order.
+
+Time data often uses a line plot.
+
+Question:
+
+#+begin_quote
+How did the number of passengers change over time?
+#+end_quote
+
+Make a line plot.
+
+#+begin_src python
+sns.lineplot(data=flights, x="year", y="passengers")
+plt.title("Passengers by Year")
+plt.xlabel("Year")
+plt.ylabel("Passengers")
+plt.show()
+#+end_src
+
+Write what you see.
+
+#+begin_quote
+Over time, the number of passengers seems to:
+#+end_quote
+
+* Add month as color
+
+Now show one line for each month.
+
+#+begin_src python
+sns.lineplot(data=flights, x="year", y="passengers", hue="month")
+plt.title("Passengers by Year and Month")
+plt.xlabel("Year")
+plt.ylabel("Passengers")
+plt.show()
+#+end_src
+
+Write what you see.
+
+#+begin_quote
+The month lines show that:
+#+end_quote
+
+* A scatter plot of time data
+
+Now use a scatter plot instead.
+
+#+begin_src python
+sns.scatterplot(data=flights, x="year", y="passengers")
+plt.title("Passengers by Year")
+plt.xlabel("Year")
+plt.ylabel("Passengers")
+plt.show()
+#+end_src
+
+Write why this is less useful.
+
+#+begin_quote
+The scatter plot is less useful here because:
+#+end_quote
+
+Now return to the line plot.
+
+#+begin_src python
+sns.lineplot(data=flights, x="year", y="passengers")
+plt.title("Passengers by Year")
+plt.xlabel("Year")
+plt.ylabel("Passengers")
+plt.show()
+#+end_src
+
+Write why the line plot is useful.
+
+#+begin_quote
+The line plot is useful here because:
+#+end_quote
+
+* Line plot recap
+
+A line plot is useful when:
+
+#+begin_quote
+The observations are connected by ______ or another meaningful order.
+#+end_quote
+
+* Choose the right plot
+
+Now decide which plot fits each question.
+
+Do not run code yet. First write the plot type.
+
+*Question:* Do larger bills usually have larger tips?
+
+#+begin_quote
+Plot type:
+#+end_quote
+
+Now run the plot.
+
+#+begin_src python
+sns.scatterplot(data=tips, x="total_bill", y="tip")
+plt.title("Tip vs. Total Bill")
+plt.xlabel("Total bill in dollars")
+plt.ylabel("Tip in dollars")
+plt.show()
+#+end_src
+
+*Question:* What is the distribution of tips?
+
+#+begin_quote
+Plot type:
+#+end_quote
+
+Now run the plot.
+
+#+begin_src python
+sns.histplot(data=tips, x="tip", bins=15)
+plt.title("Distribution of Tips")
+plt.xlabel("Tip in dollars")
+plt.ylabel("Count")
+plt.show()
+#+end_src
+
+*Question:* Do tips differ by day?
+
+#+begin_quote
+Plot type:
+#+end_quote
+
+Now run the plot.
+
+#+begin_src python
+sns.boxplot(data=tips, x="day", y="tip")
+plt.title("Tip by Day")
+plt.xlabel("Day")
+plt.ylabel("Tip in dollars")
+plt.show()
+#+end_src
+
+*Question:* How many bills were recorded for each day?
+
+#+begin_quote
+Plot type:
+#+end_quote
+
+Now run the plot.
+
+#+begin_src python
+sns.countplot(data=tips, x="day")
+plt.title("Number of Bills by Day")
+plt.xlabel("Day")
+plt.ylabel("Count")
+plt.show()
+#+end_src
+
+*Question:* How did passenger counts change over time?
+
+#+begin_quote
+Plot type:
+#+end_quote
+
+Now run the plot.
+
+#+begin_src python
+sns.lineplot(data=flights, x="year", y="passengers")
+plt.title("Passengers by Year")
+plt.xlabel("Year")
+plt.ylabel("Passengers")
+plt.show()
+#+end_src
+
+* Final review
+
+Complete the following.
+
+A scatter plot is used when:
+
+#+begin_quote
+#+end_quote
+
+A histogram is used when:
+
+#+begin_quote
+#+end_quote
+
+A box plot is used when:
+
+#+begin_quote
+#+end_quote
+
+A bar plot is used when:
+
+#+begin_quote
+#+end_quote
+
+A line plot is used when:
+
+#+begin_quote
+#+end_quote
+
+* Instructor pacing notes
+
+This lab is intended as a code-along.
+
+Recommended pacing:
+
+- Setup and inspection: 10–15 minutes
+- Scatter plots: 20 minutes
+- Histograms: 20–25 minutes
+- Box plots: 20 minutes
+- Bar plots: 15 minutes
+- Line plots: 15 minutes
+- Final choose-the-plot section: 10–15 minutes
+
+The important teaching move is to slow down before each plot:
+
+1. Ask what question is being answered.
+2. Identify variable types.
+3. Choose the plot.
+4. Run the code.
+5. Interpret the visual result.
+
+Do not add advanced Python syntax unless students are moving very fast.

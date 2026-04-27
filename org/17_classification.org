@@ -301,7 +301,7 @@ Interpretation:
 
 - The red line shows predicted class across inputs
 
-* PRACTICE Predicting Loan Approval in 2D
+* IN PROGRESS Predicting Loan Approval in 2D
 
 A bank wants to decide whether to approve a loan based on *two input
 features*:
@@ -461,7 +461,7 @@ Will the loan be approved?
      plt.clf()
 
      # Choose which model to visualize
-     model = model3
+     model = model1
 
      # Create a grid of points in the plane
      xx, yy = np.meshgrid(
@@ -492,6 +492,66 @@ Will the loan be approved?
    #+RESULTS:
    [[file:loan2d_regions.png]]
 
+   *Code explanation:*
+   
+   - ~plt.clf()~: Clear the current figure to start with a fresh plot.
+
+   - ~model = model1~: Select which trained kNN model to visualize
+     (here: k = 1).
+
+   - ~np.meshgrid(...)~:
+     + Create a grid of evenly spaced points covering the 2D feature
+       space.
+     + First range → income (x-axis)
+     + Second range → credit score (y-axis)
+
+   - ~xx, yy~:
+     + Matrices representing all x- and y-coordinates in the grid.
+     + Each pair ~(xx[i,j], yy[i,j])~ is one point in the plane.
+
+   - ~xx.ravel(), yy.ravel()~: Flatten the grid into 1D arrays.
+
+   - ~np.c_[...]~:
+     + Combine flattened x and y into a list of coordinate pairs.
+     + Result: array of shape ~(num_points, 2)~
+
+   - ~model.predict(grid)~: Predict class (0 or 1) for every point in
+     the grid.
+
+   - ~reshape(xx.shape)~: Convert predictions back into grid shape for
+     plotting.
+
+   - ~plt.contourf(xx, yy, Z, alpha=0.3)~
+     + Draw filled regions showing predicted class across the plane.
+     + Colors represent classification regions.
+
+   - ~plt.scatter(X[y==0, 0], X[y==0, 1], ...)~: Plot all training
+     points with label 0 (denied).
+
+   - ~plt.scatter(X[y==1, 0], X[y==1, 1], ...)~: Plot all training
+     points with label 1 (approved).
+
+   - ~plt.scatter(x_new[:,0], x_new[:,1], ...)~: Plot the new data point
+     to be classified.
+
+   - ~plt.xlabel(...), plt.ylabel(...)~: Label the axes (income and
+     credit score).
+
+   - ~plt.title(...)~: Add a title describing the plot.
+
+   - ~plt.legend()~: Display legend for classes and new point.
+
+   - ~plt.savefig("loan2d_regions.png")~: Save the final visualization
+     as an image file.
+
+You can visualize the =xx= and =yy= points:
+#+begin_src python :file plot.png :results file graphics output :exports both :session *Python* :python python3 
+  plt.scatter(xx,yy,s=1)
+#+end_src
+
+#+RESULTS:
+[[file:plot.png]]
+
 ** Follow-up Questions
 
 1. Why is this example more informative than the 1D loan example?
@@ -515,6 +575,19 @@ Will the loan be approved?
    #+begin_quote
    Smaller ~k~ gives a more local, sensitive boundary, while larger ~k~
    gives a smoother, more stable boundary.
+   #+end_quote
+
+5. What happens when the new loan application lies exactly on the
+   decision boundary?
+   #+begin_quote
+   The classification becomes ambiguous - on the boundary, the model
+   predicts equal support for multiple classes (equal votes/equal
+   distance influenced). A *tie-breaking rule* must be applied:
+   - Pick the first occurring class
+   - Pick the smaller label
+   - Rely on implementation details (scikit-learn resolves ties
+     deterministically: it does not choose randomly - picks the
+     smaller label or class value: 0).
    #+end_quote
 
 ** Possible extension
@@ -549,7 +622,16 @@ point, for example:
 That gives you a more interesting comparison because one close neighbor
 may disagree with the majority of three neighbors.
 
-* NEXT Visualize over and underfitting
+** Loop over model and prediction
+
+To make the code more flexible, for multiple values of k and different
+points, wrap it in a loop over two inputs: k and a set of new
+customers (bonus assignment).
+
+*** Solution:
+
+
+* Visualize over and underfitting
 
 - Over- and underfitting as a function of =k= is easier visualized in a
   two-dimensional example:

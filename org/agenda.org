@@ -1019,15 +1019,22 @@ A manual machine learning example and exercise.
     #+end_quote
 
 
-* Week 15: Classification in 2D / Advanced examples
+* Week 15: Classification in 2D / Data visualization lab
+
+- [ ] Lecture + code along: Data visualization with ~seaborn~.
 
 ** Classification example in 2D: Loan approval (continued)
+
+- We're going to finish the example we started last week.
+- Culminating in a visualization of the 2D decision boundary.
 
 ** Data visualization: Choosing the right plot in Python
 
 - Open the notebook to code along: [[https://tinyurl.com/dviz-colab-ipynb][tinyurl.com/dviz-colab-ipynb]]
+- We are going to look at: different types of plots using two
+  different data sets.
 
-** Recognizing handwritten digits: kNN vs. NN
+** +Recognizing handwritten digits: kNN vs. NN+
 
 
 
