@@ -1021,6 +1021,7 @@ A manual machine learning example and exercise.
 
 * Week 15: Classification in 2D / Data visualization lab
 
+- [ ] Classification in 2D (continued)
 - [ ] Lecture + code along: Data visualization with ~seaborn~.
 
 ** Classification example in 2D: Loan approval (continued)
@@ -1028,24 +1029,25 @@ A manual machine learning example and exercise.
 - We're going to finish the example we started last week.
 - Culminating in a visualization of the 2D decision boundary.
 
+** +Recognizing handwritten digits: kNN vs. NN+
+
 ** Data visualization: Choosing the right plot in Python
 
 - Open the notebook to code along: [[https://tinyurl.com/dviz-colab-ipynb][tinyurl.com/dviz-colab-ipynb]]
 
+- If you missed a session, here is the notebook so far:
+  [[https://tinyurl.com/dviz-class][tinyurl.com/dviz-class]]
+
 - We are going to look at: different types of plots using two
   different data sets.
 
-- Scatter plot (2 continuous variables)
+- [X] Scatter plot (2 continuous variables)
 
-- Histogram (1 continuous variable)
+- [ ] Histogram (1 continuous variable)
 
-- Boxplot (continous + categorical)
+- [ ] Boxplot (continous + categorical)
 
-- Bar plot (categorical)
+- [ ] Bar plot (categorical)
 
-- Line plot (order/time data)
-
-** +Recognizing handwritten digits: kNN vs. NN+
-
-
+- [ ] Line plot (order/time data)
 
