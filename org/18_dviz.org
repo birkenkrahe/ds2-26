@@ -467,6 +467,17 @@ Write your answer.
 The best number of bins here is probably ______ because:
 #+end_quote
 
+For a data set like =tips= (n=244), different rules can be applied -
+Sturges rule (predicts k=9 which is underbinned), square-root-rule
+(square root of n - often reasonable):
+#+begin_src python :results output :exports both :session *Python* :python python3 
+  import math
+  print(math.sqrt(244))
+#+end_src
+
+#+RESULTS:
+: 15.620499351813308
+
 * Add a smooth curve
 
 A smooth curve can make the overall shape easier to see.
@@ -482,7 +493,7 @@ plt.show()
 Write whether the distribution is symmetric or skewed.
 
 #+begin_quote
-The distribution is:
+The distribution is: right-skewed
 #+end_quote
 
 * Histogram recap
@@ -490,9 +501,8 @@ The distribution is:
 A histogram is useful when:
 
 #+begin_quote
-We have ______ continuous variable and want to study its ______.
+We have one continuous variable and want to study its frequency distribution.
 #+end_quote
-
 
 * Box plot
 
@@ -577,6 +587,17 @@ Write what you see.
 Dinner tips seem to be:
 #+end_quote
 
+* PRACTICE Box plot: tip by party size
+
+#+begin_src python :file plot.png :results file graphics output :exports both :session *Python* :python python3 
+  plt.clf()
+  sns.boxplot(data=tips,x="size", y="tip")
+  plt.title("Tips by Party Size")
+  plt.xlabel("size")
+  plt.ylabel("Tip [$]")
+  plt.show()
+#+end_src
+
 * A messy histogram comparison
 
 Now compare total bills by day using a histogram with color.
@@ -616,9 +637,8 @@ The box plot is better here because:
 A box plot is useful when:
 
 #+begin_quote
-We have one ______ variable split by one ______ variable.
+We have one continous variable split by one categorical variable.
 #+end_quote
-
 
 * Bar plot: counts
 
@@ -700,13 +720,16 @@ Write what you see.
 One thing I notice about lunch and dinner by day is:
 #+end_quote
 
+* PRACTICE Tips by Time and Party Size
 * Bar plot recap
 
 A bar plot is useful when:
 
 #+begin_quote
-We have a ______ variable and want to count the number of observations.
+We have a continous variable and want to count the number of
+observations.
 #+end_quote
+
 
 * Load the flights dataset
 
@@ -763,6 +786,12 @@ Write what you see.
 #+begin_quote
 Over time, the number of passengers seems to:
 #+end_quote
+
+The corridor around the line represents a confidence interval:
+multiple observations for the same x-value are aggregated. Here, there
+are 12 observations per year, and the confidence interval represents
+the mean. To switch it off, add the parameter =estimator=None=. Now you
+see a line that oddly connects all 144 monthly points.
 
 * Add month as color
 
